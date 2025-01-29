@@ -1,4 +1,4 @@
-"use client";
+
 
 import { Input } from "@/components/ui/input";
 import { Controller } from "react-hook-form";
@@ -43,7 +43,7 @@ const ParentsAndGuardianInformation = ({ control, setValue }: PersonalInfoProps)
                     <div className="ml-4">
                         Father’s Info
                     </div>
-                    <div className="m-4 grid grid-cols-5 gap-4">
+                    <div className="m-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
                         {/* Academic Year Select */}
 
                         {/* Admission Number */}
@@ -139,7 +139,7 @@ const ParentsAndGuardianInformation = ({ control, setValue }: PersonalInfoProps)
                     <div className="ml-4">
                         Mother's Info
                     </div>
-                    <div className="m-4 grid grid-cols-5 gap-4">
+                    <div className="m-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
                         {/* Academic Year Select */}
 
                         {/* Admission Number */}
@@ -235,7 +235,7 @@ const ParentsAndGuardianInformation = ({ control, setValue }: PersonalInfoProps)
                     <div className="ml-4">
                         Local Guardian's Info
                     </div>
-                    <div className="m-4 grid grid-cols-5 gap-4">
+                    <div className="m-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
                         {/* Academic Year Select */}
 
                         {/* Admission Number */}

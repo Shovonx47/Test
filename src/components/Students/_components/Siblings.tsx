@@ -29,7 +29,7 @@ const Siblings = ({ control, setValue }: PersonalInfoProps) => {
     });
 
 
-    console.log(fields)
+
     // Ensure only ONE sibling field is initialized
     useEffect(() => {
         if (isSibling) {
@@ -70,7 +70,7 @@ const Siblings = ({ control, setValue }: PersonalInfoProps) => {
                 {isSibling && (
                     <div className="m-4">
                         {fields.map((field, index) => (
-                            <div key={field.id} className="grid grid-cols-5 gap-4 mb-4">
+                            <div key={field.id} className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-4">
                                 {/* Name */}
                                 <div>
                                     <label className="text-sm text-gray-600">Name</label>
