@@ -1,5 +1,5 @@
 import { Controller } from "react-hook-form";
-import { Bus, NotebookTabs } from "lucide-react";
+import { Hotel } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 import { Switch } from "@/components/ui/switch";
 
@@ -12,18 +12,18 @@ interface PersonalInfoProps {
     trigger: (name?: string | string[]) => void;
 }
 
-const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInfoProps) => {
-    const isTransportEnabled = watch("transportEnabled", true);
+const HostelInformation = ({ control, setValue, watch, trigger }: PersonalInfoProps) => {
+    const isHostelEnabled = watch("hostelEnabled", true);
 
     return (
         <div className="p-6 bg-white">
             <div className="border rounded-md">
                 <div className="p-4 bg-[#E9EDF4] rounded-md rounded-b-none flex justify-between items-center gap-2 mb-5">
                     <div className="flex items-center gap-2">
-                        <Bus className="h-5 w-5" /> Transport Information
+                        <Hotel className="h-5 w-5" /> Hostel Information
                     </div>
                     <Controller
-                        name="transportEnabled"
+                        name="hostelEnabled"
                         control={control}
                         defaultValue={true}
                         render={({ field }) => (
@@ -31,9 +31,9 @@ const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInf
                                 checked={field.value ?? true}
                                 onCheckedChange={(checked) => {
                                     field.onChange(checked);
-                                    setValue("transportEnabled", checked);
+                                    setValue("hostelEnabled", checked);
                                     if (checked) {
-                                        trigger(["route", "vehicleNumber", "pickupPoint"]);
+                                        trigger(["hostelName", "roomNumber"]);
                                     }
                                 }}
                             />
@@ -41,23 +41,23 @@ const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInf
                     />
                 </div>
 
-                {isTransportEnabled && (
-                    <div className="m-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                {isHostelEnabled && (
+                    <div className="m-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                         {/* Route Select */}
                         <Controller
-                            name="route"
+                            name="hostelName"
                             control={control}
-                            rules={{ required: "Route is required" }}
+                            rules={{ required: "Hostel name is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>
                                     <DynamicSelect
-                                        label="Route"
-                                        placeholder="Select route"
+                                        label="Hostel Name"
+                                        placeholder="Select hostel name"
                                         options={academicYears}
                                         value={field.value}
                                         onChange={(value: string) => {
-                                            setValue("route", value);
-                                            trigger("route"); // Revalidate field
+                                            setValue("hostelName", value);
+                                            trigger("hostelName"); // Revalidate field
                                         }}
                                     />
                                     {error && <p className="text-red-500 text-sm">{error.message}</p>}
@@ -65,49 +65,29 @@ const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInf
                             )}
                         />
 
-                        {/* Vehicle Number Select */}
+                        {/*room numberSelect */}
                         <Controller
-                            name="vehicleNumber"
+                            name="roomNumber"
                             control={control}
-                            rules={{ required: "Vehicle number is required" }}
+                            rules={{ required: "Room number is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>
                                     <DynamicSelect
-                                        label="Vehicle Number"
-                                        placeholder="Select Vehicle Number"
+                                        label="Room Number"
+                                        placeholder="Select room number"
                                         options={academicYears}
                                         value={field.value}
                                         onChange={(value: string) => {
-                                            setValue("vehicleNumber", value);
-                                            trigger("vehicleNumber"); // Revalidate field
+                                            setValue("roomNumber", value);
+                                            trigger("roomNumber"); // Revalidate field
                                         }}
                                     />
                                     {error && <p className="text-red-500 text-sm">{error.message}</p>}
                                 </div>
                             )}
                         />
-
-                        {/* Pickup Point Select */}
-                        <Controller
-                            name="pickupPoint"
-                            control={control}
-                            rules={{ required: "Pickup point is required" }}
-                            render={({ field, fieldState: { error } }) => (
-                                <div>
-                                    <DynamicSelect
-                                        label="Pickup Point"
-                                        placeholder="Select Pickup Point"
-                                        options={academicYears}
-                                        value={field.value}
-                                        onChange={(value: string) => {
-                                            setValue("pickupPoint", value);
-                                            trigger("pickupPoint"); // Revalidate field
-                                        }}
-                                    />
-                                    {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                                </div>
-                            )}
-                        />
+ 
+                        
                     </div>
                 )}
             </div>
@@ -115,4 +95,4 @@ const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInf
     );
 };
 
-export default TransportInformation;
+export default HostelInformation;

@@ -17,9 +17,10 @@ const motherTongues = ["English", "Spanish"];
 interface PersonalInfoProps {
     control: any;
     setValue: (name: string, value: any) => void;
+    trigger: (name?: string | string[]) => void;
 }
 
-const Siblings = ({ control, setValue }: PersonalInfoProps) => {
+const Siblings = ({ control, setValue, trigger }: PersonalInfoProps) => {
     const [isSibling, setIsSibling] = useState<boolean>(true);
 
     // UseFieldArray to handle dynamic sibling fields
@@ -28,12 +29,9 @@ const Siblings = ({ control, setValue }: PersonalInfoProps) => {
         name: "siblings",
     });
 
-
-
     // Ensure only ONE sibling field is initialized
     useEffect(() => {
         if (isSibling) {
-            // Ensure only ONE sibling field exists
             if (fields.length === 0) {
                 replace([{ siblingName: "", class: "", section: "", gender: "", roll: "", motherTongue: "" }]);
             }
@@ -41,13 +39,12 @@ const Siblings = ({ control, setValue }: PersonalInfoProps) => {
             replace([]); // Clear all siblings when "No" is selected
         }
     }, [isSibling, replace, fields.length]);
-    
 
     return (
         <div className="p-6 bg-white">
             <div className="border rounded-md">
                 <div className="p-4 bg-[#E9EDF4] rounded-md rounded-b-none flex items-center gap-2 mb-5">
-                    <Users /> Siblings
+                    <Users className="h-5 w-5" /> Siblings
                 </div>
 
                 <div className="m-4">
@@ -80,7 +77,14 @@ const Siblings = ({ control, setValue }: PersonalInfoProps) => {
                                         rules={{ required: "Name is required" }}
                                         render={({ field, fieldState: { error } }) => (
                                             <div>
-                                                <Input {...field} placeholder="Enter sibling name" />
+                                                <Input
+                                                    {...field}
+                                                    placeholder="Enter sibling name"
+                                                    onChange={(e) => {
+                                                        field.onChange(e.target.value);
+                                                        trigger(`siblings.${index}.siblingName`);
+                                                    }}
+                                                />
                                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
                                             </div>
                                         )}
@@ -100,7 +104,10 @@ const Siblings = ({ control, setValue }: PersonalInfoProps) => {
                                                     placeholder="Select Class"
                                                     options={classes}
                                                     value={field.value}
-                                                    onChange={(val) => setValue(`siblings.${index}.class`, val)}
+                                                    onChange={(val) => {
+                                                        setValue(`siblings.${index}.class`, val);
+                                                        trigger(`siblings.${index}.class`);
+                                                    }}
                                                 />
                                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
                                             </div>
@@ -121,7 +128,10 @@ const Siblings = ({ control, setValue }: PersonalInfoProps) => {
                                                     placeholder="Select Section"
                                                     options={sections}
                                                     value={field.value}
-                                                    onChange={(val) => setValue(`siblings.${index}.section`, val)}
+                                                    onChange={(val) => {
+                                                        setValue(`siblings.${index}.section`, val);
+                                                        trigger(`siblings.${index}.section`);
+                                                    }}
                                                 />
                                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
                                             </div>
@@ -142,7 +152,10 @@ const Siblings = ({ control, setValue }: PersonalInfoProps) => {
                                                     placeholder="Select Gender"
                                                     options={genders}
                                                     value={field.value}
-                                                    onChange={(val) => setValue(`siblings.${index}.gender`, val)}
+                                                    onChange={(val) => {
+                                                        setValue(`siblings.${index}.gender`, val);
+                                                        trigger(`siblings.${index}.gender`);
+                                                    }}
                                                 />
                                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
                                             </div>
@@ -159,7 +172,14 @@ const Siblings = ({ control, setValue }: PersonalInfoProps) => {
                                         rules={{ required: "Roll number is required" }}
                                         render={({ field, fieldState: { error } }) => (
                                             <div>
-                                                <Input {...field} placeholder="Enter roll number" />
+                                                <Input
+                                                    {...field}
+                                                    placeholder="Enter roll number"
+                                                    onChange={(e) => {
+                                                        field.onChange(e.target.value);
+                                                        trigger(`siblings.${index}.roll`);
+                                                    }}
+                                                />
                                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
                                             </div>
                                         )}
@@ -179,7 +199,10 @@ const Siblings = ({ control, setValue }: PersonalInfoProps) => {
                                                     placeholder="Select Mother Tongue"
                                                     options={motherTongues}
                                                     value={field.value}
-                                                    onChange={(val) => setValue(`siblings.${index}.motherTongue`, val)}
+                                                    onChange={(val) => {
+                                                        setValue(`siblings.${index}.motherTongue`, val);
+                                                        trigger(`siblings.${index}.motherTongue`);
+                                                    }}
                                                 />
                                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
                                             </div>
@@ -218,5 +241,3 @@ const Siblings = ({ control, setValue }: PersonalInfoProps) => {
 };
 
 export default Siblings;
-
-                        

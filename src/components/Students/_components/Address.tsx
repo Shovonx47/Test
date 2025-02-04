@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
  
 import { Controller } from "react-hook-form";
-import { NotebookTabs } from "lucide-react";
+import { MapPinHouse, NotebookTabs } from "lucide-react";
 
 interface PersonalInfoProps {
     control: any; // control from useForm
@@ -14,7 +14,7 @@ const Address = ({ control, setValue }: PersonalInfoProps) => {
              
             <div className="border rounded-md">
                 <div className="p-4 bg-[#E9EDF4] rounded-md rounded-b-none flex items-center gap-2 mb-5">
-                    <NotebookTabs className="h-5 w-5"/> Address
+                    <MapPinHouse className="h-5 w-5"/> Address
                 </div>
                 <div className="m-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Academic Year Select */}

@@ -1,12 +1,10 @@
-
-"use client"
+ 
 import { Input } from "@/components/ui/input";
 
 import { Controller } from "react-hook-form";
 import { ImagePlus, InfoIcon } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 import { DatePickerForm } from "@/components/Reusable/DatePickerForm";
-import { useState } from "react";
 
 
 const academicYears = ["June 2024/25", "July 2025/26"];
@@ -28,18 +26,18 @@ interface PersonalInfoProps {
 const PersonalInfo = ({ control, setValue }: PersonalInfoProps) => {
 
 
-    const [file, setFile] = useState<File | null>(null);
+    // const [file, setFile] = useState<File | null>(null);
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedFile = e.target.files ? e.target.files[0] : null;
-        if (selectedFile) {
-            setFile(selectedFile);
-        }
-    };
+    // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const selectedFile = e.target.files ? e.target.files[0] : null;
+    //     if (selectedFile) {
+    //         setFile(selectedFile);
+    //     }
+    // };
 
-    const handleRemove = () => {
-        setFile(null);
-    };
+    // const handleRemove = () => {
+    //     setFile(null);
+    // };
 
     return (
         <div className="p-6 bg-white">
@@ -50,50 +48,63 @@ const PersonalInfo = ({ control, setValue }: PersonalInfoProps) => {
 
             <div className="border rounded-md">
                 <div className="p-4 bg-[#E9EDF4] rounded-md rounded-b-none flex items-center gap-2 mb-5">
-                    <InfoIcon /> Personal Information
+                    <InfoIcon className="h-5 w-5"/> Personal Information
                 </div>
 
                 <div className="ml-4">
-
-
-                    <div className="mt-1 flex items-center">
-                        <div className="w-20 h-20 border border-dashed border-gray-300 rounded-sm flex justify-center items-center">
-                            {file ? (
-                                <img
-                                    src={URL.createObjectURL(file)}
-                                    alt="Selected image"
-                                    className="w-20 h-20 object-cover border border-dashed border-gray-300"
-                                />
-                            ) : (
-                                <label htmlFor="file-upload" className="text-gray-400 flex justify-center items-center"><ImagePlus></ImagePlus> </label>
-                            )}
-                        </div>
-                        <div className="ml-3">
-                            <input
-                                type="file"
-                                accept=".jpg,.jpeg,.png,.svg"
-                                className="hidden"
-                                id="file-upload"
-                                onChange={handleFileChange}
-                            />
-                            <label
-                                htmlFor="file-upload"
-                                className="bg-white py-2 px-3 border border-dashed border-gray-300 rounded-sm text-sm leading-4 font-medium text-gray-700 cursor-pointer"
-                            >
-                                Upload
-                            </label>
-                            <button
-                                type="button"
-                                className="ml-3 py-2 px-3 border border-dashed border-gray-300 rounded-sm text-sm leading-4 font-medium text-white bg-blue-500"
-                                onClick={handleRemove}
-                            >
-                                Remove
-                            </button>
-                            <p className="mt-2 text-xs text-gray-500">
-                                Upload image size 4MB, Format JPG, PNG, SVG
-                            </p>
-                        </div>
-                    </div>
+                    <Controller
+                        name="profileImage"
+                        control={control}
+                        render={({ field }) => (
+                            <div className="mt-1 flex items-center">
+                                <div className="w-20 h-20 border border-dashed border-gray-300 rounded-sm flex justify-center items-center">
+                                    {field.value ? (
+                                        <img
+                                            src={URL.createObjectURL(field.value)}
+                                            alt="Selected image"
+                                            className="w-20 h-20 object-cover border border-dashed border-gray-300"
+                                        />
+                                    ) : (
+                                        <label htmlFor="file-upload" className="text-gray-400 flex justify-center items-center cursor-pointer">
+                                            <ImagePlus />
+                                        </label>
+                                    )}
+                                </div>
+                                <div className="ml-3">
+                                    <input
+                                        type="file"
+                                        accept=".jpg,.jpeg,.png,.svg"
+                                        className="hidden"
+                                        id="file-upload"
+                                        onChange={(e) => {
+                                            const file = e.target.files ? e.target.files[0] : null;
+                                            setValue("profileImage", file);
+                                            // trigger("profileImage");
+                                        }}
+                                    />
+                                    <label
+                                        htmlFor="file-upload"
+                                        className="bg-white py-2 px-3 border border-dashed border-gray-300 rounded-sm text-sm font-medium text-gray-700 cursor-pointer"
+                                    >
+                                        Upload
+                                    </label>
+                                    
+                                        <label
+                                             
+                                            className="ml-3 py-2 cursor-pointer px-3 border border-dashed border-gray-300 rounded-sm text-sm font-medium text-white bg-black"
+                                            onClick={() => setValue("profileImage", null)}
+                                        >
+                                            Remove
+                                        </label>
+                                 
+                                    <p className="mt-2 text-xs text-gray-500">
+                                        Upload image size 4MB, Format JPG, PNG, SVG
+                                    </p>
+                                     
+                                </div>
+                            </div>
+                        )}
+                    />
                 </div>
                 <div className="m-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
                     {/* Academic Year Select */}
