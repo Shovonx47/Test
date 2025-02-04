@@ -29,11 +29,11 @@ const data = {
       items: [
         {
           title: "Add student",
-          url: "/add-student",
+          url: "/student/add-student",
         },
         {
           title: "All Students",
-          url: "/all-student",
+          url: "/student/all-student",
         },
       ],
     },
