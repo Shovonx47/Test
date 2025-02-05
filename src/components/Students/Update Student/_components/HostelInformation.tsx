@@ -3,16 +3,37 @@ import { Hotel } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 import { Switch } from "@/components/ui/switch";
 
-const academicYears = ["June 2024/25", "July 2025/26"];
+const namesOfHostel = [
+    "Hostel A", "Hostel B", "Hostel C", "Hostel D", 
+    "Hostel E", "Hostel F", "Hostel G", "Hostel H"
+  ];
+  
+  const numbersOfRoom = [
+    "101", "102", "103", "104", "105", "106", "107", "108", "109", "110",
+    "201", "202", "203", "204", "205", "206", "207", "208", "209", "210",
+    "301", "302", "303", "304", "305", "306", "307", "308", "309", "310",
+    "401", "402", "403", "404", "405", "406", "407", "408", "409", "410"
+  ];
+  
 
-interface PersonalInfoProps {
+
+
+interface HostelProps {
+    data: {
+        hostelName: string
+        roomNumber: string
+    }
+}
+
+interface HostelInfoProps {
     control: any;
     setValue: (name: string, value: any) => void;
     watch: (name: string, defaultValue?: any) => any;
     trigger: (name?: string | string[]) => void;
+    singleStudent: HostelProps
 }
 
-const HostelInformation = ({ control, setValue, watch, trigger }: PersonalInfoProps) => {
+const HostelInformation = ({ control, setValue, watch, trigger, singleStudent }: HostelInfoProps) => {
     const isHostelEnabled = watch("hostelEnabled", true);
 
     return (
@@ -43,17 +64,18 @@ const HostelInformation = ({ control, setValue, watch, trigger }: PersonalInfoPr
 
                 {isHostelEnabled && (
                     <div className="m-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Route Select */}
+                        {/* hostel name Select */}
                         <Controller
                             name="hostelName"
                             control={control}
+                            defaultValue={singleStudent?.data?.hostelName || ""}
                             rules={{ required: "Hostel name is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>
                                     <DynamicSelect
                                         label="Hostel Name"
                                         placeholder="Select hostel name"
-                                        options={academicYears}
+                                        options={namesOfHostel}
                                         value={field.value}
                                         onChange={(value: string) => {
                                             setValue("hostelName", value);
@@ -69,13 +91,14 @@ const HostelInformation = ({ control, setValue, watch, trigger }: PersonalInfoPr
                         <Controller
                             name="roomNumber"
                             control={control}
+                            defaultValue={singleStudent?.data?.roomNumber || ""}
                             rules={{ required: "Room number is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>
                                     <DynamicSelect
                                         label="Room Number"
                                         placeholder="Select room number"
-                                        options={academicYears}
+                                        options={numbersOfRoom}
                                         value={field.value}
                                         onChange={(value: string) => {
                                             setValue("roomNumber", value);

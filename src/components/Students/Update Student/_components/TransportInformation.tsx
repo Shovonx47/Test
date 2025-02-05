@@ -3,16 +3,53 @@ import { Bus, NotebookTabs } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 import { Switch } from "@/components/ui/switch";
 
-const academicYears = ["June 2024/25", "July 2025/26"];
+const routes = [
+    "Route A - Downtown to Campus", 
+    "Route B - Eastside to Campus", 
+    "Route C - Westside to Campus", 
+    "Route D - Northside to Campus"
+  ];
+  
+  const vehicleNumbers = [
+    "A123BC", 
+    "B234CD", 
+    "C345DE", 
+    "D456EF",
+    "E567FG",
+    "F678GH",
+    "G789HI",
+    "H890IJ"
+  ];
+  
+  const pickupPoints = [
+    "Downtown Station",
+    "Eastside Mall",
+    "Westside Park",
+    "Northside Plaza",
+    "Campus Main Entrance",
+    "Central Square",
+    "Library Stop",
+    "City Center"
+  ];
+  
 
-interface PersonalInfoProps {
+interface TransportProps {
+    data: {
+        route: string
+        vehicleNumber: string
+        pickupPoint: string
+    }
+}
+
+interface TransportInfoProps {
     control: any;
     setValue: (name: string, value: any) => void;
     watch: (name: string, defaultValue?: any) => any;
     trigger: (name?: string | string[]) => void;
+    singleStudent: TransportProps
 }
 
-const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInfoProps) => {
+const TransportInformation = ({ control, setValue, watch, trigger, singleStudent }: TransportInfoProps) => {
     const isTransportEnabled = watch("transportEnabled", true);
 
     return (
@@ -47,13 +84,14 @@ const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInf
                         <Controller
                             name="route"
                             control={control}
+                            defaultValue={singleStudent?.data?.route || ""}
                             rules={{ required: "Route is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>
                                     <DynamicSelect
                                         label="Route"
                                         placeholder="Select route"
-                                        options={academicYears}
+                                        options={routes}
                                         value={field.value}
                                         onChange={(value: string) => {
                                             setValue("route", value);
@@ -69,13 +107,14 @@ const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInf
                         <Controller
                             name="vehicleNumber"
                             control={control}
+                            defaultValue={singleStudent?.data?.vehicleNumber || ""}
                             rules={{ required: "Vehicle number is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>
                                     <DynamicSelect
                                         label="Vehicle Number"
                                         placeholder="Select Vehicle Number"
-                                        options={academicYears}
+                                        options={vehicleNumbers}
                                         value={field.value}
                                         onChange={(value: string) => {
                                             setValue("vehicleNumber", value);
@@ -91,13 +130,14 @@ const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInf
                         <Controller
                             name="pickupPoint"
                             control={control}
+                            defaultValue={singleStudent?.data?.pickupPoint || ""}
                             rules={{ required: "Pickup point is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>
                                     <DynamicSelect
                                         label="Pickup Point"
                                         placeholder="Select Pickup Point"
-                                        options={academicYears}
+                                        options={pickupPoints}
                                         value={field.value}
                                         onChange={(value: string) => {
                                             setValue("pickupPoint", value);
