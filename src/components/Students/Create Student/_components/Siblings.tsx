@@ -10,9 +10,15 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
 const genders = ["Male", "Female", "Other"];
-const classes = ["I", "II", "III"];
-const sections = ["A", "B", "C"];
-const motherTongues = ["English", "Spanish"];
+const classes = [
+    "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"
+];
+const sections = ["A", "B", "C", "D", "E", "F"];
+const motherTongues = [
+    "English", "Spanish", "Hindi", "Mandarin", "Arabic", "French", "German",
+    "Italian", "Portuguese", "Russian", "Japanese", "Korean", "Punjabi",
+    "Bengali", "Urdu", "Tamil", "Telugu", "Malayalam", "Marathi", "Gujarati"
+];
 
 interface PersonalInfoProps {
     control: any;

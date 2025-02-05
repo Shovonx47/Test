@@ -81,7 +81,7 @@ interface PersonalInfoProps {
 
 
 
-const classes = ["I", "II", "III"];
+const classes = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
 
 const PreviousSchoolDetails = ({ control, setValue, watch, trigger }: PersonalInfoProps) => {
     const isPreviousSchool = watch("previousSchool", true);

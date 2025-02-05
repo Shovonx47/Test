@@ -7,9 +7,9 @@ import { DatePickerForm } from "@/components/Reusable/DatePickerForm";
 
 const academicYears = ["June 2024/25", "July 2025/26", "August 2026/27", "September 2027/28", "October 2028/29"];
 
-const statuses = ["Active", "Inactive", "Pending", "Suspended"];
+const statuses = ["Active", "Inactive" ];
 
-const genders = ["Male", "Female", "Other", "Prefer not to say"];
+const genders = ["Male", "Female", "Other"];
 
 const classes = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
 

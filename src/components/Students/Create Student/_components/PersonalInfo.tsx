@@ -4,16 +4,27 @@ import { ImagePlus, InfoIcon } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 import { DatePickerForm } from "@/components/Reusable/DatePickerForm";
 
-const academicYears = ["June 2024/25", "July 2025/26"];
-const statuses = ["Active", "Inactive"];
+const academicYears = ["June 2024/25", "July 2025/26", "August 2026/27", "September 2027/28", "October 2028/29"];
+
+const statuses = ["Active", "Inactive" ];
+
 const genders = ["Male", "Female", "Other"];
-const classes = ["I", "II", "III"];
-const sections = ["A", "B", "C"];
-const boards = ["Dhaka", "Rajshahi", "C"];
-const bloodGroups = ["O +ve", "A +ve", "B +ve"];
-const religions = ["Christianity", "Islam", "Hinduism"];
-const categories = ["OBC", "General"];
-const motherTongues = ["English", "Spanish"];
+
+const classes = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+
+const sections = ["A", "B", "C", "D", "E"];
+
+const boards = ["Dhaka", "Rajshahi", "Comilla", "Chittagong", "Sylhet", "Barisal", "Khulna", "Rangpur", "Mymensingh"];
+
+const bloodGroups = ["O +ve", "O -ve", "A +ve", "A -ve", "B +ve", "B -ve", "AB +ve", "AB -ve"];
+
+const religions = ["Christianity", "Islam", "Hinduism", "Buddhism", "Judaism", "Sikhism", "Zoroastrianism", "Other"];
+
+const categories = ["OBC", "General", "SC", "ST", "EWS", "Other"];
+
+const motherTongues = ["English", "Spanish", "Bengali", "Hindi", "Arabic", "Chinese", "French", "German", "Tamil", "Urdu", "Portuguese"];
+
+
 
 interface PersonalInfoProps {
     control: any; // control from useForm
