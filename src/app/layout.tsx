@@ -4,6 +4,7 @@ import "./globals.css";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/Sidebar/app-sidebar";
 import { Toaster } from "sonner";
+import Providers from "@/lib/Providers/Providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,23 +28,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <SidebarProvider>
-          <AppSidebar />
-          <main className="w-full flex flex-col min-h-screen relative">
+        <Providers>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <SidebarProvider>
+            <AppSidebar />
+            <main className="w-full flex flex-col min-h-screen relative">
 
-            <div>{children}</div>
+              <div>{children}</div>
 
-            <div className="lg:-ml-[16rem]">
-              {/* <Footer /> */}
-            </div>
-            <Toaster /> 
-            {/* <ToastContainer /> */}
-          </main>
-        </SidebarProvider>
-      </body>
-    </html>
+              <div className="lg:-ml-[16rem]">
+                {/* <Footer /> */}
+              </div>
+              <Toaster position="top-right" richColors/>
+              {/* <ToastContainer /> */}
+            </main>
+          </SidebarProvider>
+        </body>
+    </Providers>
+      </html>
   );
 }

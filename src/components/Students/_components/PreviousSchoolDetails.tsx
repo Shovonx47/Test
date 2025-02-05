@@ -1,5 +1,5 @@
 // import { Input } from "@/components/ui/input";
- 
+
 // import { Controller } from "react-hook-form";
 // import { NotebookTabs } from "lucide-react";
 
@@ -11,14 +11,14 @@
 // const PreviousSchoolDetails = ({ control, setValue }: PersonalInfoProps) => {
 //     return (
 //         <div className="p-6 bg-white">
-             
+
 //             <div className="border rounded-md">
 //                 <div className="p-4 bg-[#E9EDF4] rounded-md rounded-b-none flex items-center gap-2 mb-5">
 //                     <NotebookTabs className="h-5 w-5"/> Previous School Details
 //                 </div>
 //                 <div className="m-4 grid grid-cols-2 gap-4">
 //                     {/* Academic Year Select */}
-                     
+
 //                     {/* Admission Number */}
 //                     <div>
 //                         <label className="text-sm text-gray-600">School Name </label>
@@ -36,7 +36,7 @@
 //                     </div>
 
 //                     {/* Admission Date */}
-                    
+
 
 //                     {/* Roll Number */}
 //                     <div>
@@ -53,7 +53,7 @@
 //                         />
 
 //                     </div>
-  
+
 //                 </div>
 //             </div>
 //         </div>
@@ -68,8 +68,9 @@
 import { Controller } from "react-hook-form";
 import { NotebookTabs } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
-import { Input } from "@/components/ui/input";  
- 
+import { Input } from "@/components/ui/input";
+import DynamicSelect from "@/components/Reusable/DynamicSelect";
+
 
 interface PersonalInfoProps {
     control: any;
@@ -77,6 +78,10 @@ interface PersonalInfoProps {
     watch: (name: string, defaultValue?: any) => any;
     trigger: (name?: string | string[]) => void;
 }
+
+
+
+const classes = ["I", "II", "III"];
 
 const PreviousSchoolDetails = ({ control, setValue, watch, trigger }: PersonalInfoProps) => {
     const isPreviousSchool = watch("previousSchool", true);
@@ -99,7 +104,7 @@ const PreviousSchoolDetails = ({ control, setValue, watch, trigger }: PersonalIn
                                     field.onChange(checked);
                                     setValue("previousSchool", checked);
                                     if (checked) {
-                                        trigger(["previousSchoolName", "previousSchoolAddress"]);
+                                        trigger(["previousSchoolName", "previousSchoolAddress", "previousClassName", "previousClassGpa"]);
                                     }
                                 }}
                             />
@@ -112,52 +117,92 @@ const PreviousSchoolDetails = ({ control, setValue, watch, trigger }: PersonalIn
                         {/* Route Select */}
 
                         <div>
-                        <label className="text-sm text-gray-600">School Name </label>
-                        <Controller
-                            name="previousSchoolName"
-                            control={control}
-                            rules={{ required: "School name is required" }}
-                            render={({ field, fieldState: { error } }) => (
-                                <div>
-                                    <Input
-                                        {...field}
-                                        placeholder="Add school name"
-                                        onChange={(e) => {
-                                            field.onChange(e.target.value);
-                                            trigger("previousSchoolName"); // Revalidate field
-                                        }}
-                                    />
-                                    {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                                </div>
-                            )}
-                        />
+                            <label className="text-sm text-gray-600">School Name </label>
+                            <Controller
+                                name="previousSchoolName"
+                                control={control}
+                                rules={{ required: "School name is required" }}
+                                render={({ field, fieldState: { error } }) => (
+                                    <div>
+                                        <Input
+                                            {...field}
+                                            placeholder="Add school name"
+                                            onChange={(e) => {
+                                                field.onChange(e.target.value);
+                                                trigger("previousSchoolName"); // Revalidate field
+                                            }}
+                                        />
+                                        {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                                    </div>
+                                )}
+                            />
+                        </div>
+                        <div>
+                            <Controller
+                                name="previousClassName"
+                                control={control}
+                                rules={{ required: "Class name is required" }}
+                                render={({ field, fieldState: { error } }) => (
+                                    <div>
+                                        <DynamicSelect
+                                            {...field}
+                                            label="Previous Class Name"
+                                            placeholder="Select Class"
+                                            options={classes}
+                                            value={field.value}
+                                            onChange={(val) => {
+                                                 setValue("previousClassName", val);
+                                                trigger("previousClassName"); // Revalidate field
+                                            }}
+                                        />
+                                        {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                                    </div>
+                                )}
+                            />
+                        </div>
+                        <div>
+                            <label className="text-sm text-gray-600">GPA (Optional) </label>
+                            <Controller
+                                name="previousClassGpa"
+                                control={control}
+                                render={({ field }) => (
+                                    <div>
+                                        <Input
+                                            {...field}
+                                            placeholder="Add your gpa"
+                                            onChange={(e) => {
+                                                field.onChange(e.target.value)
+                                            }} />
+                                    </div>
+                                )}
+                            />
                         </div>
 
                         {/* address Select */}
                         <div>
-                        <label className="text-sm text-gray-600">Address</label>
-                        <Controller
-                            name="previousSchoolAddress"
-                            control={control}
-                            rules={{ required: "School address is required" }}
-                            render={({ field, fieldState: { error } }) => (
-                                <div>
-                                    <Input
-                                        {...field}
-                                       
-                                        placeholder="Add school address"
-                                        onChange={(e) => {
-                                            field.onChange(e.target.value);
-                                            trigger("previousSchoolAddress"); // Revalidate field
-                                        }}
-                                    />
-                                    {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                                </div>
-                            )}
-                        />
+                            <label className="text-sm text-gray-600">Address</label>
+                            <Controller
+                                name="previousSchoolAddress"
+                                control={control}
+                                rules={{ required: "School address is required" }}
+                                render={({ field, fieldState: { error } }) => (
+                                    <div>
+                                        <Input
+                                            {...field}
+
+                                            placeholder="Add school address"
+                                            onChange={(e) => {
+                                                field.onChange(e.target.value);
+                                                trigger("previousSchoolAddress"); // Revalidate field
+                                            }}
+                                        />
+                                        {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                                    </div>
+                                )}
+                            />
                         </div>
 
-                        
+
                     </div>
                 )}
             </div>

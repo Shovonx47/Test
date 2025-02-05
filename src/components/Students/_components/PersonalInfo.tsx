@@ -1,19 +1,16 @@
- 
 import { Input } from "@/components/ui/input";
-
 import { Controller } from "react-hook-form";
 import { ImagePlus, InfoIcon } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 import { DatePickerForm } from "@/components/Reusable/DatePickerForm";
-
 
 const academicYears = ["June 2024/25", "July 2025/26"];
 const statuses = ["Active", "Inactive"];
 const genders = ["Male", "Female", "Other"];
 const classes = ["I", "II", "III"];
 const sections = ["A", "B", "C"];
+const boards = ["Dhaka", "Rajshahi", "C"];
 const bloodGroups = ["O +ve", "A +ve", "B +ve"];
-const houses = ["Red", "Blue"];
 const religions = ["Christianity", "Islam", "Hinduism"];
 const categories = ["OBC", "General"];
 const motherTongues = ["English", "Spanish"];
@@ -21,24 +18,10 @@ const motherTongues = ["English", "Spanish"];
 interface PersonalInfoProps {
     control: any; // control from useForm
     setValue: (name: string, value: any) => void;
+    trigger: (name: string) => void; // Add trigger for validation
 }
 
-const PersonalInfo = ({ control, setValue }: PersonalInfoProps) => {
-
-
-    // const [file, setFile] = useState<File | null>(null);
-
-    // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     const selectedFile = e.target.files ? e.target.files[0] : null;
-    //     if (selectedFile) {
-    //         setFile(selectedFile);
-    //     }
-    // };
-
-    // const handleRemove = () => {
-    //     setFile(null);
-    // };
-
+const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
     return (
         <div className="p-6 bg-white">
             <h2 className="text-xl font-semibold text-gray-800">Add Student</h2>
@@ -48,14 +31,15 @@ const PersonalInfo = ({ control, setValue }: PersonalInfoProps) => {
 
             <div className="border rounded-md">
                 <div className="p-4 bg-[#E9EDF4] rounded-md rounded-b-none flex items-center gap-2 mb-5">
-                    <InfoIcon className="h-5 w-5"/> Personal Information
+                    <InfoIcon className="h-5 w-5" /> Personal Information
                 </div>
 
                 <div className="ml-4">
                     <Controller
                         name="profileImage"
                         control={control}
-                        render={({ field }) => (
+                        rules={{ required: "Profile image is required" }}
+                        render={({ field, fieldState: { error } }) => (
                             <div className="mt-1 flex items-center">
                                 <div className="w-20 h-20 border border-dashed border-gray-300 rounded-sm flex justify-center items-center">
                                     {field.value ? (
@@ -79,7 +63,7 @@ const PersonalInfo = ({ control, setValue }: PersonalInfoProps) => {
                                         onChange={(e) => {
                                             const file = e.target.files ? e.target.files[0] : null;
                                             setValue("profileImage", file);
-                                            // trigger("profileImage");
+                                            trigger("profileImage");
                                         }}
                                     />
                                     <label
@@ -88,19 +72,18 @@ const PersonalInfo = ({ control, setValue }: PersonalInfoProps) => {
                                     >
                                         Upload
                                     </label>
-                                    
-                                        <label
-                                             
-                                            className="ml-3 py-2 cursor-pointer px-3 border border-dashed border-gray-300 rounded-sm text-sm font-medium text-white bg-black"
-                                            onClick={() => setValue("profileImage", null)}
-                                        >
-                                            Remove
-                                        </label>
-                                 
+
+                                    <label
+                                        className="ml-3 py-2 cursor-pointer px-3 border border-dashed border-gray-300 rounded-sm text-sm font-medium text-white bg-black"
+                                        onClick={() => setValue("profileImage", null)}
+                                    >
+                                        Remove
+                                    </label>
+
                                     <p className="mt-2 text-xs text-gray-500">
                                         Upload image size 4MB, Format JPG, PNG, SVG
                                     </p>
-                                     
+                                    {error && <p className="text-red-500 text-sm">{error.message}</p>}
                                 </div>
                             </div>
                         )}
@@ -111,206 +94,21 @@ const PersonalInfo = ({ control, setValue }: PersonalInfoProps) => {
                     <Controller
                         name="academicYear"
                         control={control}
-                        render={({ field }) => (
-                            <DynamicSelect
-                                label="Academic Year"
-                                placeholder="Select Academic Year"
-                                options={academicYears}
-                                value={field.value}
-                                onChange={(value: string) => setValue("academicYear", value)} // single value is passed to onChange
-                            />
-                        )}
-                    />
-                    {/* Admission Number */}
-                    <div>
-                        <label className="text-sm text-gray-600">Admission number</label>
-                        <Controller
-                            name="admissionNumber" // Field name
-                            control={control} // Pass control from useForm
-                            render={({ field }) => (
-                                <Input
-                                    {...field} // Spread the field props to connect the input
-                                    placeholder="Enter admission number"
+                        rules={{ required: "Academic Year is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Academic Year"
+                                    placeholder="Select Academic Year"
+                                    options={academicYears}
+                                    value={field.value}
+                                    onChange={(value: string) => {
+                                        setValue("academicYear", value);
+                                        trigger("academicYear");
+                                    }}
                                 />
-                            )}
-                        />
-
-                    </div>
-
-                    {/* Admission Date */}
-                    <Controller
-                        name="admissionDate"
-                        control={control}
-                        render={({ field }) => (
-                            <DatePickerForm
-                                value={field.value ? new Date(field.value) : undefined}
-                                onChange={(formattedDate) => setValue("admissionDate", formattedDate)}
-                                label="Admission Date"
-                            />
-                        )}
-                    />
-
-                    {/* Roll Number */}
-                    <div>
-                        <label className="text-sm text-gray-600">Roll number</label>
-                        <Controller
-                            name="roll" // Field name
-                            control={control} // Pass control from useForm
-                            render={({ field }) => (
-                                <Input
-                                    {...field} // Spread the field props to connect the input
-                                    placeholder="Enter roll number"
-                                />
-                            )}
-                        />
-
-                    </div>
-
-                    {/* Status Select */}
-                    <Controller
-                        name="status"
-                        control={control}
-                        render={({ field }) => (
-                            <DynamicSelect
-                                label="Status"
-                                placeholder="Select Status"
-                                options={statuses}
-                                value={field.value}
-                                onChange={(val) => setValue("status", val)}
-                            />
-                        )}
-                    />
-
-                    {/* First Name */}
-                    <div>
-                        <label className="text-sm text-gray-600">First name</label>
-                        <Controller
-                            name="firstName" // Field name
-                            control={control} // Pass control from useForm
-                            render={({ field }) => (
-                                <Input
-                                    {...field} // Spread the field props to connect the input
-                                    placeholder="Enter first name"
-                                />
-                            )}
-                        />
-                    </div>
-
-                    {/* Last Name */}
-                    <div>
-                        <label className="text-sm text-gray-600">Last name</label>
-                        <Controller
-                            name="lastName" // Field name
-                            control={control} // Pass control from useForm
-                            render={({ field }) => (
-                                <Input
-                                    {...field} // Spread the field props to connect the input
-                                    placeholder="Enter last name"
-                                />
-                            )}
-                        />
-                    </div>
-
-                    {/* Class Select */}
-                    <Controller
-                        name="class"
-                        control={control}
-                        render={({ field }) => (
-                            <DynamicSelect
-                                label="Class"
-                                placeholder="Select Class"
-                                options={classes}
-                                value={field.value}
-                                onChange={(val) => setValue("class", val)}
-                            />
-                        )}
-                    />
-
-                    {/* Section Select */}
-                    <Controller
-                        name="section"
-                        control={control}
-                        render={({ field }) => (
-                            <DynamicSelect
-                                label="Section"
-                                placeholder="Select Section"
-                                options={sections}
-                                value={field.value}
-                                onChange={(val) => setValue("section", val)}
-                            />
-                        )}
-                    />
-
-                    {/* Gender Select */}
-                    <Controller
-                        name="gender"
-                        control={control}
-                        render={({ field }) => (
-                            <DynamicSelect
-                                label="Gender"
-                                placeholder="Select Gender"
-                                options={genders}
-                                value={field.value}
-                                onChange={(val) => setValue("gender", val)}
-                            />
-                        )}
-                    />
-
-                    {/* Date of Birth */}
-                    <Controller
-                        name="dob"
-                        control={control}
-                        render={({ field }) => (
-                            <DatePickerForm
-                                value={field.value ? new Date(field.value) : undefined}
-                                onChange={(formattedDate) => setValue("dob", formattedDate)}
-                                label="Date of Birth"
-                            />
-                        )}
-                    />
-
-                    {/* Blood Group Select */}
-                    <Controller
-                        name="bloodGroup"
-                        control={control}
-                        render={({ field }) => (
-                            <DynamicSelect
-                                label="Blood Group"
-                                placeholder="Select Blood Group"
-                                options={bloodGroups}
-                                value={field.value}
-                                onChange={(val) => setValue("bloodGroup", val)}
-                            />
-                        )}
-                    />
-
-                    {/* House Select */}
-                    <Controller
-                        name="house"
-                        control={control}
-                        render={({ field }) => (
-                            <DynamicSelect
-                                label="House"
-                                placeholder="Select House"
-                                options={houses}
-                                value={field.value}
-                                onChange={(val) => setValue("house", val)}
-                            />
-                        )}
-                    />
-
-                    {/* Religion Select */}
-                    <Controller
-                        name="religion"
-                        control={control}
-                        render={({ field }) => (
-                            <DynamicSelect
-                                label="Religion"
-                                placeholder="Select Religion"
-                                options={religions}
-                                value={field.value}
-                                onChange={(val) => setValue("religion", val)}
-                            />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
                         )}
                     />
 
@@ -318,58 +116,322 @@ const PersonalInfo = ({ control, setValue }: PersonalInfoProps) => {
                     <Controller
                         name="category"
                         control={control}
-                        render={({ field }) => (
-                            <DynamicSelect
-                                label="Category"
-                                placeholder="Select Category"
-                                options={categories}
-                                value={field.value}
-                                onChange={(val) => setValue("category", val)}
-                            />
+                        rules={{ required: "Category is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Category"
+                                    placeholder="Select Category"
+                                    options={categories}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("category", val);
+                                        trigger("category");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
                         )}
                     />
 
-                    <div>
-                        <label className="text-sm text-gray-600">Personal contact number</label>
-                        <Controller
-                            name="contactNumber" // Field name
-                            control={control} // Pass control from useForm
-                            render={({ field }) => (
+                    {/* Admission Date */}
+                    <Controller
+                        name="admissionDate"
+                        control={control}
+                        rules={{ required: "Admission Date is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DatePickerForm
+                                    value={field.value ? new Date(field.value) : undefined}
+                                    onChange={(formattedDate) => {
+                                        setValue("admissionDate", formattedDate);
+                                        trigger("admissionDate");
+                                    }}
+                                    label="Admission Date"
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+
+                    {/* Roll Number */}
+                    <Controller
+                        name="userId"
+                        control={control}
+                        rules={{ required: "User ID is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <label className="text-sm text-gray-600">User Id</label>
                                 <Input
-                                    {...field} // Spread the field props to connect the input
+                                    {...field}
+                                    placeholder="Enter user id number"
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+
+                    {/* Status Select */}
+                    <Controller
+                        name="status"
+                        control={control}
+                        rules={{ required: "Status is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Status"
+                                    placeholder="Select Status"
+                                    options={statuses}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("status", val);
+                                        trigger("status");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+
+                    {/* First Name */}
+                    <Controller
+                        name="firstName"
+                        control={control}
+                        rules={{ required: "First Name is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <label className="text-sm text-gray-600">First name</label>
+                                <Input
+                                    {...field}
+                                    placeholder="Enter first name"
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+
+                    {/* Last Name */}
+                    <Controller
+                        name="lastName"
+                        control={control}
+                        rules={{ required: "Last Name is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <label className="text-sm text-gray-600">Last name</label>
+                                <Input
+                                    {...field}
+                                    placeholder="Enter last name"
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+
+                    {/* Class Select */}
+                    <Controller
+                        name="class"
+                        control={control}
+                        rules={{ required: "Class is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Class"
+                                    placeholder="Select Class"
+                                    options={classes}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("class", val);
+                                        trigger("class");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+
+                    {/* Section Select */}
+                    <Controller
+                        name="section"
+                        control={control}
+                        rules={{ required: "Section is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Section"
+                                    placeholder="Select Section"
+                                    options={sections}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("section", val);
+                                        trigger("section");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+
+                    {/* Gender Select */}
+                    <Controller
+                        name="gender"
+                        control={control}
+                        rules={{ required: "Gender is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Gender"
+                                    placeholder="Select Gender"
+                                    options={genders}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("gender", val);
+                                        trigger("gender");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+
+                    {/* Date of Birth */}
+                    <Controller
+                        name="dateOfBirth"
+                        control={control}
+                        rules={{ required: "Date of Birth is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DatePickerForm
+                                    value={field.value ? new Date(field.value) : undefined}
+                                    onChange={(formattedDate) => {
+                                        setValue("dateOfBirth", formattedDate);
+                                        trigger("dateOfBirth");
+                                    }}
+                                    label="Date of Birth"
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+
+                    {/* Blood Group Select */}
+                    <Controller
+                        name="bloodGroup"
+                        control={control}
+                        rules={{ required: "Blood Group is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Blood Group"
+                                    placeholder="Select Blood Group"
+                                    options={bloodGroups}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("bloodGroup", val);
+                                        trigger("bloodGroup");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+
+                    {/* Religion Select */}
+                    <Controller
+                        name="religion"
+                        control={control}
+                        rules={{ required: "Religion is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Religion"
+                                    placeholder="Select Religion"
+                                    options={religions}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("religion", val);
+                                        trigger("religion");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+
+                    {/* Contact Number */}
+                    <Controller
+                        name="contactNumber"
+                        control={control}
+                        rules={{ required: "Contact Number is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <label className="text-sm text-gray-600">Personal contact number</label>
+                                <Input
+                                    {...field}
                                     placeholder="Enter contact number"
                                 />
-                            )}
-                        />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
 
-                    </div>
-
-                    <div>
-                        <label className="text-sm text-gray-600">Email address</label>
-                        <Controller
-                            name="email" // Field name
-                            control={control} // Pass control from useForm
-                            render={({ field }) => (
+                    {/* Email Address */}
+                    <Controller
+                        name="email"
+                        control={control}
+                        rules={{ required: "Email is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <label className="text-sm text-gray-600">Email address</label>
                                 <Input
-                                    {...field} // Spread the field props to connect the input
+                                    {...field}
                                     placeholder="Enter email address"
                                 />
-                            )}
-                        />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
 
-                    </div>
+                    {/* Board Select */}
+                    <Controller
+                        name="board"
+                        control={control}
+                        rules={{ required: "Board is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Board"
+                                    placeholder="Select Board"
+                                    options={boards}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("board", val);
+                                        trigger("board");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+
                     {/* Mother Tongue Select */}
                     <Controller
                         name="motherTongue"
                         control={control}
-                        render={({ field }) => (
-                            <DynamicSelect
-                                label="Mother Tongue"
-                                placeholder="Select Mother Tongue"
-                                options={motherTongues}
-                                value={field.value}
-                                onChange={(val) => setValue("motherTongue", val)}
-                            />
+                        rules={{ required: "Mother Tongue is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Mother Tongue"
+                                    placeholder="Select Mother Tongue"
+                                    options={motherTongues}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("motherTongue", val);
+                                        trigger("motherTongue");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
                         )}
                     />
                 </div>
