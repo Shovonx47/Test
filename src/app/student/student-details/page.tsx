@@ -10,10 +10,11 @@ import SiblingInformation from '@/components/student/SiblingInformation';
 import HostelTransportInfo from '@/components/student/HostelTransportInfo';
 import OtherInfo from '@/components/student/OtherInfo';
 import { IoSearchOutline } from "react-icons/io5";
+import Avatar from '@/assets/avatars/3d_avatar_3.png';
 
 export default function StudentDetails() {
   const studentData = {
-    avatar: "/assets/avatars/3d_avatar_3.png",
+    avatar: Avatar,
     name: "Maria Shekh",
     id: "AZ09877",
     rollNo: "777"
@@ -22,13 +23,13 @@ export default function StudentDetails() {
   const siblingsData = [
     {
       id: "1",
-      avatar: "/assets/avatars/3d_avatar_18.png",
+      avatar: Avatar,
       name: "Sabab Shekh",
       class: "III, B"
     },
     {
       id: "2",
-      avatar: "/assets/avatars/3d_avatar_18.png",
+      avatar: Avatar,
       name: "Mehrima Shekh",
       class: "III, B"
     }
@@ -37,7 +38,7 @@ export default function StudentDetails() {
   const parentsData = [
     {
       id: "1",
-      avatar: "/assets/avatars/3d_avatar_21.png",
+      avatar: Avatar,
       name: "Rayan Shekh",
       relation: "Father",
       phone: "+880174545454",
@@ -45,7 +46,7 @@ export default function StudentDetails() {
     },
     {
       id: "2",
-      avatar: "/images/mother.jpg",
+      avatar: Avatar,
       name: "Mohua Majid",
       relation: "Mother",
       phone: "+880175050505",
