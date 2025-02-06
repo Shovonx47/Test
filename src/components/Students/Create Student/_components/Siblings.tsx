@@ -39,6 +39,7 @@ const Siblings = ({ control, setValue, trigger }: PersonalInfoProps) => {
             replace([]); // Clear all siblings when "No" is selected
         }
     }, [isSibling, replace, fields.length]);
+    
 
     return (
         <div className="p-6 bg-white">
@@ -52,12 +53,12 @@ const Siblings = ({ control, setValue, trigger }: PersonalInfoProps) => {
                     <div className="flex gap-x-2 items-center">
                         <h2 className="text-gray-700">Is Sibling studying in the same school?</h2>
                         <RadioGroup defaultValue="option-one" className="flex">
-                            <div onClick={() => setIsSibling(!isSibling)} className="flex items-center space-x-2">
-                                <RadioGroupItem value="option-one" id="option-one" />
+                            <div  className="flex items-center space-x-2">
+                                <RadioGroupItem onClick={() => setIsSibling(true)} value="option-one" id="option-one" />
                                 <Label htmlFor="option-one" className="text-gray-700">Yes</Label>
                             </div>
-                            <div onClick={() => setIsSibling(!isSibling)} className="flex items-center space-x-2">
-                                <RadioGroupItem value="option-two" id="option-two" />
+                            <div  className="flex items-center space-x-2">
+                                <RadioGroupItem onClick={() => setIsSibling(false)} value="option-two" id="option-two" />
                                 <Label htmlFor="option-two">No</Label>
                             </div>
                         </RadioGroup>

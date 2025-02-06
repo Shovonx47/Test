@@ -32,6 +32,10 @@ const data = {
           url: "/student/add-student",
         },
         {
+          title: "Update student",
+          url: "/student/edit-student",
+        },
+        {
           title: "All Students",
           url: "/student/all-student",
         },
