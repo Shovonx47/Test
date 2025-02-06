@@ -7,6 +7,8 @@ import PreviousSchool from '@/components/student/PreviousSchool';
 import BankDetails from '@/components/student/BankDetails';
 import MedicalHistory from '@/components/student/MedicalHistory';
 import SiblingInformation from '@/components/student/SiblingInformation';
+import HostelTransportInfo from '@/components/student/HostelTransportInfo';
+import OtherInfo from '@/components/student/OtherInfo';
 import { IoSearchOutline } from "react-icons/io5";
 
 export default function StudentDetails() {
@@ -22,6 +24,12 @@ export default function StudentDetails() {
       id: "1",
       avatar: "/assets/avatars/3d_avatar_18.png",
       name: "Sabab Shekh",
+      class: "III, B"
+    },
+    {
+      id: "2",
+      avatar: "/assets/avatars/3d_avatar_18.png",
+      name: "Mehrima Shekh",
       class: "III, B"
     }
   ];
@@ -114,6 +122,7 @@ export default function StudentDetails() {
         <div className="space-y-6">
           <BasicInformation student={studentData} />
           <SiblingInformation siblings={siblingsData} />
+          <HostelTransportInfo />
         </div>
         
         <div className="space-y-6">
@@ -135,16 +144,18 @@ export default function StudentDetails() {
           </div>
 
           <ParentsInformation parents={parentsData} />
-          <div className="grid grid-cols-2 gap-6">
-            <Documents documents={documentsData} />
-            <PrimaryContact contact={contactData} />
-          </div>
-          <Address addresses={addressesData} />
+      
+<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <Documents documents={documentsData} />
+  <PrimaryContact contact={contactData} />
+  <Address addresses={addressesData} />
+</div>
           <PreviousSchool school={schoolData} />
           <div className="grid grid-cols-2 gap-6">
             <BankDetails bank={bankData} />
             <MedicalHistory medical={medicalData} />
           </div>
+          <OtherInfo />
         </div>
       </div>
     </div>
