@@ -38,23 +38,23 @@ export default function BasicInformation({ student }: StudentProps) {
           className="rounded-full"
         />
         <div>
-          <h2 className="text-lg font-semibold">{student.name}</h2>
+            <h2 className="text-lg font-semibold text-headerText">{student.name}</h2>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-500">{student.id}</span>
+            <span className="text-sm text-[#3D5EE1]">{student.id}</span>
             <span className="px-2 py-0.5 text-xs bg-green-100 text-green-600 rounded">Active</span>
           </div>
         </div>
       </div>
 
       {/* Basic Information Title */}
-      <h3 className="font-bold text-gray-900 mb-4">Basic Information</h3>
+        <h3 className="font-bold text-headerText mb-4">Basic Information</h3>
 
       {/* Information Grid */}
       <div className="space-y-4 mb-6">
         {Object.entries(studentInfo).map(([key, value]) => (
           <div key={key} className="flex">
-            <div className="w-1/2 text-gray-500">{key}</div>
-            <div className="w-1/2">{value}</div>
+            <div className="w-1/2 text-headerText font-semibold">{key}</div>
+            <div className="w-1/2 text-dataText">{value}</div>
           </div>
         ))}
       </div>

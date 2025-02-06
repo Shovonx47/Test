@@ -108,9 +108,9 @@ export default function StudentDetails() {
 
       {/* Rest of the component remains the same */}
       <div className="flex justify-between items-center mb-6">
-        <div className="flex flex-col gap-1 text-gray-500">
-          <span className="font-bold">Student Details</span>
-          <span>Dashboard / Student</span>
+        <div className="flex flex-col gap-1">
+          <span className="font-bold text-headerText">Student Details</span>
+          <span className="text-dataText">Dashboard / Student</span>
         </div>
         <div className="flex gap-3">
           <button className="px-4 py-2 bg-gray-100 rounded">Login Details</button>
@@ -133,8 +133,8 @@ export default function StudentDetails() {
                   key={tab}
                   className={`pb-4 text-sm font-medium ${
                     tab === 'Student Details'
-                      ? 'text-blue-600 border-b-2 border-blue-600'
-                      : 'text-gray-500 hover:text-gray-700'
+                        ? 'text-blue-600 border-b-2 border-blue-600'
+                        : 'text-dataText hover:text-headerText'
                   }`}
                 >
                   {tab}

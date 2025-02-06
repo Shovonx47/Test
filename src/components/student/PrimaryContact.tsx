@@ -8,15 +8,15 @@ interface ContactProps {
 export default function PrimaryContact({ contact }: ContactProps) {
   return (
     <div className="p-4 border rounded-lg">
-      <h3 className="text-lg font-semibold mb-4">Primary Contact</h3>
-      <div className="space-y-4">
+        <h3 className="text-lg font-semibold mb-4 text-headerText">Primary Contact</h3>
+        <div className="space-y-4">
         <div>
-          <p className="text-sm text-gray-500">Phone Number</p>
-          <p>{contact.phone}</p>
+          <p className="text-md text-headerText">Phone Number</p>
+          <p className="text-dataText">{contact.phone}</p>
         </div>
         <div>
-          <p className="text-sm text-gray-500">Email Address</p>
-          <p>{contact.email}</p>
+          <p className="text-md text-headerText">Email Address</p>
+          <p className="text-dataText">{contact.email}</p>
         </div>
       </div>
     </div>
