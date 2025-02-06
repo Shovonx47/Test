@@ -13,7 +13,7 @@ interface ParentsProps {
 
 export default function ParentsInformation({ parents }: ParentsProps) {
   return (
-    <div className="space-y-4 bg-white rounded-lg p-6">
+    <div className="space-y-4 bg-white rounded-lg p-6 shadow-sm">
         <h3 className="text-lg font-semibold mb-4 text-headerText">Parents Information</h3>
         <div className="space-y-4">
         {parents.map((parent) => (

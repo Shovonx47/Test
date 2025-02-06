@@ -27,7 +27,7 @@ export default function BasicInformation({ student }: StudentProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg p-6 shadow-sm border">
+    <div className="bg-white rounded-lg p-6 shadow-md">
       {/* Header with Image and Name */}
       <div className="flex items-center gap-4 mb-6">
         <Image 

@@ -6,7 +6,7 @@ const HostelTransportInfo = () => {
   const tabs = ['Hostel', 'Transportation'];
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="bg-white rounded-lg shadow-sm p-6">
       {/* Tab Navigation */}
       <div className="mb-6">
         <div className="flex space-x-6 border-b">

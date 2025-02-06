@@ -11,7 +11,7 @@ interface SiblingProps {
 
 export default function SiblingInformation({ siblings }: SiblingProps) {
   return (
-    <div className="space-y-4 bg-white rounded-lg p-6 shadow-sm border">
+    <div className="space-y-4 bg-white rounded-lg p-6 shadow-md">
       <h3 className="text-lg font-semibold">Sibling Information</h3>
       {siblings.map((sibling) => (
         <div key={sibling.id} className="flex items-center gap-4">
