@@ -14,7 +14,7 @@ import Avatar from '@/assets/avatars/3d_avatar_3.png';
 
 export default function StudentDetails() {
   const studentData = {
-    avatar: Avatar,
+    avatar: Avatar.src,
     name: "Maria Shekh",
     id: "AZ09877",
     rollNo: "777"
@@ -121,8 +121,8 @@ export default function StudentDetails() {
 
       <div className="grid grid-cols-[300px,1fr] gap-6">
         <div className="space-y-6">
-          <BasicInformation student={studentData} />
-          <SiblingInformation siblings={siblingsData} />
+          <BasicInformation student={{ ...studentData, avatar: Avatar.src }} />
+          <SiblingInformation siblings={siblingsData.map(sibling => ({ ...sibling, avatar: Avatar.src }))} />
           <HostelTransportInfo />
         </div>
         
@@ -144,7 +144,7 @@ export default function StudentDetails() {
             </div>
           </div>
 
-          <ParentsInformation parents={parentsData} />
+          <ParentsInformation parents={parentsData.map(parent => ({ ...parent, avatar: Avatar.src }))} />
       
 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 shadow-sm">
   <Documents documents={documentsData} />
