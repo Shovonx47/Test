@@ -125,18 +125,17 @@ export default function StudentDetails() {
           <SiblingInformation siblings={siblingsData} />
           <HostelTransportInfo />
         </div>
-        
+
         <div className="space-y-6">
           <div className="mb-6">
             <div className="flex space-x-6 border-b">
               {tabs.map((tab) => (
                 <button
                   key={tab}
-                  className={`pb-4 text-sm font-medium ${
-                    tab === 'Student Details'
-                        ? 'text-blue-600 border-b-2 border-blue-600'
-                        : 'text-dataText hover:text-headerText'
-                  }`}
+                  className={`pb-4 text-sm font-medium ${tab === 'Student Details'
+                      ? 'text-blue-600 border-b-2 border-blue-600'
+                      : 'text-dataText hover:text-headerText'
+                    }`}
                 >
                   {tab}
                 </button>
@@ -145,12 +144,12 @@ export default function StudentDetails() {
           </div>
 
           <ParentsInformation parents={parentsData} />
-      
-<div className="grid grid-cols-1 lg:grid-cols-3 gap-6 shadow-sm">
-  <Documents documents={documentsData} />
-  <PrimaryContact contact={contactData} />
-  <Address addresses={addressesData} />
-</div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 shadow-sm">
+            <Documents documents={documentsData} />
+            <PrimaryContact contact={contactData} />
+            <Address addresses={addressesData} />
+          </div>
           <PreviousSchool school={schoolData} />
           <div className="grid grid-cols-2 gap-6">
             <BankDetails bank={bankData} />
