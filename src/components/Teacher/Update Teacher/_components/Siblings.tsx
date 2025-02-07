@@ -1,7 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { Controller, useFieldArray } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { Users, Trash2, SquarePlus } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -20,13 +20,24 @@ const motherTongues = [
     "Bengali", "Urdu", "Tamil", "Telugu", "Malayalam", "Marathi", "Gujarati"
 ];
 
+
+interface Siblings {
+    siblingName: string;
+    class: string;
+    section: string;
+    gender: string;
+    roll: string;
+    motherTongue: string;
+}
+
 interface PersonalInfoProps {
     control: any;
     setValue: (name: string, value: any) => void;
     trigger: (name?: string | string[]) => void;
+    singleStudent: { data: { siblings: Siblings[] } };
 }
 
-const Siblings = ({ control, setValue, trigger }: PersonalInfoProps) => {
+const Siblings = ({ control, setValue, trigger, singleStudent }: PersonalInfoProps) => {
     const [isSibling, setIsSibling] = useState<boolean>(true);
 
     // UseFieldArray to handle dynamic sibling fields
@@ -35,17 +46,19 @@ const Siblings = ({ control, setValue, trigger }: PersonalInfoProps) => {
         name: "siblings",
     });
 
-    // Ensure only ONE sibling field is initialized
+
     useEffect(() => {
         if (isSibling) {
             if (fields.length === 0) {
-                replace([{ siblingName: "", class: "", section: "", gender: "", roll: "", motherTongue: "" }]);
+                replace(singleStudent?.data?.siblings || [{ siblingName: "", class: "", section: "", gender: "", roll: "", motherTongue: "" }]);
             }
         } else {
             replace([]); // Clear all siblings when "No" is selected
         }
     }, [isSibling, replace, fields.length]);
-    
+
+
+
 
     return (
         <div className="p-6 bg-white">
@@ -59,11 +72,11 @@ const Siblings = ({ control, setValue, trigger }: PersonalInfoProps) => {
                     <div className="flex gap-x-2 items-center">
                         <h2 className="text-gray-700">Is Sibling studying in the same school?</h2>
                         <RadioGroup defaultValue="option-one" className="flex">
-                            <div  className="flex items-center space-x-2">
+                            <div className="flex items-center space-x-2">
                                 <RadioGroupItem onClick={() => setIsSibling(true)} value="option-one" id="option-one" />
                                 <Label htmlFor="option-one" className="text-gray-700">Yes</Label>
                             </div>
-                            <div  className="flex items-center space-x-2">
+                            <div className="flex items-center space-x-2">
                                 <RadioGroupItem onClick={() => setIsSibling(false)} value="option-two" id="option-two" />
                                 <Label htmlFor="option-two">No</Label>
                             </div>
@@ -81,6 +94,7 @@ const Siblings = ({ control, setValue, trigger }: PersonalInfoProps) => {
                                     <Controller
                                         name={`siblings.${index}.siblingName`}
                                         control={control}
+                                        defaultValue={singleStudent?.data?.siblings[index]?.siblingName || ""}
                                         rules={{ required: "Name is required" }}
                                         render={({ field, fieldState: { error } }) => (
                                             <div>
@@ -103,6 +117,7 @@ const Siblings = ({ control, setValue, trigger }: PersonalInfoProps) => {
                                     <Controller
                                         name={`siblings.${index}.class`}
                                         control={control}
+                                        defaultValue={singleStudent?.data?.siblings[index]?.class || ""}
                                         rules={{ required: "Class is required" }}
                                         render={({ field, fieldState: { error } }) => (
                                             <div>
@@ -127,6 +142,7 @@ const Siblings = ({ control, setValue, trigger }: PersonalInfoProps) => {
                                     <Controller
                                         name={`siblings.${index}.section`}
                                         control={control}
+                                        defaultValue={singleStudent?.data?.siblings[index]?.section || ""}
                                         rules={{ required: "Section is required" }}
                                         render={({ field, fieldState: { error } }) => (
                                             <div>
@@ -151,6 +167,7 @@ const Siblings = ({ control, setValue, trigger }: PersonalInfoProps) => {
                                     <Controller
                                         name={`siblings.${index}.gender`}
                                         control={control}
+                                        defaultValue={singleStudent?.data?.siblings[index]?.gender || ""}
                                         rules={{ required: "Gender is required" }}
                                         render={({ field, fieldState: { error } }) => (
                                             <div>
@@ -176,6 +193,7 @@ const Siblings = ({ control, setValue, trigger }: PersonalInfoProps) => {
                                     <Controller
                                         name={`siblings.${index}.roll`}
                                         control={control}
+                                        defaultValue={singleStudent?.data?.siblings[index]?.roll || ""}
                                         rules={{ required: "Roll number is required" }}
                                         render={({ field, fieldState: { error } }) => (
                                             <div>
@@ -198,6 +216,7 @@ const Siblings = ({ control, setValue, trigger }: PersonalInfoProps) => {
                                     <Controller
                                         name={`siblings.${index}.motherTongue`}
                                         control={control}
+                                        defaultValue={singleStudent?.data?.siblings[index]?.motherTongue || ""}
                                         rules={{ required: "Mother Tongue is required" }}
                                         render={({ field, fieldState: { error } }) => (
                                             <div>

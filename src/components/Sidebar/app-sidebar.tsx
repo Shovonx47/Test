@@ -52,11 +52,15 @@ const data = {
       items: [
         {
           title: "Add Teacher",
-          url: "/add-teacher",
+          url: "/teacher/add-teacher",
+        },
+        {
+          title: "Edit Teacher",
+          url: "/teacher/edit-teacher",
         },
         {
           title: "All Teachers",
-          url: "/all-teacher",
+          url: "/teacher/all-teacher",
         },
       ],
     },

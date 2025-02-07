@@ -1,5 +1,5 @@
 import { Controller } from "react-hook-form";
-import { Bus } from "lucide-react";
+import { Bus, NotebookTabs } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 import { Switch } from "@/components/ui/switch";
 
@@ -31,14 +31,25 @@ const routes = [
     "Library Stop",
     "City Center"
   ];
-interface PersonalInfoProps {
+  
+
+interface TransportProps {
+    data: {
+        route: string
+        vehicleNumber: string
+        pickupPoint: string
+    }
+}
+
+interface TransportInfoProps {
     control: any;
     setValue: (name: string, value: any) => void;
     watch: (name: string, defaultValue?: any) => any;
     trigger: (name?: string | string[]) => void;
+    singleStudent: TransportProps
 }
 
-const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInfoProps) => {
+const TransportInformation = ({ control, setValue, watch, trigger, singleStudent }: TransportInfoProps) => {
     const isTransportEnabled = watch("transportEnabled", true);
 
     return (
@@ -73,6 +84,7 @@ const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInf
                         <Controller
                             name="route"
                             control={control}
+                            defaultValue={singleStudent?.data?.route || ""}
                             rules={{ required: "Route is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>
@@ -95,6 +107,7 @@ const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInf
                         <Controller
                             name="vehicleNumber"
                             control={control}
+                            defaultValue={singleStudent?.data?.vehicleNumber || ""}
                             rules={{ required: "Vehicle number is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>
@@ -117,6 +130,7 @@ const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInf
                         <Controller
                             name="pickupPoint"
                             control={control}
+                            defaultValue={singleStudent?.data?.pickupPoint || ""}
                             rules={{ required: "Pickup point is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>
