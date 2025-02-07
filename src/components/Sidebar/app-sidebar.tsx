@@ -39,6 +39,10 @@ const data = {
           title: "All Students",
           url: "/student/all-student",
         },
+        {
+          title: "Student Details",
+          url: "/student/student-details",
+        },
       ],
     },
     {
