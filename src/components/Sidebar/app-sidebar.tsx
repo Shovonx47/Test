@@ -43,6 +43,10 @@ const data = {
           title: "Student Details",
           url: "/student/student-details",
         },
+        {
+          title: "Student Dashboard",
+          url: "/student/student-dashboard",
+        },
       ],
     },
     {
