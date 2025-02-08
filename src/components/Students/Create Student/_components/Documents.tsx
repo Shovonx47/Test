@@ -40,7 +40,7 @@ const Documents = ({ control, setValue }: PersonalInfoProps) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
                     {/* Birth Certificate Upload */}
                     <div>
-                        <h3 className="font-semibold">Upload Birth Certificate Document</h3>
+                        <h3 className="font-semibold">Upload Birth Certificate</h3>
                         <p className="text-sm text-gray-500">Upload file size of 4MB, Accepted Format: PDF</p>
                         <Controller
                             name="birthCertificate"
@@ -80,7 +80,7 @@ const Documents = ({ control, setValue }: PersonalInfoProps) => {
 
                     {/* Transfer Certificate Upload */}
                     <div>
-                        <h3 className="font-semibold">Upload Transfer Certificate Document</h3>
+                        <h3 className="font-semibold">Upload Transfer Certificate</h3>
                         <p className="text-sm text-gray-500">Upload file size of 4MB, Accepted Format: PDF</p>
                         <Controller
                             name="transferCertificate"
@@ -88,7 +88,7 @@ const Documents = ({ control, setValue }: PersonalInfoProps) => {
                             render={({ field }) => (
                                 <div className="mt-3 flex items-center gap-3">
                                     <label htmlFor="transfer-certificate" className="bg-black text-white px-4 py-2 rounded-md cursor-pointer">
-                                        {field.value ? "Change" : "Upload Document"}
+                                        {field.value ? "Change" : "Upload"}
                                     </label>
                                     <input
                                         type="file"

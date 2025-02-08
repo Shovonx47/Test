@@ -7,11 +7,7 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: `${process.env.NEXT_PUBLIC_BASE_API_URL}` }),
   tagTypes: [
     "student",
-    "folder", 
-    "banner",
-    "school-features",
-    "explore-point",
-    "history"
+    "teacher"
   ],
   endpoints: () => ({}),
 });
