@@ -8,7 +8,7 @@ const AttendanceSection = () => {
   ];
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow">
+    <div className="bg-white p-4 rounded-lg shadow h-[calc(100vh-24rem)]"> {/* Added fixed height */}
       <h2 className="text-lg font-semibold mb-4">Attendance</h2>
       <div className="flex items-center justify-between">
         <div className="w-32">
@@ -26,7 +26,9 @@ const AttendanceSection = () => {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <p className="text-sm">No. of total working days: <span className="font-semibold">30 days</span></p>
+          <p className="text-sm">
+            No. of total working days: <span className="font-semibold">30 days</span>
+          </p>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-[#4CAF50]"></div>
@@ -39,7 +41,7 @@ const AttendanceSection = () => {
           </div>
         </div>
       </div>
-      <div className="mt-4">
+      <div className="mt-2">
         <h3 className="text-sm font-semibold mb-2">Last 7 Days</h3>
         <div className="flex gap-1">
           {["P", "P", "P", "A", "P", "P", "P"].map((status, index) => (
