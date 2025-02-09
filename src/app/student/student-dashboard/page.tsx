@@ -10,6 +10,8 @@ import FeesReminderSection from "@/components/Students/Students Dashboard/FeesRe
 import ClassFacultiesSection from "@/components/Students/Students Dashboard/ClassFacultiesSection";
 import NoticeBoardSection from "@/components/Students/Students Dashboard/NoticeBoardSection";
 import SyllabusSection from "@/components/Students/Students Dashboard/SyllabusSection";
+import TodaysClasses from "@/components/Students/Students Dashboard/TodaysClasses";
+
 
 export default function StudentDashboard() {
   return (
@@ -29,6 +31,9 @@ export default function StudentDashboard() {
         {/* Profile Card - Full Width */}
         <div className="col-span-4">
           <ProfileCard />
+          <div className="mt-6">
+    <TodaysClasses />
+  </div>
         </div>
 
         {/* Main Content - Left Side */}
