@@ -10,10 +10,14 @@ import ClassFacultiesSection from "@/components/Students/Students Dashboard/Clas
 import NoticeBoardSection from "@/components/Students/Students Dashboard/NoticeBoardSection";
 import PerformanceSection from "@/components/Students/Students Dashboard/PerformanceSection";
 import ScheduleSection from "@/components/Students/Students Dashboard/ScheduleSection";
+import HomeWorksSection from "@/components/Students/Students Dashboard/HomeWorksSection";
+import FeesReminderSection from "@/components/Students/Students Dashboard/FeesReminderSection";
+import SyllabusSection from "@/components/Students/Students Dashboard/SyllabusSection";
+import TodoList from "@/components/Students/Students Dashboard/TodoList";
 
 export default function StudentDashboard() {
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gray-50 min-h-screen relative">
       {/* Search Bar */}
       <div className="mb-6">
         <div className="relative w-2/5">
@@ -53,11 +57,20 @@ export default function StudentDashboard() {
           <div className="mt-[42rem]">
             <ExamResultsSection />
           </div>
+          <div className="absolute bottom-32 mt-6">
+            <TodoList />
+          </div>
         </div>
 
         {/* Right Column */}
         <div className="col-span-4">
           <ScheduleSection />
+          <div className="mt-5">
+            <HomeWorksSection />
+          </div>
+          <div className="mt-8">
+            <FeesReminderSection />
+          </div>
         </div>
 
         {/* Class Faculties - Full Width */}
@@ -69,6 +82,11 @@ export default function StudentDashboard() {
         <div className="col-span-4">
           <NoticeBoardSection />
         </div>
+      </div>
+
+      {/* Syllabus Section - Absolute Bottom Right with Responsive Width */}
+      <div className="absolute bottom-10 right-6 w-76 sm:w-92 md:w-[20rem] lg:w-[24rem]">
+        <SyllabusSection />
       </div>
     </div>
   );
