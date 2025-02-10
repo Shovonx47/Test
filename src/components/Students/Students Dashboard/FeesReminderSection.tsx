@@ -1,52 +1,64 @@
-"use client";
+import React from 'react';
 
 const FeesReminderSection = () => {
   const fees = [
     {
       type: "Mess Fees",
-      amount: "₹ 1,500",
-      dueDate: "15 Feb 2025",
-      lastDate: "20 Feb 2025",
+      amount: "Tk 2000 + Tk 150",
+      lastDate: "28 Feb 2025",
+      isDue: true
     },
     {
       type: "Hostel",
-      amount: "₹ 5,000",
-      dueDate: "15 Feb 2025",
-      lastDate: "20 Feb 2025",
+      amount: "Tk 2500",
+      lastDate: "28 Feb 2025",
+      isDue: false
+    },
+    {
+      type: "Book Fees",
+      amount: "Tk 1500",
+      lastDate: "28 Feb 2025",
+      isDue: false
     },
     {
       type: "Exam Fees",
-      amount: "₹ 1,500",
-      dueDate: "15 Feb 2025",
-      lastDate: "20 Feb 2025",
+      amount: "Tk 1000",
+      lastDate: "28 Feb 2025",
+      isDue: false
     },
     {
       type: "Transport Fees",
-      amount: "₹ 1,000",
-      dueDate: "15 Feb 2025",
-      lastDate: "20 Feb 2025",
-    },
+      amount: "Tk 1500",
+      lastDate: "28 Feb 2025",
+      isDue: false
+    }
   ];
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold">Fees Reminder</h2>
+    <div className="bg-white rounded-lg shadow p-4 max-w-md">
+      <div className="flex justify-between items-center mb-2">
+        <h2 className="text-lg font-semibold text-gray-900">Fees Reminder</h2>
         <button className="text-blue-600 text-sm">View All</button>
       </div>
-      <div className="space-y-3">
+
+      <div className="space-y-4 mt-4">
         {fees.map((fee, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-between p-3 bg-gray-50 rounded"
-          >
-            <div>
-              <h4 className="font-medium">{fee.type}</h4>
-              <p className="text-sm text-gray-500">Due Date: {fee.dueDate}</p>
+          <div key={index} className="flex items-center space-x-3">
+            <div className="w-8 h-8 rounded-full bg-red-100"></div>
+            <div className="flex-grow">
+              <div className="flex items-center gap-2">
+                <span className="font-medium text-gray-900">{fee.type}</span>
+                {fee.isDue && (
+                  <span className="text-xs text-red-500 px-2 py-0.5 bg-red-50 rounded">
+                    Due
+                  </span>
+                )}
+              </div>
+              <div className="text-sm text-gray-500">{fee.amount}</div>
             </div>
             <div className="text-right">
-              <p className="font-medium">{fee.amount}</p>
-              <p className="text-sm text-gray-500">Last Date: {fee.lastDate}</p>
+              <div className="text-sm text-gray-500">Last Date</div>
+              <div className="text-sm text-gray-900">{fee.lastDate}</div>
             </div>
           </div>
         ))}

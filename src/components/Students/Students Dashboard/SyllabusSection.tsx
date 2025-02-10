@@ -37,6 +37,7 @@ const SyllabusSection = () => {
   return (
     <div className="bg-white p-6 pb-32 rounded-lg shadow w-full max-w-2xl">
       <h2 className="text-lg font-semibold mb-2">Syllabus</h2>
+      <div className="border-b border-gray-200 -mx-6 mb-4"></div>
       
       <div className="flex justify-center mb-6">
         <div className="bg-green-50 text-green-600 text-sm px-4 py-2 whitespace-nowrap">

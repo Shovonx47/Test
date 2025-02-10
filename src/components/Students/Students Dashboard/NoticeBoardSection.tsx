@@ -39,12 +39,10 @@ const NoticeBoardSection = () => {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold">Notice Board</h2>
         <div className="flex items-center gap-4">
-          <select className="text-sm border rounded px-2 py-1">
-            <option>Today</option>
-          </select>
-          <button className="text-blue-600 text-sm">View All</button>
+          <button className="text-headerText text-sm">View All</button>
         </div>
       </div>
+      <div className="border-b border-gray-200 -mx-6 mb-4"></div>
       <div className="space-y-3">
         {notices.map((notice, index) => (
           <div
@@ -55,11 +53,6 @@ const NoticeBoardSection = () => {
               <h4 className="font-medium">{notice.title}</h4>
               <p className="text-sm text-gray-500">Added on: {notice.date}</p>
             </div>
-            <span
-              className={`px-3 py-1 rounded-full text-sm ${notice.typeColor}`}
-            >
-              {notice.type}
-            </span>
           </div>
         ))}
       </div>

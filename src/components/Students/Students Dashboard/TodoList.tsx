@@ -51,11 +51,12 @@ const TodoList = () => {
   return (
     <div className="bg-white rounded-lg shadow-sm p-4">
       <div className="flex items-center justify-between pb-4 border-b border-gray-100">
-        <h3 className="text-lg font-medium text-gray-900">Todo</h3>
+        <h3 className="text-lg font-semibold text-headerText">Todo</h3>
         <select className="text-sm text-gray-500 border-none bg-transparent outline-none cursor-pointer">
           <option>Today</option>
         </select>
       </div>
+      <div className="border-b border-gray-200 -mx-4 mb-4"></div>
       
       <div className="mt-4 space-y-3">
         {todos.map((todo) => (

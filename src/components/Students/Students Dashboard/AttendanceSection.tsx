@@ -10,6 +10,7 @@ const AttendanceSection = () => {
   return (
     <div className="bg-white p-4 rounded-lg shadow h-[calc(100vh-24rem)]"> {/* Added fixed height */}
       <h2 className="text-lg font-semibold mb-4">Attendance</h2>
+      <div className="border-b border-gray-200 -mx-4 mb-4"></div>
       <div className="flex items-center justify-between">
         <div className="w-32">
           <PieChart

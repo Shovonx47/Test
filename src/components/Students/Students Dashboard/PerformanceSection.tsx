@@ -24,6 +24,7 @@ ChartJS.register(
 const PerformanceSection = () => {
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "bottom" as const,
@@ -49,14 +50,12 @@ const PerformanceSection = () => {
     labels,
     datasets: [
       {
-        label: "Mathematics",
         data: [65, 59, 80, 81, 56],
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
         tension: 0.4,
       },
       {
-        label: "Science",
         data: [70, 72, 68, 75, 82],
         borderColor: "rgb(75, 192, 192)",
         backgroundColor: "rgba(75, 192, 192, 0.5)",
@@ -66,14 +65,15 @@ const PerformanceSection = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow">
-      <div className="flex items-center justify-between mb-4">
+    <div className="w-full bg-white p-6 rounded-lg shadow">
+      <div className="flex items-center justify-between mb-3">
         <h2 className="text-lg font-semibold">Performance</h2>
-        <select className="text-sm border rounded px-2 py-1">
+        <select className="text-sm px-2 py-1">
           <option>2024 - 2025</option>
         </select>
       </div>
-      <div className="h-64">
+      <div className="border-b border-gray-200 -mx-6 mb-4"></div>
+      <div className="w-full h-64">
         <Line options={options} data={data} />
       </div>
     </div>

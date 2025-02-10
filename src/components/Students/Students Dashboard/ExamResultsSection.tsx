@@ -56,7 +56,7 @@ const ExamResultsSection = () => {
     <div className="bg-white p-6 rounded-lg shadow">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold">Exam Result</h2>
-        <select className="text-sm border rounded px-2 py-1">
+        <select className="text-sm px-2 py-1">
           <option>Fall Quarter</option>
         </select>
       </div>

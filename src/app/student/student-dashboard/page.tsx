@@ -15,23 +15,29 @@ import FeesReminderSection from "@/components/Students/Students Dashboard/FeesRe
 import SyllabusSection from "@/components/Students/Students Dashboard/SyllabusSection";
 import TodoList from "@/components/Students/Students Dashboard/TodoList";
 
+
 export default function StudentDashboard() {
   return (
     <div className="p-6 bg-gray-50 min-h-screen relative">
-      {/* Search Bar */}
       <div className="mb-6">
-        <div className="relative w-2/5">
-          <input
-            type="text"
-            placeholder="Search"
-            className="w-full max-w-full px-4 py-2 pr-10 bg-white border rounded-lg focus:outline-none focus:border-gray-400"
-          />
-          <IoSearchOutline className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
-        </div>
-      </div>
+  <div className="relative w-2/5">
+    <input
+      type="text"
+      placeholder="Search"
+      className="w-full max-w-full px-4 py-2 pr-10 bg-white border rounded-lg focus:outline-none focus:border-gray-400"
+    />
+    <IoSearchOutline className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
+  </div>
+</div>
 
-      {/* Main Grid Layout */}
-      <div className="grid grid-cols-12 gap-6">
+{/* Dashboard Header */}
+<div className="flex flex-col gap-1 mb-6">
+  <span className="font-bold text-headerText">Student Dashboard</span>
+  <span className="text-dataText">Dashboard</span>
+</div>
+
+{/* Main Grid Layout */}
+<div className="grid grid-cols-12 gap-6">
         {/* Left Column */}
         <div className="col-span-4">
           <ProfileCard />
@@ -54,7 +60,7 @@ export default function StudentDashboard() {
         {/* Middle Column */}
         <div className="col-span-4">
           <AttendanceSection />
-          <div className="mt-[42rem]">
+          <div className="mt-[44rem]">
             <ExamResultsSection />
           </div>
           <div className="absolute bottom-32 mt-6">
@@ -68,7 +74,7 @@ export default function StudentDashboard() {
           <div className="mt-5">
             <HomeWorksSection />
           </div>
-          <div className="mt-8">
+          <div className="mt-[7rem]">
             <FeesReminderSection />
           </div>
         </div>
