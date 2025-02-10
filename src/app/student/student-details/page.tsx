@@ -94,10 +94,10 @@ export default function StudentDetails() {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 md:p-8 lg:p-10">
       {/* Search Bar */}
       <div className="mb-6">
-        <div className="relative w-2/5">
+        <div className="relative w-full md:w-2/5">
           <input
             type="text"
             placeholder="Search"
@@ -108,18 +108,18 @@ export default function StudentDetails() {
       </div>
 
       {/* Rest of the component remains the same */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col lg:flex-row justify-between items-center mb-6">
         <div className="flex flex-col gap-1">
           <span className="font-bold text-headerText">Student Details</span>
           <span className="text-dataText">Dashboard / Student</span>
         </div>
         <div className="flex gap-3">
-          <button className="px-4 py-2 bg-gray-100 rounded">Login Details</button>
+          <button className="px-4 py-2 bg-[#E9EDF4] text-gray-700 rounded">Login Details</button>
           <button className="px-4 py-2 bg-[#48CB45] text-white rounded">Edit Student</button>
         </div>
       </div>
 
-      <div className="grid grid-cols-[300px,1fr] gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-[300px,1fr] gap-6">
         <div className="space-y-6">
           <BasicInformation student={{ ...studentData, avatar: Avatar.src }} />
           <SiblingInformation siblings={siblingsData.map(sibling => ({ ...sibling, avatar: Avatar.src }))} />
@@ -147,15 +147,17 @@ export default function StudentDetails() {
 
 
           <ParentsInformation parents={parentsData.map(parent => ({ ...parent, avatar: Avatar.src }))} />
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 shadow-sm">
+ 
+      
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 shadow-sm">
+ 
             <Documents documents={documentsData} />
             <PrimaryContact contact={contactData} />
             <Address addresses={addressesData} />
           </div>
-
+ 
           <PreviousSchool school={schoolData} />
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <BankDetails bank={bankData} />
             <MedicalHistory medical={medicalData} />
           </div>

@@ -14,7 +14,7 @@ export default function SiblingInformation({ siblings }: SiblingProps) {
     <div className="space-y-4 bg-white rounded-lg p-6 shadow-md">
       <h3 className="text-lg font-semibold">Sibling Information</h3>
       {siblings.map((sibling) => (
-        <div key={sibling.id} className="flex items-center gap-4">
+        <div key={sibling.id} className="flex items-center gap-4 bg-[#FAFAFA] p-4 flex-col sm:flex-row">
           <Image
             src={sibling.avatar}
             alt={sibling.name}

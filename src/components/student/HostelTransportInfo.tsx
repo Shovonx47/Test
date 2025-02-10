@@ -29,10 +29,15 @@ const HostelTransportInfo = () => {
       {/* Content Section */}
       {activeTab === 'Hostel' && (
         <div className="space-y-2">
-          <div className="text-headerText font-semibold">MI-Hostel, Floor-05</div>
-          <div className="flex items-center">
-            <span className="text-blue-600">Room No :</span>
-            <span className="text-blue-600 ml-1">10</span>
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-[#FAFAFA] rounded-sm flex-shrink-0" />
+            <div>
+              <div className="text-headerText font-semibold">MI-Hostel, Floor-05</div>
+              <div className="flex items-center">
+                <span className="text-blue-600">Room No :</span>
+                <span className="text-blue-600 ml-1">10</span>
+              </div>
+            </div>
           </div>
         </div>
       )}
