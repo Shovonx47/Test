@@ -23,9 +23,14 @@ const Documents = ({ control, setValue, singleStudent }: DocumentInfoProps) => {
     const [transferCertificateUrl, setTransferCertificateUrl] = useState<string | null>(singleStudent?.data?.transferCertificate || null);
 
     // Truncate file names for display
-    const truncateFileName = (name: string, maxLength: number = 20) => {
-        return name.length > maxLength ? name.substring(0, maxLength) + "..." : name;
-    };
+    const extractFileName = (url: string) => {
+        return url.split('/').pop() || ''; // Extracts the last part of the URL (the file name)
+      };
+      
+      const truncateFileName = (url: string ) => {
+        const fileName = extractFileName(url);
+        return fileName
+      };
 
     // Handle file input change
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, field: any, setFileName: React.Dispatch<React.SetStateAction<string>>, setFileUrl: React.Dispatch<React.SetStateAction<string | null>>) => {

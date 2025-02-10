@@ -2,7 +2,6 @@
 import { useForm } from "react-hook-form";
 import PersonalInfo from "./_components/PersonalInfo";
 import ParentsAndGuardianInformation from "./_components/Parents&GuardianInformation";
-import Siblings from "./_components/Siblings";
 import Address from "./_components/Address";
 import TransportInformation from "./_components/TransportInformation";
 import PreviousSchoolDetails from "./_components/PreviousSchoolDetails";
@@ -10,43 +9,46 @@ import { Button } from "../../ui/button";
 import HostelInformation from "./_components/HostelInformation";
 import Documents from "./_components/Documents";
 import uploadFile from "@/Helper/uploadFile";
-import { useCreateStudentMutation } from "@/redux/api/Student/studentApi";
 import { toast } from "sonner";
+import PayrollInformation from "./_components/Payroll";
+import BankAccountDetail from "./_components/BankAccountDetail";
+import { useCreateTeacherMutation } from "@/redux/api/Teacher/teacherApi";
 
 
 
 const formSections = [
     PersonalInfo,
+    PayrollInformation,
     ParentsAndGuardianInformation,
-    Siblings,
     Address,
+    BankAccountDetail,
     TransportInformation,
     HostelInformation,
     PreviousSchoolDetails,
     Documents
 ];
 
-const AddStudentForm = () => {
+const AddTeacherForm = () => {
     const { control, handleSubmit, setValue, watch, trigger, reset } = useForm({});
-    const [createStudent, { isLoading }] = useCreateStudentMutation()
+    const [createTeacher, { isLoading }] = useCreateTeacherMutation()
 
     const onSubmit = async (data: any) => {
 
         // Upload files and update data
         const profileImage = await uploadFile(data.profileImage);
-        const birthCertificate = await uploadFile(data.birthCertificate);
-        const transferCertificate = await uploadFile(data.transferCertificate);
+        const resume = await uploadFile(data.resume);
+        const joiningLetter = await uploadFile(data.joiningLetter);
 
         data.profileImage = profileImage?.secure_url;
-        data.birthCertificate = birthCertificate?.secure_url;
-        data.transferCertificate = transferCertificate?.secure_url;
+        data.resume = resume?.secure_url;
+        data.joiningLetter = joiningLetter?.secure_url;
 
         try {
-            const response = await createStudent(data).unwrap();
-
+            const response = await createTeacher(data).unwrap();
+            console.log(response)
             if (response.success) {
                 toast.success(response.message);
-                reset()
+                // reset()
             } else if (response.success === false && response.errorSources) {
                 // Extract error messages from errorSources array
                 const errorMessage = response.errorSources.map((err: any) => err.message).join(", ");
@@ -72,22 +74,6 @@ const AddStudentForm = () => {
 
 
     return (
-        // <form onSubmit={handleSubmit(onSubmit)}>
-        //     <PersonalInfo control={control} setValue={setValue} />
-        //     <ParentsAndGuardianInformation control={control} setValue={setValue} />
-        //     <Siblings control={control} setValue={setValue} trigger={trigger} />
-        //     <Address control={control} setValue={setValue} />
-        //     <TransportInformation control={control} setValue={setValue} watch={watch} trigger={trigger} />
-        //     <HostelInformation control={control} setValue={setValue} watch={watch} trigger={trigger} />
-        //     <PreviousSchoolDetails control={control} setValue={setValue} watch={watch} trigger={trigger} />
-        //     <Documents control={control} setValue={setValue} />
-
-
-        //     <div className="flex justify-end m-10">
-        //         <Button variant="default" type="submit">Submit</Button>
-        //     </div>
-        // </form>
-
         <form onSubmit={handleSubmit(onSubmit)}>
             {formSections.map((Component, index) => (
                 <Component key={index} control={control} setValue={setValue} watch={watch} trigger={trigger} />
@@ -101,4 +87,4 @@ const AddStudentForm = () => {
     );
 }
 
-export default AddStudentForm
+export default AddTeacherForm

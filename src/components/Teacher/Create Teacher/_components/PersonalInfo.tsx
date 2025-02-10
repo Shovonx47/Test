@@ -4,15 +4,13 @@ import { ImagePlus, InfoIcon } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 import { DatePickerForm } from "@/components/Reusable/DatePickerForm";
 
-const academicYears = ["June 2024/25", "July 2025/26", "August 2026/27", "September 2027/28", "October 2028/29"];
 
-const statuses = ["Active", "Inactive" ];
+
+const statuses = ["Active", "Inactive"];
 
 const genders = ["Male", "Female", "Other"];
 
-const classes = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
-
-const sections = ["A", "B", "C", "D", "E"];
+const subject = ["A", "B", "C", "D", "E"];
 
 const boards = ["Dhaka", "Rajshahi", "Comilla", "Chittagong", "Sylhet", "Barisal", "Khulna", "Rangpur", "Mymensingh"];
 
@@ -35,7 +33,7 @@ interface PersonalInfoProps {
 const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
     return (
         <div className="p-6 bg-white">
-            <h2 className="text-xl font-semibold text-gray-800">Add Student</h2>
+            <h2 className="text-xl font-semibold text-gray-800">Add Teacher</h2>
             <nav className="text-sm text-gray-500 mb-4">
                 Dashboard / Teachers / <span className="text-gray-800">Add Teacher</span>
             </nav>
@@ -101,71 +99,7 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                     />
                 </div>
                 <div className="m-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                    {/* Academic Year Select */}
-                    <Controller
-                        name="academicYear"
-                        control={control}
-                        rules={{ required: "Academic Year is required" }}
-                        render={({ field, fieldState: { error } }) => (
-                            <div>
-                                <DynamicSelect
-                                    label="Academic Year"
-                                    placeholder="Select Academic Year"
-                                    options={academicYears}
-                                    value={field.value}
-                                    onChange={(value: string) => {
-                                        setValue("academicYear", value);
-                                        trigger("academicYear");
-                                    }}
-                                />
-                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                            </div>
-                        )}
-                    />
-
-                    {/* Category Select */}
-                    <Controller
-                        name="category"
-                        control={control}
-                        rules={{ required: "Category is required" }}
-                        render={({ field, fieldState: { error } }) => (
-                            <div>
-                                <DynamicSelect
-                                    label="Category"
-                                    placeholder="Select Category"
-                                    options={categories}
-                                    value={field.value}
-                                    onChange={(val) => {
-                                        setValue("category", val);
-                                        trigger("category");
-                                    }}
-                                />
-                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                            </div>
-                        )}
-                    />
-
-                    {/* Admission Date */}
-                    <Controller
-                        name="admissionDate"
-                        control={control}
-                        rules={{ required: "Admission Date is required" }}
-                        render={({ field, fieldState: { error } }) => (
-                            <div>
-                                <DatePickerForm
-                                    value={field.value ? new Date(field.value) : undefined}
-                                    onChange={(formattedDate) => {
-                                        setValue("admissionDate", formattedDate);
-                                        trigger("admissionDate");
-                                    }}
-                                    label="Admission Date"
-                                />
-                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                            </div>
-                        )}
-                    />
-
-                    {/* Roll Number */}
+                    {/* user id Number */}
                     <Controller
                         name="userId"
                         control={control}
@@ -181,29 +115,6 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                             </div>
                         )}
                     />
-
-                    {/* Status Select */}
-                    <Controller
-                        name="status"
-                        control={control}
-                        rules={{ required: "Status is required" }}
-                        render={({ field, fieldState: { error } }) => (
-                            <div>
-                                <DynamicSelect
-                                    label="Status"
-                                    placeholder="Select Status"
-                                    options={statuses}
-                                    value={field.value}
-                                    onChange={(val) => {
-                                        setValue("status", val);
-                                        trigger("status");
-                                    }}
-                                />
-                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                            </div>
-                        )}
-                    />
-
                     {/* First Name */}
                     <Controller
                         name="firstName"
@@ -238,21 +149,21 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                         )}
                     />
 
-                    {/* Class Select */}
+                    {/* Category Select */}
                     <Controller
-                        name="class"
+                        name="category"
                         control={control}
-                        rules={{ required: "Class is required" }}
+                        rules={{ required: "Category is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
                                 <DynamicSelect
-                                    label="Class"
-                                    placeholder="Select Class"
-                                    options={classes}
+                                    label="Category"
+                                    placeholder="Select Category"
+                                    options={categories}
                                     value={field.value}
                                     onChange={(val) => {
-                                        setValue("class", val);
-                                        trigger("class");
+                                        setValue("category", val);
+                                        trigger("category");
                                     }}
                                 />
                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
@@ -260,21 +171,40 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                         )}
                     />
 
+                    {/* joining Date */}
+                    <Controller
+                        name="joiningDate"
+                        control={control}
+                        rules={{ required: "Joining date is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DatePickerForm
+                                    value={field.value ? new Date(field.value) : undefined}
+                                    onChange={(formattedDate) => {
+                                        setValue("joiningDate", formattedDate);
+                                        trigger("joiningDate");
+                                    }}
+                                    label="Joining Date"
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
                     {/* Section Select */}
                     <Controller
-                        name="section"
+                        name="subject"
                         control={control}
-                        rules={{ required: "Section is required" }}
+                        rules={{ required: "Subject is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
                                 <DynamicSelect
-                                    label="Section"
-                                    placeholder="Select Section"
-                                    options={sections}
+                                    label="Subject"
+                                    placeholder="Select Subject"
+                                    options={subject}
                                     value={field.value}
                                     onChange={(val) => {
-                                        setValue("section", val);
-                                        trigger("section");
+                                        setValue("subject", val);
+                                        trigger("subject");
                                     }}
                                 />
                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
@@ -345,6 +275,27 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                             </div>
                         )}
                     />
+                    {/* Blood Group Select */}
+                    <Controller
+                        name="maritalStatus"
+                        control={control}
+                        rules={{ required: "Marital Status is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Marital Status"
+                                    placeholder="Select Marital Status"
+                                    options={bloodGroups}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("maritalStatus", val);
+                                        trigger("maritalStatus");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
 
                     {/* Religion Select */}
                     <Controller
@@ -362,6 +313,7 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                                         setValue("religion", val);
                                         trigger("religion");
                                     }}
+                                     
                                 />
                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
                             </div>
@@ -384,6 +336,21 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                             </div>
                         )}
                     />
+                    {/* Contact Number */}
+                    <Controller
+                        name="alternativeContactNumber"
+                        control={control}
+                         
+                        render={({ field  }) => (
+                            <div>
+                                <label className="text-sm text-gray-600">Alternative Contact Number</label>
+                                <Input
+                                    {...field}
+                                    placeholder="Enter contact number"
+                                />
+                            </div>
+                        )}
+                    />
 
                     {/* Email Address */}
                     <Controller
@@ -401,22 +368,38 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                             </div>
                         )}
                     />
+                    {/* NID Address */}
+                    <Controller
+                        name="nidNumber"
+                        control={control}
+                        rules={{ required: "NID Number is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <label className="text-sm text-gray-600">NID Number</label>
+                                <Input
+                                    {...field}
+                                    placeholder="Enter NID number"
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
 
                     {/* Board Select */}
                     <Controller
-                        name="board"
+                        name="educationalQualification"
                         control={control}
-                        rules={{ required: "Board is required" }}
+                        rules={{ required: "Qualification is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
                                 <DynamicSelect
-                                    label="Board"
-                                    placeholder="Select Board"
+                                    label="Educational Qualification"
+                                    placeholder="Select Qualification"
                                     options={boards}
                                     value={field.value}
                                     onChange={(val) => {
-                                        setValue("board", val);
-                                        trigger("board");
+                                        setValue("educationalQualification", val);
+                                        trigger("educationalQualification");
                                     }}
                                 />
                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
@@ -439,6 +422,27 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                                     onChange={(val) => {
                                         setValue("motherTongue", val);
                                         trigger("motherTongue");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+                    {/* Status Select */}
+                    <Controller
+                        name="status"
+                        control={control}
+                        rules={{ required: "Status is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Status"
+                                    placeholder="Select Status"
+                                    options={statuses}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("status", val);
+                                        trigger("status");
                                     }}
                                 />
                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}

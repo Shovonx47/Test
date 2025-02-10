@@ -22,11 +22,21 @@ const Documents = ({ control, setValue, singleStudent }: DocumentInfoProps) => {
     const [birthCertificateUrl, setBirthCertificateUrl] = useState<string | null>(singleStudent?.data?.birthCertificate || null);
     const [transferCertificateUrl, setTransferCertificateUrl] = useState<string | null>(singleStudent?.data?.transferCertificate || null);
 
-    // Truncate file names for display
-    const truncateFileName = (name: string, maxLength: number = 20) => {
-        return name.length > maxLength ? name.substring(0, maxLength) + "..." : name;
-    };
+    // Truncate file names for display 
+    const extractFileName = (url: string) => {
+        return url.split('/').pop() || ''; // Extracts the last part of the URL (the file name)
+      };
+      
+      const truncateFileName = (url: string ) => {
+        const fileName = extractFileName(url);
+        return fileName
+      };
+      
+      // Example usage:
+      const url = "https://res.cloudinary.com/dfunuoqfv/image/upload/v1738997639/hse1d7th56trhxeean4f.png";
 
+
+      console.log(truncateFileName(url));
     // Handle file input change
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, field: any, setFileName: React.Dispatch<React.SetStateAction<string>>, setFileUrl: React.Dispatch<React.SetStateAction<string | null>>) => {
         const file = e.target.files?.[0] || null;
