@@ -20,7 +20,7 @@ const ParentsAndGuardianInformation = ({ control, setValue, trigger }: PersonalI
         <div className="p-6 bg-white">
             <div className="border rounded-md">
                 <div className="p-4 bg-[#E9EDF4] rounded-md rounded-b-none flex items-center gap-2 mb-5">
-                    <UserRoundCogIcon className="w-5 h-5" /> Parents & Guardian Information
+                    <UserRoundCogIcon className="w-5 h-5" /> Parent's Information
                 </div>
 
                 {/* Father's Info */}
@@ -121,10 +121,10 @@ const ParentsAndGuardianInformation = ({ control, setValue, trigger }: PersonalI
                     />
                 </div>
 
-                <div className="border-t mt-6 m-4"></div>
+                {/* <div className="border-t mt-6 m-4"></div> */}
 
                 {/* Local Guardian's Info */}
-                <div className="ml-4">Local Guardian's Info</div>
+                {/* <div className="ml-4">Local Guardian's Info</div>
                 <div className="m-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
                     {[
                         { name: "localGuardianName", label: "Local Guardian Name" },
@@ -150,7 +150,7 @@ const ParentsAndGuardianInformation = ({ control, setValue, trigger }: PersonalI
                     ))}
 
                     {/* Local Guardian's Occupation Select */}
-                    <Controller
+                    {/* <Controller
                         name="localGuardianOccupation"
                         control={control}
                         rules={{ required: "Local Guardian Occupation is required" }}
@@ -170,7 +170,7 @@ const ParentsAndGuardianInformation = ({ control, setValue, trigger }: PersonalI
                             </div>
                         )}
                     />
-                </div>
+                </div> */} 
             </div>
         </div>
     );

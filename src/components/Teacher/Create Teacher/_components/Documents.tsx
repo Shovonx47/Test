@@ -40,24 +40,24 @@ const Documents = ({ control, setValue }: PersonalInfoProps) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
                     {/* Birth Certificate Upload */}
                     <div>
-                        <h3 className="font-semibold">Upload Birth Certificate Document</h3>
+                        <h3 className="font-semibold">Upload Resume</h3>
                         <p className="text-sm text-gray-500">Upload file size of 4MB, Accepted Format: PDF</p>
                         <Controller
-                            name="birthCertificate"
+                            name="resume"
                             control={control}
                             render={({ field }) => (
                                 <div className="mt-3 flex items-center gap-3">
-                                    <label htmlFor="birth-certificate" className="bg-black text-white w-[90px] text-center py-2 rounded-md cursor-pointer">
+                                    <label htmlFor="resume" className="bg-black text-white w-[90px] text-center py-2 rounded-md cursor-pointer">
                                         {field.value ? "Change" : "Upload"}
                                     </label>
                                     <input
                                         type="file"
-                                        id="birth-certificate"
+                                        id="resume"
                                         className="hidden"
                                         accept=".pdf"
                                         onChange={(e) => {
                                             field.onChange(e.target.files?.[0]);
-                                            setValue("birthCertificate", e.target.files?.[0]);
+                                            setValue("resume", e.target.files?.[0]);
                                             handleFileChange(e, setBirthCertificateUrl); // Update URL for preview
                                         }}
                                     />
@@ -72,7 +72,7 @@ const Documents = ({ control, setValue }: PersonalInfoProps) => {
                                 width="100%"
                                 height="200"
                                 frameBorder="0"
-                                title="Birth Certificate PDF"
+                                title="Resume PDF"
                                  className="mt-5"
                             />
                         )}
@@ -80,24 +80,24 @@ const Documents = ({ control, setValue }: PersonalInfoProps) => {
 
                     {/* Transfer Certificate Upload */}
                     <div>
-                        <h3 className="font-semibold">Upload Transfer Certificate Document</h3>
+                        <h3 className="font-semibold">Upload Joining Letter</h3>
                         <p className="text-sm text-gray-500">Upload file size of 4MB, Accepted Format: PDF</p>
                         <Controller
-                            name="transferCertificate"
+                            name="joiningLetter"
                             control={control}
                             render={({ field }) => (
                                 <div className="mt-3 flex items-center gap-3">
-                                    <label htmlFor="transfer-certificate" className="bg-black text-white px-4 py-2 rounded-md cursor-pointer">
-                                        {field.value ? "Change" : "Upload Document"}
+                                    <label htmlFor="joiningLetter" className="bg-black text-white px-4 py-2 rounded-md cursor-pointer">
+                                        {field.value ? "Change" : "Upload"}
                                     </label>
                                     <input
                                         type="file"
-                                        id="transfer-certificate"
+                                        id="joiningLetter"
                                         className="hidden"
                                         accept=".pdf"
                                         onChange={(e) => {
                                             field.onChange(e.target.files?.[0]);
-                                            setValue("transferCertificate", e.target.files?.[0]);
+                                            setValue("joiningLetter", e.target.files?.[0]);
                                             handleFileChange(e, setTransferCertificateUrl); // Update URL for preview
                                         }}
                                     />
@@ -112,7 +112,7 @@ const Documents = ({ control, setValue }: PersonalInfoProps) => {
                                 width="100%"
                                 height="200"
                                 frameBorder="0"
-                                title="Transfer Certificate PDF"
+                                title="Joining Letter PDF"
                                 className="mt-5"
                             />
                         )}
