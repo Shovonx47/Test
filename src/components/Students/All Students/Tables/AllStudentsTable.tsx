@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { ChevronDown, Filter } from 'lucide-react';
 import Avatar from '@/assets/avatars/3d_avatar_3.png';
 
-// Define the type for tickers
 type Tickers = {
-  [key: string]: boolean; // Allow dynamic keys with boolean values
+  [key: string]: boolean;
 };
 
 const AllStudentsTable = () => {
-  const [tickers, setTickers] = useState<Tickers>({}); // Use the defined type
+  const [tickers, setTickers] = useState<Tickers>({});
+  const [filterBy, setFilterBy] = useState('all');
+  const [sortBy, setSortBy] = useState('name-asc');
 
   const students = [
     {
@@ -25,7 +26,71 @@ const AllStudentsTable = () => {
       dateOfBirth: '06 Mar 2011',
       paid: true
     },
-    // Add other student data here
+    {
+      admissionNo: 'AD11223345',
+      rollNo: '1235',
+      name: 'Emma',
+      profileImage: Avatar.src,
+      class: 'VII',
+      section: 'A',
+      gender: 'Female',
+      status: 'Active',
+      dateOfJoin: '22 Jan 2024',
+      dateOfBirth: '15 Apr 2011',
+      paid: false
+    },
+    {
+      admissionNo: 'AD11223346',
+      rollNo: '1236',
+      name: 'Liam',
+      profileImage: Avatar.src,
+      class: 'VII',
+      section: 'B',
+      gender: 'Male',
+      status: 'Inactive',
+      dateOfJoin: '22 Jan 2024',
+      dateOfBirth: '20 May 2011',
+      paid: true
+    },
+    {
+      admissionNo: 'AD11223347',
+      rollNo: '1237',
+      name: 'Olivia',
+      profileImage: Avatar.src,
+      class: 'VIII',
+      section: 'A',
+      gender: 'Female',
+      status: 'Active',
+      dateOfJoin: '22 Jan 2024',
+      dateOfBirth: '30 Jun 2010',
+      paid: false
+    },
+    {
+      admissionNo: 'AD11223348',
+      rollNo: '1238',
+      name: 'Noah',
+      profileImage: Avatar.src,
+      class: 'VIII',
+      section: 'B',
+      gender: 'Male',
+      status: 'Active',
+      dateOfJoin: '22 Jan 2024',
+      dateOfBirth: '12 Jul 2010',
+      paid: true
+    },
+    {
+      admissionNo: 'AD11223349',
+      rollNo: '1239',
+      name: 'Ava',
+      profileImage: Avatar.src,
+      class: 'VII',
+      section: 'C',
+      gender: 'Female',
+      status: 'Inactive',
+      dateOfJoin: '22 Jan 2024',
+      dateOfBirth: '25 Aug 2011',
+      paid: false
+    },
   ];
 
   const handleTickerClick = (studentIndex: number, tickerIndex: number) => {
@@ -41,19 +106,43 @@ const AllStudentsTable = () => {
         <h1 className="text-xl font-semibold text-gray-800">Students List</h1>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
+            <div className="border border-gray-200 py-1 px-2">
             <span className="text-sm text-gray-600">01/01/2025 - 31/01/2025</span>
-            <button className="flex items-center px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded">
-              Filter
-              <Filter className="w-4 h-4 ml-2" />
-            </button>
+
+            </div>
+            <div className="relative">
+              <select 
+                value={filterBy}
+                onChange={(e) => setFilterBy(e.target.value)}
+                className="appearance-none bg-white border rounded px-3 py-1 pr-8 text-sm text-gray-600 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="all">Fiters</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+                <option value="paid">Paid</option>
+                <option value="unpaid">Unpaid</option>
+              </select>
+              <Filter className="w-4 h-4 absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none text-gray-400" />
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-600">Sort by A-Z</span>
-            <ChevronDown className="w-4 h-4" />
+          <div className="relative">
+            <select 
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="appearance-none bg-white border rounded px-3 py-1 pr-8 text-sm text-gray-600 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="name-asc">Sort by A-Z</option>
+              <option value="name-desc">Sort by Z-A</option>
+              <option value="date-asc">Date Ascending</option>
+              <option value="date-desc">Date Descending</option>
+            </select>
+            <ChevronDown className="w-4 h-4 absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none text-gray-400" />
           </div>
         </div>
       </div>
+      <div className="border-b border-gray-200"></div>
 
+      {/* Rest of the component remains the same */}
       <div className="flex items-center justify-between mb-4 p-6">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
