@@ -1,67 +1,56 @@
 "use client";
-import { Bar } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import React from "react";
 
 const ExamResultsSection = () => {
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        max: 100,
-      },
-    },
-  };
-
-  const data = {
-    labels: ["Mat", "Phy", "Che", "Eng", "Art"],
-    datasets: [
-      {
-        data: [95, 85, 75, 65, 85],
-        backgroundColor: [
-          "rgba(54, 162, 235, 0.8)",
-          "rgba(75, 192, 192, 0.8)",
-          "rgba(255, 206, 86, 0.8)",
-          "rgba(255, 99, 132, 0.8)",
-          "rgba(153, 102, 255, 0.8)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
+  const subjects = [
+    { name: "Mat", score: 100, color: "#A855F7" }, // Purple for Math
+    { name: "Phy", score: 92, color: "#6366F1" }, // Blue for Physics
+    { name: "Che", score: 90, color: "#22C55E" }, // Green for Chemistry
+    { name: "Eng", score: 82, color: "#EF4444" }, // Red for English
+  ];
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold">Exam Result</h2>
-        <select className="text-sm px-2 py-1">
-          <option>Fall Quarter</option>
+    <div className="p-6 w-full max-w-xl bg-white shadow-md rounded-lg">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-headerText font-semibold text-gray-900">Exam Result</h2>
+        <select className="text-sm text-gray-600 px-3 py-1">
+          <option>1st Quarter</option>
         </select>
       </div>
-      <div className="h-64">
-        <Bar options={options} data={data} />
+      <div className="border-b border-gray-200 -mx-6 mb-4"></div>
+
+      <div className="mb-6 flex gap-4">
+        {subjects.slice(0, 4).map((subject) => (
+          <div 
+            key={subject.name} 
+            className="flex items-center gap-2 bg-gray-100 rounded px-3 py-1.5 w-24 mb-6"
+          >
+            <span style={{ color: subject.color }} className="font-medium">{subject.name}</span>
+            <span className="text-sm text-gray-900">{subject.score}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="relative h-64">
+        <div className="flex justify-between h-full">
+          {subjects.map((subject) => (
+            <div key={subject.name} className="flex flex-col items-center justify-end w-full">
+              <div
+                className="w-16 relative"
+                style={{
+                  height: `${subject.score}%`,
+                  backgroundColor: subject.color,
+                  borderRadius: "4px",
+                }}
+              >
+                <span className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-sm">
+                  {subject.score}%
+                </span>
+              </div>
+              <span className="mt-2 text-sm text-gray-600">{subject.name}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

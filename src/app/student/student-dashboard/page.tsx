@@ -60,7 +60,7 @@ export default function StudentDashboard() {
         {/* Middle Column */}
         <div className="col-span-4">
           <AttendanceSection />
-          <div className="mt-[44rem]">
+          <div className="mt-[34rem]">
             <ExamResultsSection />
           </div>
           <div className="absolute bottom-32 mt-6">
@@ -74,7 +74,7 @@ export default function StudentDashboard() {
           <div className="mt-5">
             <HomeWorksSection />
           </div>
-          <div className="mt-[7rem]">
+          <div className="mt-[2rem]">
             <FeesReminderSection />
           </div>
         </div>

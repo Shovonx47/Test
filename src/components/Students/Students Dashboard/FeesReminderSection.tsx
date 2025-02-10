@@ -40,6 +40,7 @@ const FeesReminderSection = () => {
         <h2 className="text-lg font-semibold text-gray-900">Fees Reminder</h2>
         <button className="text-blue-600 text-sm">View All</button>
       </div>
+      <div className="border-b border-gray-200 -mx-6 mb-4"></div>
 
       <div className="space-y-4 mt-4">
         {fees.map((fee, index) => (

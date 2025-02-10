@@ -1,58 +1,95 @@
-"use client";
-import { PieChart } from "react-minimal-pie-chart";
+import React from 'react';
 
-const AttendanceSection = () => {
-  const attendanceData = [
-    { title: "Present", value: 85, color: "#4CAF50" },
-    { title: "Absent", value: 15, color: "#FF5252" },
-  ];
+const AttendanceCard = () => {
+  // Attendance data
+  const totalDays = 28;
+  const present = 27;
+  const absent = 1;
+  const halfDay = 0;
+
+  // Calendar data for last 7 days
+  const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  const dateRange = '15 Jan 2025 - 21 Jan 2025';
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow h-[calc(100vh-24rem)]"> {/* Added fixed height */}
-      <h2 className="text-lg font-semibold mb-4">Attendance</h2>
-      <div className="border-b border-gray-200 -mx-4 mb-4"></div>
-      <div className="flex items-center justify-between">
-        <div className="w-32">
-          <PieChart
-            data={attendanceData}
-            lineWidth={20}
-            paddingAngle={2}
-            rounded
-            label={({ dataEntry }) => Math.round(dataEntry.percentage) + "%"}
-            labelStyle={{
-              fontSize: "8px",
-              fontFamily: "sans-serif",
-              fill: "#fff",
-            }}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <p className="text-sm">
-            No. of total working days: <span className="font-semibold">30 days</span>
-          </p>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#4CAF50]"></div>
-              <span className="text-sm">Present</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#FF5252]"></div>
-              <span className="text-sm">Absent</span>
-            </div>
-          </div>
+    <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-medium text-gray-900">Attendance</h2>
+        <div className="text-sm text-gray-500 flex items-center">
+          This Week <span className="ml-1">▾</span>
         </div>
       </div>
-      <div className="mt-2">
-        <h3 className="text-sm font-semibold mb-2">Last 7 Days</h3>
+      <div className="border-b border-gray-200 -mx-6 mb-4"></div>
+
+      {/* Working days counter */}
+      <div className="text-sm text-gray-500 mb-4">
+        No of total working days <span className="text-black font-medium">{totalDays} Days</span>
+      </div>
+
+      {/* Statistics boxes */}
+      <div className="grid grid-cols-3 gap-4 text-center mb-8">
+        <div className="bg-gray-50 p-3 rounded border border-gray-200">
+          <div className="text-2xl font-semibold">{present}</div>
+          <div className="text-sm text-gray-500">Present</div>
+        </div>
+        <div className="bg-gray-50 p-3 rounded border border-gray-200">
+          <div className="text-2xl font-semibold">{absent}</div>
+          <div className="text-sm text-gray-500">Absent</div>
+        </div>
+        <div className="bg-gray-50 p-3 rounded border border-gray-200">
+          <div className="text-2xl font-semibold">{halfDay}</div>
+          <div className="text-sm text-gray-500">Half day</div>
+        </div>
+      </div>
+
+      {/* Donut Chart */}
+      <div className="relative w-48 h-48 mx-auto mb-8">
+        <svg viewBox="0 0 100 100" className="transform -rotate-90 w-full h-full">
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            stroke="#E5E7EB"
+            strokeWidth="12"
+            fill="none"
+          />
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            stroke="#22C55E"
+            strokeWidth="12"
+            fill="none"
+            strokeDasharray={`${(present/totalDays) * 251.2} 251.2`}
+          />
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            stroke="#EF4444"
+            strokeWidth="12"
+            fill="none"
+            strokeDasharray={`${(absent/totalDays) * 251.2} 251.2`}
+            strokeDashoffset={-((present/totalDays) * 251.2)}
+          />
+        </svg>
+      </div>
+
+      {/* Calendar Section */}
+      <div>
+        <div className="flex justify-between items-center mb-2">
+          <div className="text-sm font-medium">Last 7 Days</div>
+          <div className="text-xs text-gray-500">{dateRange}</div>
+        </div>
         <div className="flex gap-1">
-          {["P", "P", "P", "A", "P", "P", "P"].map((status, index) => (
+          {days.map((day, index) => (
             <div
               key={index}
-              className={`w-8 h-8 rounded flex items-center justify-center text-xs text-white ${
-                status === "P" ? "bg-[#4CAF50]" : "bg-[#FF5252]"
-              }`}
+              className={`w-8 h-8 rounded flex items-center justify-center text-xs text-white
+                ${day === 'F' ? 'bg-red-500' : day === 'S' ? 'bg-red-500' : 'bg-green-500'}`}
             >
-              {status}
+              {day}
             </div>
           ))}
         </div>
@@ -61,4 +98,4 @@ const AttendanceSection = () => {
   );
 };
 
-export default AttendanceSection;
+export default AttendanceCard;

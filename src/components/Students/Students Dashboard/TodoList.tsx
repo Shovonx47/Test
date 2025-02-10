@@ -49,42 +49,43 @@ const TodoList = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-4">
-      <div className="flex items-center justify-between pb-4 border-b border-gray-100">
-        <h3 className="text-lg font-semibold text-headerText">Todo</h3>
+    <div className="bg-white rounded-lg shadow-lg p-4">
+      <div className="flex items-center justify-between pb-4 border-b border-gray-200">
+        <h3 className="text-lg font-semibold text-gray-800">Todo</h3>
         <select className="text-sm text-gray-500 border-none bg-transparent outline-none cursor-pointer">
           <option>Today</option>
         </select>
       </div>
-      <div className="border-b border-gray-200 -mx-4 mb-4"></div>
-      
-      <div className="mt-4 space-y-3">
+
+      <div className="mt-4 divide-y divide-gray-100">
         {todos.map((todo) => (
-          <div key={todo.id} className="flex items-center gap-3">
-            <div className="flex-shrink-0">
-              <div className={`w-5 h-5 rounded border ${
-                todo.status === 'Completed' 
-                  ? 'bg-blue-600 border-blue-600' 
-                  : 'border-gray-300'
-              } flex items-center justify-center cursor-pointer`}>
-                {todo.status === 'Completed' && (
-                  <Check className="h-4 w-4 text-white" />
-                )}
+          <div key={todo.id} className="py-3 first:pt-0 last:pb-0">
+            <div className="flex items-center gap-3">
+              <div className="flex-shrink-0">
+                <div className={`w-5 h-5 rounded border ${
+                  todo.status === 'Completed'
+                    ? 'bg-blue-600 border-blue-600'
+                    : 'border-gray-300'
+                } flex items-center justify-center cursor-pointer`}>
+                  {todo.status === 'Completed' && (
+                    <Check className="h-4 w-4 text-white" />
+                  )}
+                </div>
               </div>
-            </div>
-            <div className="flex-grow">
-              <div className="flex justify-between items-center">
-                <span className={`text-sm ${
-                  todo.status === 'Completed' ? 'text-gray-500' : 'text-gray-900'
-                }`}>
-                  {todo.task}
-                </span>
-                <span className={`text-xs px-2 py-1 rounded-md ${getStatusColor(todo.status)}`}>
-                  {todo.status}
-                </span>
-              </div>
-              <div className="text-xs text-gray-500 mt-1">
-                {todo.time}
+              <div className="flex-grow">
+                <div className="flex justify-between items-center">
+                  <span className={`text-sm ${
+                    todo.status === 'Completed' ? 'text-gray-500' : 'text-gray-900'
+                  }`}>
+                    {todo.task}
+                  </span>
+                  <span className={`text-xs px-2 py-1 rounded-md ${getStatusColor(todo.status)}`}>
+                    {todo.status}
+                  </span>
+                </div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {todo.time}
+                </div>
               </div>
             </div>
           </div>

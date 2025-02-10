@@ -4,33 +4,28 @@ const NoticeBoardSection = () => {
   const notices = [
     {
       title: "Exam Schedule Release",
-      date: "02 Feb 2025",
-      type: "Important",
-      typeColor: "bg-blue-100 text-blue-600",
+      date: "05 Feb 2025",
+      color: "bg-blue-200",
     },
     {
-      title: "Follow up - Exam Preparation!",
-      date: "01 Feb 2025",
-      type: "Important",
-      typeColor: "bg-blue-100 text-blue-600",
+      title: "Follow Up - Exam Preparation !",
+      date: "02 Feb 2025",
+      color: "bg-red-200",
     },
     {
       title: "Updated Syllabus Instructions",
-      date: "31 Jan 2025",
-      type: "In Progress",
-      typeColor: "bg-yellow-100 text-yellow-600",
+      date: "11 Jan 2025",
+      color: "bg-red-200",
     },
     {
       title: "Online Classes New Schedule",
-      date: "30 Jan 2025",
-      type: "Not Started",
-      typeColor: "bg-gray-100 text-gray-600",
+      date: "10 Jan 2025",
+      color: "bg-red-200",
     },
     {
-      title: "Sports Day Program...!!",
-      date: "29 Jan 2025",
-      type: "Completed",
-      typeColor: "bg-green-100 text-green-600",
+      title: "Sports Day Program....!!!",
+      date: "01 Jan 2025",
+      color: "bg-blue-200",
     },
   ];
 
@@ -38,23 +33,30 @@ const NoticeBoardSection = () => {
     <div className="bg-white p-6 rounded-lg shadow">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold">Notice Board</h2>
-        <div className="flex items-center gap-4">
-          <button className="text-headerText text-sm">View All</button>
-        </div>
+        <button className="text-gray-600 text-sm">View All</button>
       </div>
-      <div className="border-b border-gray-200 -mx-6 mb-4"></div>
-      <div className="space-y-3">
-        {notices.map((notice, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-between p-3 bg-gray-50 rounded"
-          >
-            <div>
-              <h4 className="font-medium">{notice.title}</h4>
-              <p className="text-sm text-gray-500">Added on: {notice.date}</p>
+
+      <div className="relative mt-8">
+        {/* Timeline line */}
+        <div className="absolute left-2.5 top-0 h-full w-0.5 bg-gray-200" />
+
+        {/* Notice items */}
+        <div className="space-y-6">
+          {notices.map((notice, index) => (
+            <div key={index} className="flex items-start gap-4">
+              {/* Timeline dot */}
+              <div className="relative">
+                <div className={`w-5 h-5 rounded-full ${notice.color} border-2 border-white ring-2 ring-gray-100`} />
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 bg-gray-50 rounded p-3">
+                <h4 className="font-medium text-gray-900">{notice.title}</h4>
+                <p className="text-sm text-gray-500 mt-1">Added on : {notice.date}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
