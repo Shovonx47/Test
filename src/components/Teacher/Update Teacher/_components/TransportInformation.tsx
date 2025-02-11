@@ -46,10 +46,10 @@ interface TransportInfoProps {
     setValue: (name: string, value: any) => void;
     watch: (name: string, defaultValue?: any) => any;
     trigger: (name?: string | string[]) => void;
-    singleStudent: TransportProps
+    singleTeacher: TransportProps
 }
 
-const TransportInformation = ({ control, setValue, watch, trigger, singleStudent }: TransportInfoProps) => {
+const TransportInformation = ({ control, setValue, watch, trigger, singleTeacher }: TransportInfoProps) => {
     const isTransportEnabled = watch("transportEnabled", true);
 
     return (
@@ -84,7 +84,7 @@ const TransportInformation = ({ control, setValue, watch, trigger, singleStudent
                         <Controller
                             name="route"
                             control={control}
-                            defaultValue={singleStudent?.data?.route || ""}
+                            defaultValue={singleTeacher?.data?.route || ""}
                             rules={{ required: "Route is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>
@@ -107,7 +107,7 @@ const TransportInformation = ({ control, setValue, watch, trigger, singleStudent
                         <Controller
                             name="vehicleNumber"
                             control={control}
-                            defaultValue={singleStudent?.data?.vehicleNumber || ""}
+                            defaultValue={singleTeacher?.data?.vehicleNumber || ""}
                             rules={{ required: "Vehicle number is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>
@@ -130,7 +130,7 @@ const TransportInformation = ({ control, setValue, watch, trigger, singleStudent
                         <Controller
                             name="pickupPoint"
                             control={control}
-                            defaultValue={singleStudent?.data?.pickupPoint || ""}
+                            defaultValue={singleTeacher?.data?.pickupPoint || ""}
                             rules={{ required: "Pickup point is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>

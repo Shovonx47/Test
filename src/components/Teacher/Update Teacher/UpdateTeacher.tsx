@@ -2,7 +2,6 @@
 import { useForm } from "react-hook-form";
 import PersonalInfo from "./_components/PersonalInfo";
 import ParentsAndGuardianInformation from "./_components/Parents&GuardianInformation";
-import Siblings from "./_components/Siblings";
 import Address from "./_components/Address";
 import TransportInformation from "./_components/TransportInformation";
 import PreviousSchoolDetails from "./_components/PreviousSchoolDetails";
@@ -10,42 +9,45 @@ import { Button } from "../../ui/button";
 import HostelInformation from "./_components/HostelInformation";
 import Documents from "./_components/Documents";
 import uploadFile from "@/Helper/uploadFile";
-import { useCreateStudentMutation, useGetSingleStudentQuery, useUpdateStudentMutation } from "@/redux/api/Student/studentApi";
 import { toast } from "sonner";
 import LoadingSpinner from "@/components/Loader";
+import { useGetSingleTeacherQuery, useUpdateTeacherMutation } from "@/redux/api/Teacher/teacherApi";
+import PayrollInformation from "./_components/Payroll";
+import BankAccountDetail from "./_components/BankAccountDetail";
 
 
 
 const formSections = [
     PersonalInfo,
+    PayrollInformation,
     ParentsAndGuardianInformation,
-    Siblings,
     Address,
+    BankAccountDetail,
     TransportInformation,
     HostelInformation,
     PreviousSchoolDetails,
     Documents
 ];
 
-const UpdateStudentForm = () => {
-    const id = "67a340bdaa72d2787d7478ee"
+const UpdateTeacherForm = () => {
+    const id = "67a6fd840b1e4a0655e440cb"
 
     const { control, handleSubmit, setValue, watch, trigger } = useForm({});
 
-    const { data: singleStudent, isLoading, refetch } = useGetSingleStudentQuery(id)
+    const { data: singleTeacher, isLoading, refetch } = useGetSingleTeacherQuery(id)
 
-    const [updateStudent, { isLoading: updateLoading }] = useUpdateStudentMutation()
+    const [updateTeacher, { isLoading: updateLoading }] = useUpdateTeacherMutation()
 
     const onSubmit = async (data: any) => {
-       
+
         // Upload files and update data
         const profileImage = await uploadFile(data.profileImage);
-        const birthCertificate = await uploadFile(data.birthCertificate);
-        const transferCertificate = await uploadFile(data.transferCertificate);
+        const resume = await uploadFile(data.resume);
+        const joiningLetter = await uploadFile(data.joiningLetter);
 
         data.profileImage = profileImage?.secure_url;
-        data.birthCertificate = birthCertificate?.secure_url;
-        data.transferCertificate = transferCertificate?.secure_url;
+        data.resume = resume?.secure_url;
+        data.joiningLetter = joiningLetter?.secure_url;
 
 
         try {
@@ -55,7 +57,9 @@ const UpdateStudentForm = () => {
                 data
             }
 
-            const response = await updateStudent(values).unwrap();
+            const response = await updateTeacher(values).unwrap();
+
+            console.log(response)
 
             if (response.success) {
                 toast.success(response.message);
@@ -66,6 +70,7 @@ const UpdateStudentForm = () => {
                 toast.error(errorMessage);
             }
         } catch (error: any) {
+            console.log(error)
             let errorMessage = "Network error, please try again!";
 
             // Check if error contains data with specific error messages
@@ -90,17 +95,21 @@ const UpdateStudentForm = () => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
             {formSections.map((Component, index) => (
-                <Component key={index} control={control} setValue={setValue} watch={watch} trigger={trigger} singleStudent={singleStudent} />
+                <Component key={index} control={control} setValue={setValue} watch={watch} trigger={trigger} singleTeacher={singleTeacher} />
             ))}
 
             <div className="flex justify-end m-10">
                 <Button
                     disabled={updateLoading}
-                    variant="default" type="submit"> {updateLoading ? "Submitting..." : "Submit"} </Button>
+                    variant="default" type="submit">
+                    {
+                        updateLoading ? "Submitting..." :
+                            "Submit"
+                    } </Button>
             </div>
         </form>
 
     );
 }
 
-export default UpdateStudentForm
+export default UpdateTeacherForm

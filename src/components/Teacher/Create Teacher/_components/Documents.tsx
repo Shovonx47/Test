@@ -41,7 +41,7 @@ const Documents = ({ control, setValue }: PersonalInfoProps) => {
                     {/* Birth Certificate Upload */}
                     <div>
                         <h3 className="font-semibold">Upload Resume</h3>
-                        <p className="text-sm text-gray-500">Upload file size of 4MB, Accepted Format: PDF</p>
+                        <p className="text-sm text-gray-500">Upload file, Accepted Format: PDF</p>
                         <Controller
                             name="resume"
                             control={control}
@@ -81,7 +81,7 @@ const Documents = ({ control, setValue }: PersonalInfoProps) => {
                     {/* Transfer Certificate Upload */}
                     <div>
                         <h3 className="font-semibold">Upload Joining Letter</h3>
-                        <p className="text-sm text-gray-500">Upload file size of 4MB, Accepted Format: PDF</p>
+                        <p className="text-sm text-gray-500">Upload file, Accepted Format: PDF</p>
                         <Controller
                             name="joiningLetter"
                             control={control}

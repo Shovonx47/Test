@@ -8,10 +8,11 @@ import DynamicSelect from "@/components/Reusable/DynamicSelect";
 
 interface PreviousSchoolProps {
     data:{
+        previousSchool: boolean
         previousSchoolName: string
+        previousSchoolPosition: string
+        previousSchoolRating: string
         previousSchoolAddress: string
-        previousClassName: string
-        previousClassGpa: string
     }
 }
 
@@ -20,35 +21,35 @@ interface PreviousSchoolInfoProps {
     setValue: (name: string, value: any) => void;
     watch: (name: string, defaultValue?: any) => any;
     trigger: (name?: string | string[]) => void;
-    singleStudent: PreviousSchoolProps
+    singleTeacher: PreviousSchoolProps
 }
 
 
 
 const classes = ["I", "II", "III"];
 
-const PreviousSchoolDetails = ({ control, setValue, watch, trigger, singleStudent }: PreviousSchoolInfoProps) => {
-    const isPreviousSchool = watch("previousSchool", true);
+const PreviousSchoolDetails = ({ control, setValue, watch, trigger, singleTeacher }: PreviousSchoolInfoProps) => {
+    const isPreviousSchool = watch("previousSchool", singleTeacher?.data?.previousSchool) === true;
 
     return (
         <div className="p-6 bg-white">
             <div className="border rounded-md">
                 <div className="p-4 bg-[#E9EDF4] rounded-md rounded-b-none flex justify-between items-center gap-2 mb-5">
                     <div className="flex items-center gap-2">
-                        <NotebookTabs className="h-5 w-5" /> Previous School Details
+                        <NotebookTabs className="h-5 w-5" /> Previous School Details ( If Any)
                     </div>
                     <Controller
                         name="previousSchool"
                         control={control}
-                        defaultValue={true}
+                        defaultValue={singleTeacher?.data?.previousSchool}
                         render={({ field }) => (
                             <Switch
-                                checked={field.value ?? true}
+                                checked={field.value ?? singleTeacher?.data?.previousSchool}
                                 onCheckedChange={(checked) => {
                                     field.onChange(checked);
                                     setValue("previousSchool", checked);
                                     if (checked) {
-                                        trigger(["previousSchoolName", "previousSchoolAddress", "previousClassName", "previousClassGpa"]);
+                                        trigger(["previousSchoolName", "previousSchoolPosition", "previousSchoolRating", "previousSchoolAddress"]);
                                     }
                                 }}
                             />
@@ -65,7 +66,7 @@ const PreviousSchoolDetails = ({ control, setValue, watch, trigger, singleStuden
                             <Controller
                                 name="previousSchoolName"
                                 control={control}
-                                defaultValue={singleStudent?.data?.previousSchoolName}
+                                defaultValue={singleTeacher?.data?.previousSchoolName || ""}
                                 rules={{ required: "School name is required" }}
                                 render={({ field, fieldState: { error } }) => (
                                     <div>
@@ -84,21 +85,21 @@ const PreviousSchoolDetails = ({ control, setValue, watch, trigger, singleStuden
                         </div>
                         <div>
                             <Controller
-                                name="previousClassName"
+                                name="previousSchoolPosition"
                                 control={control}
-                                defaultValue={singleStudent?.data?.previousClassName}
-                                rules={{ required: "Class name is required" }}
+                                defaultValue={singleTeacher?.data?.previousSchoolPosition || ""}
+                                rules={{ required: "Position is required" }}
                                 render={({ field, fieldState: { error } }) => (
                                     <div>
                                         <DynamicSelect
                                             {...field}
-                                            label="Previous Class Name"
-                                            placeholder="Select Class"
+                                            label="Previous School Position"
+                                            placeholder="Select position"
                                             options={classes}
                                             value={field.value}
                                             onChange={(val) => {
-                                                 setValue("previousClassName", val);
-                                                trigger("previousClassName"); // Revalidate field
+                                                setValue("previousSchoolPosition", val);
+                                                trigger("previousSchoolPosition"); // Revalidate field
                                             }}
                                         />
                                         {error && <p className="text-red-500 text-sm">{error.message}</p>}
@@ -107,16 +108,16 @@ const PreviousSchoolDetails = ({ control, setValue, watch, trigger, singleStuden
                             />
                         </div>
                         <div>
-                            <label className="text-sm text-gray-600">GPA (Optional) </label>
+                            <label className="text-sm text-gray-600">Rating (Optional) </label>
                             <Controller
-                                name="previousClassGpa"
+                                name="previousSchoolRating"
                                 control={control}
-                                defaultValue={singleStudent?.data?.previousClassGpa}
+                                defaultValue={singleTeacher?.data?.previousSchoolRating || ""}
                                 render={({ field }) => (
                                     <div>
                                         <Input
                                             {...field}
-                                            placeholder="Add your gpa"
+                                            placeholder="Add your rating"
                                             onChange={(e) => {
                                                 field.onChange(e.target.value)
                                             }} />
@@ -131,7 +132,7 @@ const PreviousSchoolDetails = ({ control, setValue, watch, trigger, singleStuden
                             <Controller
                                 name="previousSchoolAddress"
                                 control={control}
-                                defaultValue={singleStudent?.data?.previousSchoolAddress}
+                                defaultValue={singleTeacher?.data?.previousSchoolAddress || ""}
                                 rules={{ required: "School address is required" }}
                                 render={({ field, fieldState: { error } }) => (
                                     <div>
