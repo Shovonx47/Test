@@ -190,7 +190,7 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                             </div>
                         )}
                     />
-                    {/* Section Select */}
+                    {/* subject Select */}
                     <Controller
                         name="subject"
                         control={control}
@@ -275,7 +275,7 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                             </div>
                         )}
                     />
-                    {/* Blood Group Select */}
+                    {/*maritalStatus Select */}
                     <Controller
                         name="maritalStatus"
                         control={control}
@@ -385,7 +385,7 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                         )}
                     />
 
-                    {/* Board Select */}
+                    {/* educationalQualification Select */}
                     <Controller
                         name="educationalQualification"
                         control={control}

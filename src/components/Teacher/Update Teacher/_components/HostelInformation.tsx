@@ -30,10 +30,10 @@ interface HostelInfoProps {
     setValue: (name: string, value: any) => void;
     watch: (name: string, defaultValue?: any) => any;
     trigger: (name?: string | string[]) => void;
-    singleStudent: HostelProps
+    singleTeacher: HostelProps
 }
 
-const HostelInformation = ({ control, setValue, watch, trigger, singleStudent }: HostelInfoProps) => {
+const HostelInformation = ({ control, setValue, watch, trigger, singleTeacher }: HostelInfoProps) => {
     const isHostelEnabled = watch("hostelEnabled", true);
 
     return (
@@ -68,7 +68,7 @@ const HostelInformation = ({ control, setValue, watch, trigger, singleStudent }:
                         <Controller
                             name="hostelName"
                             control={control}
-                            defaultValue={singleStudent?.data?.hostelName || ""}
+                            defaultValue={singleTeacher?.data?.hostelName || ""}
                             rules={{ required: "Hostel name is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>
@@ -91,7 +91,7 @@ const HostelInformation = ({ control, setValue, watch, trigger, singleStudent }:
                         <Controller
                             name="roomNumber"
                             control={control}
-                            defaultValue={singleStudent?.data?.roomNumber || ""}
+                            defaultValue={singleTeacher?.data?.roomNumber || ""}
                             rules={{ required: "Room number is required" }}
                             render={({ field, fieldState: { error } }) => (
                                 <div>

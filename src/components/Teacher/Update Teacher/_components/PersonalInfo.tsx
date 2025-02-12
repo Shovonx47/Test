@@ -4,16 +4,13 @@ import { ImagePlus, InfoIcon } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 import { DatePickerForm } from "@/components/Reusable/DatePickerForm";
 
+ 
 
-const academicYears = ["June 2024/25", "July 2025/26", "August 2026/27", "September 2027/28", "October 2028/29"];
-
-const statuses = ["Active", "Inactive" ];
+const statuses = ["Active", "Inactive"];
 
 const genders = ["Male", "Female", "Other"];
 
-const classes = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
-
-const sections = ["A", "B", "C", "D", "E"];
+const subject = ["A", "B", "C", "D", "E"];
 
 const boards = ["Dhaka", "Rajshahi", "Comilla", "Chittagong", "Sylhet", "Barisal", "Khulna", "Rangpur", "Mymensingh"];
 
@@ -27,25 +24,26 @@ const motherTongues = ["English", "Spanish", "Bengali", "Hindi", "Arabic", "Chin
 
 
 
-interface SingleStudent {
+interface SingleTeacher {
     data: {
         profileImage: string;
-        academicYear: string;
-        category: string;
-        admissionDate: string;
         userId: string;
-        status: string;
         firstName: string;
         lastName: string;
-        class: string;
-        section: string;
+        category: string;
+        joiningDate: string;
+        subject: string;
         gender: string;
         dateOfBirth: string;
         bloodGroup: string;
+        maritalStatus: string;
         religion: string;
         contactNumber: string;
+        alternativeContactNumber: string;
         email: string;
-        board: string;
+        nidNumber: string;
+        educationalQualification: string;
+        status: string
         motherTongue: string;
     }
 }
@@ -55,18 +53,18 @@ interface PersonalInfoProps {
     setValue: (name: string, value: any) => void;
     trigger: (name: string) => void; // Add trigger for validation
 
-    singleStudent: SingleStudent
+    singleTeacher: SingleTeacher
 }
 
-const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInfoProps) => {
+const PersonalInfo = ({ control, setValue, trigger, singleTeacher }: PersonalInfoProps) => {
 
 
 
     return (
         <div className="p-6 bg-white">
-            <h2 className="text-xl font-semibold text-gray-800">Add Student</h2>
+            <h2 className="text-xl font-semibold text-gray-800">Add Teacher</h2>
             <nav className="text-sm text-gray-500 mb-4">
-                Dashboard / Students / <span className="text-gray-800">Add Student</span>
+                Dashboard / Teachers / <span className="text-gray-800">Add Teacher</span>
             </nav>
 
             <div className="border rounded-md">
@@ -78,7 +76,7 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
                     <Controller
                         name="profileImage"
                         control={control}
-                        defaultValue={singleStudent?.data?.profileImage || null} // Ensure a proper default value
+                        defaultValue={singleTeacher?.data?.profileImage || null} // Ensure a proper default value
                         rules={{ required: "Profile image is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div className="mt-1 flex items-center">
@@ -132,7 +130,7 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
                                         type="button"
                                         className="ml-3 py-2 px-3 border border-dashed border-gray-300 rounded-sm text-sm font-medium text-white bg-black"
                                         onClick={() => {
-                                            setValue("profileImage", singleStudent?.data?.profileImage);
+                                            setValue("profileImage", singleTeacher?.data?.profileImage);
                                             trigger("profileImage");
                                         }}
                                     >
@@ -151,34 +149,64 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
 
                 </div>
                 <div className="m-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                    {/* Academic Year Select */}
+                    {/* user id */}
                     <Controller
-                        name="academicYear"
+                        name="userId"
                         control={control}
-                        defaultValue={singleStudent?.data?.academicYear || ""}
-                        rules={{ required: "Academic Year is required" }}
+                        defaultValue={singleTeacher?.data?.userId || ""}
+                        rules={{ required: "User ID is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
-                                <DynamicSelect
-                                    label="Academic Year"
-                                    placeholder="Select Academic Year"
-                                    options={academicYears}
-                                    value={field.value}
-                                    onChange={(value: string) => {
-                                        setValue("academicYear", value);
-                                        trigger("academicYear");
-                                    }}
+                                <label className="text-sm text-gray-600">User Id</label>
+                                <Input
+                                    {...field}
+                                    placeholder="Enter user id number"
                                 />
                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
                             </div>
                         )}
                     />
 
+                    {/* First Name */}
+                    <Controller
+                        name="firstName"
+                        control={control}
+                        defaultValue={singleTeacher?.data?.firstName || ""}
+                        rules={{ required: "First Name is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <label className="text-sm text-gray-600">First name</label>
+                                <Input
+                                    {...field}
+                                    placeholder="Enter first name"
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+
+                    {/* Last Name */}
+                    <Controller
+                        name="lastName"
+                        control={control}
+                        defaultValue={singleTeacher?.data?.lastName || ""}
+                        rules={{ required: "Last Name is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <label className="text-sm text-gray-600">Last name</label>
+                                <Input
+                                    {...field}
+                                    placeholder="Enter last name"
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
                     {/* Category Select */}
                     <Controller
                         name="category"
                         control={control}
-                        defaultValue={singleStudent?.data?.category || ""}
+                        defaultValue={singleTeacher?.data?.category || ""}
                         rules={{ required: "Category is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
@@ -197,61 +225,44 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
                         )}
                     />
 
-                    {/* Admission Date */}
+                    {/* joiningDate Date */}
                     <Controller
-                        name="admissionDate"
+                        name="joiningDate"
                         control={control}
-                        defaultValue={singleStudent?.data?.admissionDate || ""}
-                        rules={{ required: "Admission Date is required" }}
+                        defaultValue={singleTeacher?.data?.joiningDate || ""}
+                        rules={{ required: "Joining date is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
                                 <DatePickerForm
                                     value={field.value ? new Date(field.value) : undefined}
                                     onChange={(formattedDate) => {
-                                        setValue("admissionDate", formattedDate);
-                                        trigger("admissionDate");
+                                        setValue("joiningDate", formattedDate);
+                                        trigger("joiningDate");
                                     }}
-                                    label="Admission Date"
+                                    label="Joining Date"
                                 />
                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
                             </div>
                         )}
                     />
 
-                    {/* user id */}
-                    <Controller
-                        name="userId"
-                        control={control}
-                        defaultValue={singleStudent?.data?.userId || ""}
-                        rules={{ required: "User ID is required" }}
-                        render={({ field, fieldState: { error } }) => (
-                            <div>
-                                <label className="text-sm text-gray-600">User Id</label>
-                                <Input
-                                    {...field}
-                                    placeholder="Enter user id number"
-                                />
-                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                            </div>
-                        )}
-                    />
 
-                    {/* Status Select */}
+                    {/* subject Select */}
                     <Controller
-                        name="status"
+                        name="subject"
                         control={control}
-                        defaultValue={singleStudent?.data?.status || ""}
-                        rules={{ required: "Status is required" }}
+                        defaultValue={singleTeacher?.data?.subject || ""}
+                        rules={{ required: "Subject is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
                                 <DynamicSelect
-                                    label="Status"
-                                    placeholder="Select Status"
-                                    options={statuses}
+                                    label="Subject"
+                                    placeholder="Select Subject"
+                                    options={subject}
                                     value={field.value}
                                     onChange={(val) => {
-                                        setValue("status", val);
-                                        trigger("status");
+                                        setValue("subject", val);
+                                        trigger("subject");
                                     }}
                                 />
                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
@@ -259,93 +270,12 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
                         )}
                     />
 
-                    {/* First Name */}
-                    <Controller
-                        name="firstName"
-                        control={control}
-                        defaultValue={singleStudent?.data?.firstName || ""}
-                        rules={{ required: "First Name is required" }}
-                        render={({ field, fieldState: { error } }) => (
-                            <div>
-                                <label className="text-sm text-gray-600">First name</label>
-                                <Input
-                                    {...field}
-                                    placeholder="Enter first name"
-                                />
-                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                            </div>
-                        )}
-                    />
-
-                    {/* Last Name */}
-                    <Controller
-                        name="lastName"
-                        control={control}
-                        defaultValue={singleStudent?.data?.lastName || ""}
-                        rules={{ required: "Last Name is required" }}
-                        render={({ field, fieldState: { error } }) => (
-                            <div>
-                                <label className="text-sm text-gray-600">Last name</label>
-                                <Input
-                                    {...field}
-                                    placeholder="Enter last name"
-                                />
-                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                            </div>
-                        )}
-                    />
-
-                    {/* Class Select */}
-                    <Controller
-                        name="class"
-                        control={control}
-                        defaultValue={singleStudent?.data?.class || ""}
-                        rules={{ required: "Class is required" }}
-                        render={({ field, fieldState: { error } }) => (
-                            <div>
-                                <DynamicSelect
-                                    label="Class"
-                                    placeholder="Select Class"
-                                    options={classes}
-                                    value={field.value}
-                                    onChange={(val) => {
-                                        setValue("class", val);
-                                        trigger("class");
-                                    }}
-                                />
-                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                            </div>
-                        )}
-                    />
-
-                    {/* Section Select */}
-                    <Controller
-                        name="section"
-                        control={control}
-                        defaultValue={singleStudent?.data?.section || ""}
-                        rules={{ required: "Section is required" }}
-                        render={({ field, fieldState: { error } }) => (
-                            <div>
-                                <DynamicSelect
-                                    label="Section"
-                                    placeholder="Select Section"
-                                    options={sections}
-                                    value={field.value}
-                                    onChange={(val) => {
-                                        setValue("section", val);
-                                        trigger("section");
-                                    }}
-                                />
-                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                            </div>
-                        )}
-                    />
 
                     {/* Gender Select */}
                     <Controller
                         name="gender"
                         control={control}
-                        defaultValue={singleStudent?.data?.gender || ""}
+                        defaultValue={singleTeacher?.data?.gender || ""}
                         rules={{ required: "Gender is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
@@ -368,7 +298,7 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
                     <Controller
                         name="dateOfBirth"
                         control={control}
-                        defaultValue={singleStudent?.data?.dateOfBirth || ""}
+                        defaultValue={singleTeacher?.data?.dateOfBirth || ""}
                         rules={{ required: "Date of Birth is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
@@ -389,7 +319,7 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
                     <Controller
                         name="bloodGroup"
                         control={control}
-                        defaultValue={singleStudent?.data?.bloodGroup || ""}
+                        defaultValue={singleTeacher?.data?.bloodGroup || ""}
                         rules={{ required: "Blood Group is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
@@ -407,12 +337,33 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
                             </div>
                         )}
                     />
-
+                    {/*maritalStatus Select */}
+                    <Controller
+                        name="maritalStatus"
+                        control={control}
+                        defaultValue={singleTeacher?.data?.maritalStatus || ""}
+                        rules={{ required: "Marital Status is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Marital Status"
+                                    placeholder="Select Marital Status"
+                                    options={bloodGroups}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("maritalStatus", val);
+                                        trigger("maritalStatus");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
                     {/* Religion Select */}
                     <Controller
                         name="religion"
                         control={control}
-                        defaultValue={singleStudent?.data?.religion || ""}
+                        defaultValue={singleTeacher?.data?.religion || ""}
                         rules={{ required: "Religion is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
@@ -435,7 +386,7 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
                     <Controller
                         name="contactNumber"
                         control={control}
-                        defaultValue={singleStudent?.data?.contactNumber || ""}
+                        defaultValue={singleTeacher?.data?.contactNumber || ""}
                         rules={{ required: "Contact Number is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
@@ -448,12 +399,28 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
                             </div>
                         )}
                     />
+                    {/* Contact Number */}
+                    <Controller
+                        name="alternativeContactNumber"
+                        control={control}
+                        defaultValue={singleTeacher?.data?.alternativeContactNumber || ""}
+
+                        render={({ field }) => (
+                            <div>
+                                <label className="text-sm text-gray-600">Alternative contact number</label>
+                                <Input
+                                    {...field}
+                                    placeholder="Enter contact number"
+                                />
+                            </div>
+                        )}
+                    />
 
                     {/* Email Address */}
                     <Controller
                         name="email"
                         control={control}
-                        defaultValue={singleStudent?.data?.email || ""}
+                        defaultValue={singleTeacher?.data?.email || ""}
                         rules={{ required: "Email is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
@@ -466,35 +433,51 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
                             </div>
                         )}
                     />
-
-                    {/* Board Select */}
+                    {/* NID Address */}
                     <Controller
-                        name="board"
+                        name="nidNumber"
                         control={control}
-                        defaultValue={singleStudent?.data?.board || ""}
-                        rules={{ required: "Board is required" }}
+                        defaultValue={singleTeacher?.data?.nidNumber || ""}
+                        rules={{ required: "NID Number is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
-                                <DynamicSelect
-                                    label="Board"
-                                    placeholder="Select Board"
-                                    options={boards}
-                                    value={field.value}
-                                    onChange={(val) => {
-                                        setValue("board", val);
-                                        trigger("board");
-                                    }}
+                                <label className="text-sm text-gray-600">NID Number</label>
+                                <Input
+                                    {...field}
+                                    placeholder="Enter NID number"
                                 />
                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
                             </div>
                         )}
                     />
 
+                    {/* educationalQualification Select */}
+                    <Controller
+                        name="educationalQualification"
+                        control={control}
+                        defaultValue={singleTeacher?.data?.educationalQualification || ""}
+                        rules={{ required: "Qualification is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Educational Qualification"
+                                    placeholder="Select Qualification"
+                                    options={boards}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("educationalQualification", val);
+                                        trigger("educationalQualification");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
                     {/* Mother Tongue Select */}
                     <Controller
                         name="motherTongue"
                         control={control}
-                        defaultValue={singleStudent?.data?.motherTongue || ""}
+                        defaultValue={singleTeacher?.data?.motherTongue || ""}
                         rules={{ required: "Mother Tongue is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
@@ -506,6 +489,28 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
                                     onChange={(val) => {
                                         setValue("motherTongue", val);
                                         trigger("motherTongue");
+                                    }}
+                                />
+                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                            </div>
+                        )}
+                    />
+                    {/* Status Select */}
+                    <Controller
+                        name="status"
+                        control={control}
+                        defaultValue={singleTeacher?.data?.status || ""}
+                        rules={{ required: "Status is required" }}
+                        render={({ field, fieldState: { error } }) => (
+                            <div>
+                                <DynamicSelect
+                                    label="Status"
+                                    placeholder="Select Status"
+                                    options={statuses}
+                                    value={field.value}
+                                    onChange={(val) => {
+                                        setValue("status", val);
+                                        trigger("status");
                                     }}
                                 />
                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}

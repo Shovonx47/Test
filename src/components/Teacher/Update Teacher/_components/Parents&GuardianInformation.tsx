@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { Controller, useForm } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import { UserRoundCogIcon } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 
@@ -25,12 +25,7 @@ interface ParentsAndGuardianFormValues {
         motherNidNumber: string;
         motherOccupation: string;
 
-        localGuardianName: string;
-        relationshipWithLocalGuardian: string;
-        localGuardianEmail: string;
-        localGuardianContactNumber: string;
-        localGuardianNidNumber: string;
-        localGuardianOccupation: string;
+        
     }
 }
 
@@ -39,10 +34,10 @@ interface PersonalInfoProps {
     control: any;
     setValue: (name: string, value: any) => void;
     trigger: (name: string) => void; // Added trigger function
-    singleStudent: ParentsAndGuardianFormValues
+    singleTeacher: ParentsAndGuardianFormValues
 }
 
-const ParentsAndGuardianInformation = ({ control, setValue, trigger, singleStudent }: PersonalInfoProps) => {
+const ParentsAndGuardianInformation = ({ control, setValue, trigger, singleTeacher }: PersonalInfoProps) => {
 
 
     return (
@@ -66,7 +61,7 @@ const ParentsAndGuardianInformation = ({ control, setValue, trigger, singleStude
                             <Controller
                                 name={name}
                                 control={control}
-                                defaultValue={singleStudent?.data?.[name] || ""}
+                                defaultValue={singleTeacher?.data?.[name] || ""}
                                 rules={{ required: `${label} is required` }}
                                 render={({ field, fieldState: { error } }) => (
                                     <>
@@ -82,7 +77,7 @@ const ParentsAndGuardianInformation = ({ control, setValue, trigger, singleStude
                     <Controller
                         name="fatherOccupation"
                         control={control}
-                        defaultValue={singleStudent?.data?.fatherOccupation}
+                        defaultValue={singleTeacher?.data?.fatherOccupation}
                         rules={{ required: "Father Occupation is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
@@ -118,7 +113,7 @@ const ParentsAndGuardianInformation = ({ control, setValue, trigger, singleStude
                             <Controller
                                 name={name}
                                 control={control}
-                                defaultValue={singleStudent?.data?.[name] || ""}
+                                defaultValue={singleTeacher?.data?.[name] || ""}
                                 rules={{ required: `${label} is required` }}
                                 render={({ field, fieldState: { error } }) => (
                                     <>
@@ -134,7 +129,7 @@ const ParentsAndGuardianInformation = ({ control, setValue, trigger, singleStude
                     <Controller
                         name="motherOccupation"
                         control={control}
-                        defaultValue={singleStudent?.data?.motherOccupation}
+                        defaultValue={singleTeacher?.data?.motherOccupation}
                         rules={{ required: "Mother Occupation is required" }}
                         render={({ field, fieldState: { error } }) => (
                             <div>
@@ -154,58 +149,8 @@ const ParentsAndGuardianInformation = ({ control, setValue, trigger, singleStude
                     />
                 </div>
 
-                <div className="border-t mt-6 m-4"></div>
-
-                {/* Local Guardian's Info */}
-                <div className="ml-4">Local Guardian's Info</div>
-                <div className="m-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                    {[
-                        { name: "localGuardianName", label: "Local Guardian Name" },
-                        { name: "relationshipWithLocalGuardian", label: "Relationship" },
-                        { name: "localGuardianEmail", label: "Local Guardian Email" },
-                        { name: "localGuardianContactNumber", label: "Local Guardian Contact Number" },
-                        { name: "localGuardianNidNumber", label: "Local Guardian NID Number" }
-                    ].map(({ name, label }) => (
-                        <div key={name}>
-                            <label className="text-sm text-gray-600">{label}</label>
-                            <Controller
-                                name={name}
-                                control={control}
-                                defaultValue={singleStudent?.data?.[name] || ""}
-                                rules={{ required: `${label} is required` }}
-                                render={({ field, fieldState: { error } }) => (
-                                    <>
-                                        <Input {...field} placeholder={`Enter ${label}`} />
-                                        {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                                    </>
-                                )}
-                            />
-                        </div>
-                    ))}
-
-                    {/* Local Guardian's Occupation Select */}
-                    <Controller
-                        name="localGuardianOccupation"
-                        control={control}
-                        defaultValue={singleStudent?.data?.localGuardianOccupation}
-                        rules={{ required: "Local Guardian Occupation is required" }}
-                        render={({ field, fieldState: { error } }) => (
-                            <div>
-                                <DynamicSelect
-                                    label="Guardian Occupation"
-                                    placeholder="Select Occupation"
-                                    options={occupations}
-                                    value={field.value}
-                                    onChange={(val) => {
-                                        setValue("localGuardianOccupation", val);
-                                        trigger("localGuardianOccupation");
-                                    }}
-                                />
-                                {error && <p className="text-red-500 text-sm">{error.message}</p>}
-                            </div>
-                        )}
-                    />
-                </div>
+                 
+                 
             </div>
         </div>
     );

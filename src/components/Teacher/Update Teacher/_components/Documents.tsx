@@ -4,23 +4,23 @@ import { useState } from "react";
 
 interface DocumentProps {
     data: {
-        birthCertificate: string;
-        transferCertificate: string;
+        resume: string;
+        joiningLetter: string;
     };
 }
 
 interface DocumentInfoProps {
     control: any;
     setValue: (name: string, value: any) => void;
-    singleStudent: DocumentProps;
+    singleTeacher: DocumentProps;
 }
 
-const Documents = ({ control, setValue, singleStudent }: DocumentInfoProps) => {
+const Documents = ({ control, setValue, singleTeacher }: DocumentInfoProps) => {
     // Local states for updated file names and URLs
-    const [birthCertificateFile, setBirthCertificateFile] = useState<string>(singleStudent?.data?.birthCertificate || "");
-    const [transferCertificateFile, setTransferCertificateFile] = useState<string>(singleStudent?.data?.transferCertificate || "");
-    const [birthCertificateUrl, setBirthCertificateUrl] = useState<string | null>(singleStudent?.data?.birthCertificate || null);
-    const [transferCertificateUrl, setTransferCertificateUrl] = useState<string | null>(singleStudent?.data?.transferCertificate || null);
+    const [resumeFile, setResumeFile] = useState<string>(singleTeacher?.data?.resume || "");
+    const [joiningLetterFile, setJoiningLetterFile] = useState<string>(singleTeacher?.data?.joiningLetter || "");
+    const [resumeUrl, setResumeUrl] = useState<string | null>(singleTeacher?.data?.resume || null);
+    const [joiningLetterUrl, setJoiningLetterUrl] = useState<string | null>(singleTeacher?.data?.joiningLetter || null);
 
     // Truncate file names for display 
     const extractFileName = (url: string) => {
@@ -32,11 +32,7 @@ const Documents = ({ control, setValue, singleStudent }: DocumentInfoProps) => {
         return fileName
       };
       
-      // Example usage:
-      const url = "https://res.cloudinary.com/dfunuoqfv/image/upload/v1738997639/hse1d7th56trhxeean4f.png";
-
-
-      console.log(truncateFileName(url));
+      
     // Handle file input change
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, field: any, setFileName: React.Dispatch<React.SetStateAction<string>>, setFileUrl: React.Dispatch<React.SetStateAction<string | null>>) => {
         const file = e.target.files?.[0] || null;
@@ -76,12 +72,12 @@ const Documents = ({ control, setValue, singleStudent }: DocumentInfoProps) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
                     {/* Birth Certificate Upload */}
                     <div>
-                        <h3 className="font-semibold">Upload Birth Certificate Document</h3>
-                        <p className="text-sm text-gray-500">Upload file size of 4MB, Accepted Format: PDF</p>
+                        <h3 className="font-semibold"> Upload Resume</h3>
+                        <p className="text-sm text-gray-500">Upload file, Accepted Format: PDF</p>
                         <Controller
-                            name="birthCertificate"
+                            name="resume"
                             control={control}
-                            defaultValue={singleStudent?.data?.birthCertificate || ""}
+                            defaultValue={singleTeacher?.data?.resume || ""}
                             render={({ field }) => (
                                 <div className="mt-3 flex items-center gap-3">
                                     <label htmlFor="birth-certificate" className="bg-black text-white w-[90px] text-center py-2 rounded-md cursor-pointer">
@@ -92,24 +88,24 @@ const Documents = ({ control, setValue, singleStudent }: DocumentInfoProps) => {
                                         id="birth-certificate"
                                         className="hidden"
                                         accept=".pdf"
-                                        onChange={(e) => handleFileChange(e, field, setBirthCertificateFile, setBirthCertificateUrl)}
+                                        onChange={(e) => handleFileChange(e, field, setResumeFile, setResumeUrl)}
                                     />
-                                    {field.value && <span className="text-gray-700">{truncateFileName(birthCertificateFile)}</span>}
+                                    {field.value && <span className="text-gray-700">{truncateFileName(resumeFile)}</span>}
                                 </div>
                             )}
                         />
                         <div className="mt-5">
-                            {renderPdfIframe(birthCertificateUrl)}</div> {/* Dynamically renders the iframe */}
+                            {renderPdfIframe(resumeUrl)}</div> {/* Dynamically renders the iframe */}
                     </div>
 
                     {/* Transfer Certificate Upload */}
                     <div>
-                        <h3 className="font-semibold">Upload Transfer Certificate Document</h3>
-                        <p className="text-sm text-gray-500">Upload file size of 4MB, Accepted Format: PDF</p>
+                        <h3 className="font-semibold">Upload Joining Letter</h3>
+                        <p className="text-sm text-gray-500">Upload file, Accepted Format: PDF</p>
                         <Controller
-                            name="transferCertificate"
+                            name="joiningLetter"
                             control={control}
-                            defaultValue={singleStudent?.data?.transferCertificate || ""}
+                            defaultValue={singleTeacher?.data?.joiningLetter || ""}
                             render={({ field }) => (
                                 <div className="mt-3 flex items-center gap-3">
                                     <label htmlFor="transfer-certificate" className="bg-black text-white px-4 py-2 rounded-md cursor-pointer">
@@ -120,14 +116,14 @@ const Documents = ({ control, setValue, singleStudent }: DocumentInfoProps) => {
                                         id="transfer-certificate"
                                         className="hidden"
                                         accept=".pdf"
-                                        onChange={(e) => handleFileChange(e, field, setTransferCertificateFile, setTransferCertificateUrl)}
+                                        onChange={(e) => handleFileChange(e, field, setJoiningLetterFile, setJoiningLetterUrl)}
                                     />
-                                    {field.value && <span className="text-gray-700">{truncateFileName(transferCertificateFile)}</span>}
+                                    {field.value && <span className="text-gray-700">{truncateFileName(joiningLetterFile)}</span>}
                                 </div>
                             )}
                         />
                         <div className="mt-5">
-                            {renderPdfIframe(transferCertificateUrl)}</div> {/* Dynamically renders the iframe */}
+                            {renderPdfIframe(joiningLetterUrl)}</div> {/* Dynamically renders the iframe */}
                     </div>
                 </div>
             </div>

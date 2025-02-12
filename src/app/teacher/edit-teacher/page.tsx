@@ -1,4 +1,4 @@
-import UpdateStudentForm from '@/components/Students/Update Student/UpdateStudent';
+import UpdateTeacherForm from '@/components/Teacher/Update Teacher/UpdateTeacher';
 import React from 'react';
 
 interface PageProps {
@@ -15,7 +15,7 @@ interface PageProps {
 
     return (
         <div>
-            <UpdateStudentForm />
+            <UpdateTeacherForm />
         </div>
     );
 };

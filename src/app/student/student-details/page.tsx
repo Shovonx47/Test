@@ -142,12 +142,7 @@ export default function StudentDetails() {
               ))}
             </div>
           </div>
-
-
-
-
           <ParentsInformation parents={parentsData.map(parent => ({ ...parent, avatar: Avatar.src }))} />
- 
       
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 shadow-sm">
  

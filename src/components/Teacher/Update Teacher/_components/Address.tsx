@@ -12,10 +12,10 @@ interface AddressProps {
 }
 interface AddressInfoProps {
     control: any; // control from useForm
-    singleStudent: AddressProps
+    singleTeacher: AddressProps
 }
 
-const Address = ({ control, singleStudent }: AddressInfoProps) => {
+const Address = ({ control, singleTeacher }: AddressInfoProps) => {
     return (
         <div className="p-6 bg-white">
             <div className="border rounded-md">
@@ -30,7 +30,7 @@ const Address = ({ control, singleStudent }: AddressInfoProps) => {
                         <Controller
                             name="presentAddress"
                             control={control}
-                            defaultValue={singleStudent?.data?.presentAddress}
+                            defaultValue={singleTeacher?.data?.presentAddress}
                             rules={{ required: "Present address is required" }} // Validation
                             render={({ field, fieldState: { error } }) => (
                                 <>
@@ -47,7 +47,7 @@ const Address = ({ control, singleStudent }: AddressInfoProps) => {
                         <Controller
                             name="permanentAddress"
                             control={control}
-                            defaultValue={singleStudent?.data?.permanentAddress}
+                            defaultValue={singleTeacher?.data?.permanentAddress}
                             rules={{ required: "Permanent address is required" }} // Validation
                             render={({ field, fieldState: { error } }) => (
                                 <>
