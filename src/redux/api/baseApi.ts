@@ -10,6 +10,7 @@ export const baseApi = createApi({
     "teacher",
     "staff",
     "account_officer",
+    "class_routine",
   ],
   endpoints: () => ({}),
 });
