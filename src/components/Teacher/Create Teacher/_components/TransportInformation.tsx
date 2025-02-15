@@ -1,27 +1,27 @@
-import { Controller } from "react-hook-form";
+import { Control, Controller, FieldValues } from "react-hook-form";
 import { Bus } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 import { Switch } from "@/components/ui/switch";
 
 const routes = [
-    "Route A - Downtown to Campus", 
-    "Route B - Eastside to Campus", 
-    "Route C - Westside to Campus", 
+    "Route A - Downtown to Campus",
+    "Route B - Eastside to Campus",
+    "Route C - Westside to Campus",
     "Route D - Northside to Campus"
-  ];
-  
-  const vehicleNumbers = [
-    "A123BC", 
-    "B234CD", 
-    "C345DE", 
+];
+
+const vehicleNumbers = [
+    "A123BC",
+    "B234CD",
+    "C345DE",
     "D456EF",
     "E567FG",
     "F678GH",
     "G789HI",
     "H890IJ"
-  ];
-  
-  const pickupPoints = [
+];
+
+const pickupPoints = [
     "Downtown Station",
     "Eastside Mall",
     "Westside Park",
@@ -30,9 +30,9 @@ const routes = [
     "Central Square",
     "Library Stop",
     "City Center"
-  ];
+];
 interface PersonalInfoProps {
-    control: any;
+    control: Control<FieldValues>
     setValue: (name: string, value: any) => void;
     watch: (name: string, defaultValue?: any) => any;
     trigger: (name?: string | string[]) => void;
@@ -55,7 +55,7 @@ const TransportInformation = ({ control, setValue, watch, trigger }: PersonalInf
                         render={({ field }) => (
                             <Switch
                                 checked={field.value ?? true}
-                                onCheckedChange={(checked) => {
+                                onCheckedChange={(checked: boolean) => {
                                     field.onChange(checked);
                                     setValue("transportEnabled", checked);
                                     if (checked) {

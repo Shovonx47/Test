@@ -1,11 +1,12 @@
 "use client";
-import { Controller } from "react-hook-form";
+import { Control, Controller, FieldValues, UseFormSetValue } from "react-hook-form";
 import { FilePlus2 } from "lucide-react";
 import { useState } from "react";
 
 interface PersonalInfoProps {
-    control: any;
-    setValue: (name: string, value: any) => void;
+    control: Control<FieldValues>;  // Use react-hook-form's Control type
+    setValue: UseFormSetValue<FieldValues>; // Type-safe function for setting form values
+
 }
 
 const Documents = ({ control, setValue }: PersonalInfoProps) => {
@@ -73,7 +74,7 @@ const Documents = ({ control, setValue }: PersonalInfoProps) => {
                                 height="200"
                                 frameBorder="0"
                                 title="Resume PDF"
-                                 className="mt-5"
+                                className="mt-5"
                             />
                         )}
                     </div>

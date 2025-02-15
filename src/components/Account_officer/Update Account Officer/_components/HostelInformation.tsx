@@ -50,7 +50,7 @@ const HostelInformation = ({ control, setValue, watch, trigger, singleAccountOff
                         render={({ field }) => (
                             <Switch
                                 checked={field.value ?? true}
-                                onCheckedChange={(checked) => {
+                                onCheckedChange={(checked: boolean) => {
                                     field.onChange(checked);
                                     setValue("hostelEnabled", checked);
                                     if (checked) {

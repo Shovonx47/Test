@@ -1,6 +1,6 @@
 
 
-import { Controller } from "react-hook-form";
+import { Control, Controller, FieldValues, UseFormSetValue, UseFormTrigger } from "react-hook-form";
 import { NotebookTabs } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
@@ -8,10 +8,11 @@ import DynamicSelect from "@/components/Reusable/DynamicSelect";
 
 
 interface PersonalInfoProps {
-    control: any;
-    setValue: (name: string, value: any) => void;
-    watch: (name: string, defaultValue?: any) => any;
-    trigger: (name?: string | string[]) => void;
+    control: Control<FieldValues>;  // Use react-hook-form's Control type
+    watch: any;  // Adjust return type based on expected data
+
+    setValue: UseFormSetValue<FieldValues>; // Type-safe function for setting form values
+    trigger: UseFormTrigger<FieldValues>;
 }
 
 
@@ -35,7 +36,7 @@ const PreviousSchoolDetails = ({ control, setValue, watch, trigger }: PersonalIn
                         render={({ field }) => (
                             <Switch
                                 checked={field.value ?? true}
-                                onCheckedChange={(checked) => {
+                                onCheckedChange={(checked: boolean) => {
                                     field.onChange(checked);
                                     setValue("previousSchool", checked);
                                     if (checked) {

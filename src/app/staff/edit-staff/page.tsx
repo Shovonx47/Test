@@ -1,16 +1,16 @@
 import UpdateStaffForm from '@/components/Staff/Update Staff/UpdateStaff';
 import React from 'react';
 
-interface PageProps {
-    params: {
-      id: string; // Dynamic route parameter
-    };
-  }
+// interface PageProps {
+//     params: {
+//       id: string; // Dynamic route parameter
+//     };
+//   }
   
-  const page = ({ params }: PageProps) => {
-    const { id } = params;
+  const page = ( ) => {
+    // const { id } = params;
   
-    console.log(id); // Log the ID to verify
+    // console.log(id); // Log the ID to verify
   
 
     return (
