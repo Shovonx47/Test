@@ -79,11 +79,15 @@ const data = {
       items: [
         {
           title: "Add Staff",
-          url: "/add-staff",
+          url: "/staff/add-staff",
+        },
+        {
+          title: "Edit Staff",
+          url: "/staff/edit-staff",
         },
         {
           title: "All Staffs",
-          url: "/all-staff",
+          url: "/staff/all-staff",
         },
       ],
     },
@@ -94,11 +98,15 @@ const data = {
       items: [
         {
           title: "Add Accountant",
-          url: "/add-accountant",
+          url: "/accountant/add-accountant",
+        },
+        {
+          title: "Edit Accountant",
+          url: "/accountant/edit-accountant",
         },
         {
           title: "All Accountants",
-          url: "/all-accountant",
+          url: "/accountant/all-accountant",
         },
       ],
     },
