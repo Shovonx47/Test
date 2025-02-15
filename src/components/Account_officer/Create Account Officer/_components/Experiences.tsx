@@ -115,7 +115,7 @@ const Experiences = ({ control, setValue, trigger, watch, getValues }: PersonalI
                                         render={({ field, fieldState: { error } }) => (
                                             <div>
                                                 <DatePickerForm
-                                                    value={field.value ? new Date(field.value) : undefined}
+                                                    value={field.value}
                                                     onChange={(formattedDate) => {
                                                         setValue(`experiences.${index}.startDate`, formattedDate);
                                                         trigger(`experiences.${index}.startDate`);
@@ -145,7 +145,7 @@ const Experiences = ({ control, setValue, trigger, watch, getValues }: PersonalI
                                         render={({ field, fieldState: { error } }) => (
                                             <div>
                                                 <DatePickerForm
-                                                    value={field.value ? new Date(field.value) : undefined}
+                                                    value={field.value}
                                                     onChange={(formattedDate) => {
                                                         setValue(`experiences.${index}.endDate`, formattedDate);
                                                         trigger(`experiences.${index}.startDate`); // Revalidate Start Date

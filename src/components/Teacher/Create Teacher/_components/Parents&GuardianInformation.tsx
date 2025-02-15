@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { Controller, useForm } from "react-hook-form";
+import { Control, Controller, FieldValues, useForm, UseFormSetValue, UseFormTrigger } from "react-hook-form";
 import { UserRoundCogIcon } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 
@@ -10,9 +10,10 @@ const occupations = [
 ];
 
 interface PersonalInfoProps {
-    control: any;
-    setValue: (name: string, value: any) => void;
-    trigger: (name: string) => void; // Added trigger function
+    control: Control<FieldValues>;  // Use react-hook-form's Control type
+    // Adjust return type based on expected data
+    setValue: UseFormSetValue<FieldValues>; // Type-safe function for setting form values
+    trigger: UseFormTrigger<FieldValues>; // Added trigger function
 }
 
 const ParentsAndGuardianInformation = ({ control, setValue, trigger }: PersonalInfoProps) => {
@@ -150,7 +151,7 @@ const ParentsAndGuardianInformation = ({ control, setValue, trigger }: PersonalI
                     ))}
 
                     {/* Local Guardian's Occupation Select */}
-                    {/* <Controller
+                {/* <Controller
                         name="localGuardianOccupation"
                         control={control}
                         rules={{ required: "Local Guardian Occupation is required" }}
@@ -170,7 +171,7 @@ const ParentsAndGuardianInformation = ({ control, setValue, trigger }: PersonalI
                             </div>
                         )}
                     />
-                </div> */} 
+                </div> */}
             </div>
         </div>
     );

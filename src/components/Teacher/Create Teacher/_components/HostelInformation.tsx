@@ -1,29 +1,30 @@
-import { Controller } from "react-hook-form";
+import { Control, Controller, FieldValues, UseFormSetValue, UseFormTrigger } from "react-hook-form";
 import { Hotel } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 import { Switch } from "@/components/ui/switch";
 
 
 const hostelNames = [
-    "Hostel A", "Hostel B", "Hostel C", "Hostel D", 
-    "Hostel E", "Hostel F", "Hostel G", "Hostel H", 
-    "Hostel I", "Hostel J", "Hostel K", "Hostel L", 
-    "Hostel M", "Hostel N", "Hostel O", "Hostel P", 
+    "Hostel A", "Hostel B", "Hostel C", "Hostel D",
+    "Hostel E", "Hostel F", "Hostel G", "Hostel H",
+    "Hostel I", "Hostel J", "Hostel K", "Hostel L",
+    "Hostel M", "Hostel N", "Hostel O", "Hostel P",
     "Hostel Q", "Hostel R", "Hostel S", "Hostel T"
-  ];
+];
 
 const roomNumbers = [
     "101", "102", "103", "104", "105", "106", "107", "108", "109", "110",
     "201", "202", "203", "204", "205", "206", "207", "208", "209", "210",
     "301", "302", "303", "304", "305", "306", "307", "308", "309", "310",
     "401", "402", "403", "404", "405", "406", "407", "408", "409", "410"
-  ];
-  
+];
+
 interface PersonalInfoProps {
-    control: any;
-    setValue: (name: string, value: any) => void;
-    watch: (name: string, defaultValue?: any) => any;
-    trigger: (name?: string | string[]) => void;
+    control: Control<FieldValues>;  // Use react-hook-form's Control type
+    watch: any;  // Adjust return type based on expected data
+
+    setValue: UseFormSetValue<FieldValues>; // Type-safe function for setting form values
+    trigger: UseFormTrigger<FieldValues>;
 }
 
 const HostelInformation = ({ control, setValue, watch, trigger }: PersonalInfoProps) => {
@@ -100,8 +101,8 @@ const HostelInformation = ({ control, setValue, watch, trigger }: PersonalInfoPr
                                 </div>
                             )}
                         />
- 
-                        
+
+
                     </div>
                 )}
             </div>

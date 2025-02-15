@@ -15,11 +15,6 @@ interface Teacher {
     teacherId: string;
     
 }
-interface TeachersResponse {
-    data: {
-        data: Teacher[];
-    };
-}
 
 const ClassRoutineForm = () => {
 

@@ -121,6 +121,21 @@ const data = {
         }
       ],
     },
+    {
+      title: "Exam Schedule",
+      url: "#",
+      icon: GraduationCap,
+      items: [
+        {
+          title: "Add Exam Schedule",
+          url: "/exam-schedule/add-exam-schedule",
+        },
+        {
+          title: "Edit Exam Schedule",
+          url: "/exam-schedule/edit-exam-schedule",
+        }
+      ],
+    },
      
   ],
 };

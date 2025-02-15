@@ -1,5 +1,5 @@
-import UpdateAccountantForm from '@/components/Account_officer/Update Account Officer/UpdateAccountOfficer';
 import React from 'react';
+import UpdateExamScheduleForm from '@/components/ExamSchedule/Update Exam Schedule/UpdateExamSchedule';
 
 // interface PageProps {
 //     params: {
@@ -7,7 +7,7 @@ import React from 'react';
 //     };
 //   }
   
-  const page = () => {
+  const page = ( ) => {
     // const { id } = params;
   
     // console.log(id); // Log the ID to verify
@@ -15,7 +15,7 @@ import React from 'react';
 
     return (
         <div>
-            <UpdateAccountantForm />
+            <UpdateExamScheduleForm />
         </div>
     );
 };

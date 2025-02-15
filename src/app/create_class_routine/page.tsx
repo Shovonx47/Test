@@ -1,4 +1,5 @@
-import ClassRoutineForm from '@/components/CreateCalender/ClassRoutineForm';
+ 
+import ClassRoutineForm from '@/components/CreateClassRoutine/ClassRoutineForm';
 import React from 'react';
 
 const page = () => {

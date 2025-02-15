@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { Controller, useForm } from "react-hook-form";
+import { Control, Controller, FieldValues, useForm, UseFormSetValue, UseFormTrigger } from "react-hook-form";
 import { UserRoundCogIcon } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 
@@ -10,9 +10,10 @@ const occupations = [
 ];
 
 interface PersonalInfoProps {
-    control: any;
-    setValue: (name: string, value: any) => void;
-    trigger: (name: string) => void; // Added trigger function
+    control: Control<FieldValues>;  // Use react-hook-form's Control type
+
+    setValue: UseFormSetValue<FieldValues>; // Type-safe function for setting form values
+    trigger: UseFormTrigger<FieldValues>; // Added trigger function
 }
 
 const PayrollInformation = ({ control, setValue, trigger }: PersonalInfoProps) => {
@@ -27,7 +28,7 @@ const PayrollInformation = ({ control, setValue, trigger }: PersonalInfoProps) =
 
                 <div className="m-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
                     <div>
-                    <label className="text-sm text-gray-600">EPF No (Optional)</label>
+                        <label className="text-sm text-gray-600">EPF No (Optional)</label>
                         <Controller
                             name="EPFNo"
                             control={control}
@@ -41,7 +42,7 @@ const PayrollInformation = ({ control, setValue, trigger }: PersonalInfoProps) =
                         />
                     </div>
                     {[
-                      
+
                         { name: "basicSalary", label: "Basic Salary" },
                         { name: "workLocation", label: "Work Location" },
 

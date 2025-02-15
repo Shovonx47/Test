@@ -206,7 +206,7 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
                         render={({ field, fieldState: { error } }) => (
                             <div>
                                 <DatePickerForm
-                                    value={field.value ? new Date(field.value) : undefined}
+                                    value={field.value }
                                     onChange={(formattedDate) => {
                                         setValue("admissionDate", formattedDate);
                                         trigger("admissionDate");
@@ -373,7 +373,7 @@ const PersonalInfo = ({ control, setValue, trigger, singleStudent }: PersonalInf
                         render={({ field, fieldState: { error } }) => (
                             <div>
                                 <DatePickerForm
-                                    value={field.value ? new Date(field.value) : undefined}
+                                    value={field.value }
                                     onChange={(formattedDate) => {
                                         setValue("dateOfBirth", formattedDate);
                                         trigger("dateOfBirth");

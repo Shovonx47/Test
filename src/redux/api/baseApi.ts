@@ -11,6 +11,7 @@ export const baseApi = createApi({
     "staff",
     "account_officer",
     "class_routine",
+    "exam_schedule",
   ],
   endpoints: () => ({}),
 });

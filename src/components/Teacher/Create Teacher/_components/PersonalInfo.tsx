@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { Controller } from "react-hook-form";
+import { Control, Controller, FieldValues, UseFormSetValue, UseFormTrigger } from "react-hook-form";
 import { ImagePlus, InfoIcon } from "lucide-react";
 import DynamicSelect from "@/components/Reusable/DynamicSelect";
 import { DatePickerForm } from "@/components/Reusable/DatePickerForm";
@@ -25,9 +25,10 @@ const motherTongues = ["English", "Spanish", "Bengali", "Hindi", "Arabic", "Chin
 
 
 interface PersonalInfoProps {
-    control: any; // control from useForm
-    setValue: (name: string, value: any) => void;
-    trigger: (name: string) => void; // Add trigger for validation
+    control: Control<FieldValues>;  // Use react-hook-form's Control type
+
+    setValue: UseFormSetValue<FieldValues>; // Type-safe function for setting form values
+    trigger: UseFormTrigger<FieldValues>;// Add trigger for validation
 }
 
 const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
@@ -179,7 +180,7 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                         render={({ field, fieldState: { error } }) => (
                             <div>
                                 <DatePickerForm
-                                    value={field.value ? new Date(field.value) : undefined}
+                                    value={field.value}
                                     onChange={(formattedDate) => {
                                         setValue("joiningDate", formattedDate);
                                         trigger("joiningDate");
@@ -242,7 +243,7 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                         render={({ field, fieldState: { error } }) => (
                             <div>
                                 <DatePickerForm
-                                    value={field.value ? new Date(field.value) : undefined}
+                                    value={field.value}
                                     onChange={(formattedDate) => {
                                         setValue("dateOfBirth", formattedDate);
                                         trigger("dateOfBirth");
@@ -313,7 +314,7 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                                         setValue("religion", val);
                                         trigger("religion");
                                     }}
-                                     
+
                                 />
                                 {error && <p className="text-red-500 text-sm">{error.message}</p>}
                             </div>
@@ -340,8 +341,8 @@ const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
                     <Controller
                         name="alternativeContactNumber"
                         control={control}
-                         
-                        render={({ field  }) => (
+
+                        render={({ field }) => (
                             <div>
                                 <label className="text-sm text-gray-600">Alternative Contact Number</label>
                                 <Input

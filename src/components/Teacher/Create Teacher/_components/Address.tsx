@@ -1,9 +1,10 @@
 import { Input } from "@/components/ui/input";
-import { Controller } from "react-hook-form";
+import { Control, Controller, FieldValues } from "react-hook-form";
 import { MapPinHouse } from "lucide-react";
 
 interface PersonalInfoProps {
-    control: any; // control from useForm
+    control: Control<FieldValues>;  // Use react-hook-form's Control type
+        
 }
 
 const Address = ({ control }: PersonalInfoProps) => {
