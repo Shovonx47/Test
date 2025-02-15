@@ -67,7 +67,7 @@ const Experiences = ({ control, setValue, trigger, watch, getValues, singleAccou
                         render={({ field }) => (
                             <Switch
                                 checked={field.value ?? true}
-                                onCheckedChange={(checked) => {
+                                onCheckedChange={(checked: boolean) => {
                                     field.onChange(checked);
                                     setValue("hasExperience", checked);
                                     if (checked) {
