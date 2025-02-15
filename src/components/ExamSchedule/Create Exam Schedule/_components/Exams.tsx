@@ -80,10 +80,30 @@ const Exams = ({ control }: ExamsInfoProps) => {
                                     <Controller
                                         name={`exams.${index}.maxMark`}
                                         control={control}
-                                        render={({ field }) => (
-                                            <Input {...field} placeholder="Enter max mark" />
+                                        rules={{ required: "Max Mark is required" }}
+                                        render={({ field, fieldState: { error } }) => (
+                                            <div>
+                                                <Input
+                                                    {...field}
+                                                    placeholder="Enter max mark"
+                                                    className={`border ${error ? "border-red-500" : "border-gray-300"}`} // Style for error
+                                                    onKeyDown={(e) => {
+                                                        // Allow only numbers, backspace, and delete keys
+                                                        if (!/[0-9]/.test(e.key) && e.key !== "Backspace" && e.key !== "Delete") {
+                                                            e.preventDefault();
+                                                        }
+                                                    }}
+
+                                                    pattern="\d+" // This regex accepts only digits
+                                                    title="Only numbers are allowed"
+                                                />
+                                                {error && (
+                                                    <p className="text-red-500 text-sm">{error.message}</p> // Error message display
+                                                )}
+                                            </div>
                                         )}
                                     />
+
                                 </div>
 
                                 <Controller
@@ -99,7 +119,7 @@ const Exams = ({ control }: ExamsInfoProps) => {
                                     )}
                                 />
                                 <Controller
-                                         name={`exams.${index}.endTime`}
+                                    name={`exams.${index}.endTime`}
                                     control={control}
                                     rules={{ required: "End Time is required" }}
                                     render={({ field, fieldState: { error } }) => (

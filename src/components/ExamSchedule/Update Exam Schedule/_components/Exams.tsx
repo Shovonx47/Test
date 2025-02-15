@@ -1,7 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { Control, Controller, FieldValues, useFieldArray} from "react-hook-form";
+import { Control, Controller, FieldValues, useFieldArray } from "react-hook-form";
 import { Trash2, SquarePlus, NotebookTabs } from "lucide-react";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -99,8 +99,24 @@ const Exams = ({ control, singleExamSchedule }: ExamsInfoProps) => {
                                         name={`exams.${index}.maxMark`}
                                         control={control}
                                         defaultValue={singleExamSchedule?.data?.exams?.[index]?.maxMark || ""}
-                                        render={({ field }) => (
-                                            <Input {...field} placeholder="Enter max mark" />
+                                        rules={{ required: "Max Mark is required" }}
+                                        render={({ field, fieldState: { error } }) => (
+                                            <div>
+                                                <Input {...field} placeholder="Enter max mark" onKeyDown={(e) => {
+                                                    // Allow only numbers, backspace, and delete keys
+                                                    if (!/[0-9]/.test(e.key) && e.key !== "Backspace" && e.key !== "Delete") {
+                                                        e.preventDefault();
+                                                    }
+                                                }}
+
+                                                    pattern="\d+" // This regex accepts only digits
+                                                    title="Only numbers are allowed" />
+
+                                                {error && (
+                                                    <p className="text-red-500 text-sm">{error.message}</p> // Error message display
+                                                )}
+                                            </div>
+
                                         )}
                                     />
                                 </div>
