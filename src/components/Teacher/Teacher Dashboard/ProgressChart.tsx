@@ -23,15 +23,18 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ students }) => {
     <div className="w-full max-w-sm p-4 bg-white rounded-lg shadow-sm">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-base font-semibold text-gray-800">Student Progress</h2>
-        <button className="text-blue-600 text-xs hover:underline">
+        <button className="text-blue-600 text-xs hover:underline flex items-center">
           This Month
-          <ChevronDown className="w-4 h-4 ml-1 inline" />
+          <ChevronDown className="w-4 h-4 ml-1" />
         </button>
       </div>
 
       <div className="space-y-3">
         {students.map((student) => (
-          <div key={student.id} className="flex items-center justify-between p-1.5 hover:bg-gray-50 rounded-lg">
+          <div 
+            key={student.id} 
+            className="flex items-center justify-between p-3 hover:bg-gray-50 rounded-md border border-gray-200"
+          >
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 rounded-full overflow-hidden">
                 <img

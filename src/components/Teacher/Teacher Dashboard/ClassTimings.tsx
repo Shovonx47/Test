@@ -19,6 +19,7 @@ const Schedule: React.FC<ScheduleProps> = ({ date, sessions }) => {
         <h2 className="text-navy-800 text-lg font-medium">Today's Class</h2>
         <span className="text-gray-400 text-sm">{date}</span>
       </div>
+      <div className="border-b border-gray-200 -mx-6 mb-4"></div>
       
       <div className="grid grid-cols-4 gap-3">
         {sessions.map((session, index) => (
@@ -27,7 +28,7 @@ const Schedule: React.FC<ScheduleProps> = ({ date, sessions }) => {
             className="bg-gray-50 rounded-lg p-3"
           >
             <div className={`inline-flex px-2 py-1 rounded-md text-sm mb-2 ${
-              session.isAfternoon ? 'bg-purple-100 text-purple-700' : 'bg-green-400 text-white'
+              session.isAfternoon ? 'bg-[#3D5EE180] text-white' : 'bg-[#48CB45] text-white'
             }`}>
               {session.startTime} - {session.endTime}
             </div>

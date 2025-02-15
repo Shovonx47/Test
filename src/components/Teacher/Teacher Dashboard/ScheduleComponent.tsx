@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Avatar from '@/assets/avatars/3d_avatar_3.png';
 
 interface Event {
   title: string;
@@ -100,12 +101,13 @@ const ScheduleComponent = () => {
 
   return (
     <div className="bg-white rounded-lg p-6 max-w-2xl mx-auto">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-3">
         <h2 className="text-lg font-semibold text-gray-900">Schedules</h2>
         <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
           Add New
         </button>
       </div>
+      <div className="border-b border-gray-200 -mx-6 mb-4"></div>
 
       {/* Calendar Section */}
       <div className="mb-8">
@@ -182,9 +184,11 @@ const ScheduleComponent = () => {
                     </span>
                     <div className="flex -space-x-2">
                       {[...Array(event.participants)].map((_, i) => (
-                        <div
+                        <img
                           key={i}
-                          className="w-8 h-8 rounded-full border-2 border-white bg-gray-200"
+                          src={Avatar.src}
+                          alt={`Participant ${i + 1}`}
+                          className="w-8 h-8 rounded-full border-2 border-white object-cover"
                         />
                       ))}
                     </div>

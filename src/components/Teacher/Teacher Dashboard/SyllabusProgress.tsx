@@ -15,7 +15,7 @@ const SyllabusProgress: React.FC<SyllabusProgressProps> = ({ completed = 95, pen
   const redOffset = (completed / 100) * circumference;
   
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 max-w-md">
+    <div className="bg-white rounded-sm border border-gray-200 p-6 max-w-md">
       <div className="flex items-center space-x-6">
         <div className="relative w-24 h-24 flex-shrink-0">
           {/* Background circle */}

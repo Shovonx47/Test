@@ -15,7 +15,7 @@ const AttendanceCard = () => {
   return (
     <div className="w-full max-w-md bg-white rounded-lg shadow p-6">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-3">
         <h2 className="text-lg font-semibold text-gray-800">Attendance</h2>
         <button className="flex items-center text-sm text-gray-600">
           This Week
@@ -24,6 +24,7 @@ const AttendanceCard = () => {
           </svg>
         </button>
       </div>
+      <div className="border-b border-gray-200 -mx-6 mb-4"></div>
 
       {/* Last 7 Days Calendar */}
       <div className="mb-6">

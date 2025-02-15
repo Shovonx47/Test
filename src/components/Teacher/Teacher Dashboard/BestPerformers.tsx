@@ -31,6 +31,7 @@ const BestPerformers = () => {
           View All
         </button>
       </div>
+      <div className="border-b border-gray-200 -mx-6 mb-4"></div>
 
       <div className="space-y-3">
         {performers.map((performer, index) => (
