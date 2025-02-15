@@ -45,7 +45,7 @@ const PreviousSchoolDetails = ({ control, setValue, watch, trigger, singleAccoun
                         render={({ field }) => (
                             <Switch
                                 checked={field.value ?? singleAccountOfficer?.data?.previousSchool}
-                                onCheckedChange={(checked) => {
+                                onCheckedChange={(checked: boolean) => {
                                     field.onChange(checked);
                                     setValue("previousSchool", checked);
                                     if (checked) {

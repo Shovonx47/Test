@@ -66,7 +66,7 @@ const TransportInformation = ({ control, setValue, watch, trigger, singleTeacher
                         render={({ field }) => (
                             <Switch
                                 checked={field.value ?? true}
-                                onCheckedChange={(checked) => {
+                                onCheckedChange={(checked: boolean) => {
                                     field.onChange(checked);
                                     setValue("transportEnabled", checked);
                                     if (checked) {
