@@ -1,7 +1,10 @@
 "use client";
 import React, { useState } from 'react';
 import { ChevronDown, Filter } from 'lucide-react';
-import Avatar from '@/assets/avatars/3d_avatar_3.png';
+import { useGetAllStudentsQuery } from '@/redux/api/Student/studentApi';
+import LoadingSpinner from '@/components/Loader';
+import { PaginationPage } from '@/components/Reusable/Pagination';
+
 
 type Tickers = {
   [key: string]: boolean;
@@ -10,88 +13,11 @@ type Tickers = {
 const AllStudentsTable = () => {
   const [tickers, setTickers] = useState<Tickers>({});
   const [filterBy, setFilterBy] = useState('all');
-  const [sortBy, setSortBy] = useState('name-asc');
+  const [sortBy, setSortBy] = useState('-createdAt');
 
-  const students = [
-    {
-      admissionNo: 'AD11223344',
-      rollNo: '1234',
-      name: 'Ryan',
-      profileImage: Avatar.src,
-      class: 'VII',
-      section: 'A',
-      gender: 'Male',
-      status: 'Active',
-      dateOfJoin: '22 Jan 2024',
-      dateOfBirth: '06 Mar 2011',
-      paid: true
-    },
-    {
-      admissionNo: 'AD11223345',
-      rollNo: '1235',
-      name: 'Emma',
-      profileImage: Avatar.src,
-      class: 'VII',
-      section: 'A',
-      gender: 'Female',
-      status: 'Active',
-      dateOfJoin: '22 Jan 2024',
-      dateOfBirth: '15 Apr 2011',
-      paid: false
-    },
-    {
-      admissionNo: 'AD11223346',
-      rollNo: '1236',
-      name: 'Liam',
-      profileImage: Avatar.src,
-      class: 'VII',
-      section: 'B',
-      gender: 'Male',
-      status: 'Inactive',
-      dateOfJoin: '22 Jan 2024',
-      dateOfBirth: '20 May 2011',
-      paid: true
-    },
-    {
-      admissionNo: 'AD11223347',
-      rollNo: '1237',
-      name: 'Olivia',
-      profileImage: Avatar.src,
-      class: 'VIII',
-      section: 'A',
-      gender: 'Female',
-      status: 'Active',
-      dateOfJoin: '22 Jan 2024',
-      dateOfBirth: '30 Jun 2010',
-      paid: false
-    },
-    {
-      admissionNo: 'AD11223348',
-      rollNo: '1238',
-      name: 'Noah',
-      profileImage: Avatar.src,
-      class: 'VIII',
-      section: 'B',
-      gender: 'Male',
-      status: 'Active',
-      dateOfJoin: '22 Jan 2024',
-      dateOfBirth: '12 Jul 2010',
-      paid: true
-    },
-    {
-      admissionNo: 'AD11223349',
-      rollNo: '1239',
-      name: 'Ava',
-      profileImage: Avatar.src,
-      class: 'VII',
-      section: 'C',
-      gender: 'Female',
-      status: 'Inactive',
-      dateOfJoin: '22 Jan 2024',
-      dateOfBirth: '25 Aug 2011',
-      paid: false
-    },
-  ];
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState(5)
+
 
   const handleTickerClick = (studentIndex: number, tickerIndex: number) => {
     setTickers(prev => ({
@@ -100,6 +26,18 @@ const AllStudentsTable = () => {
     }));
   };
 
+
+
+
+  const { data: allStudents, isLoading } = useGetAllStudentsQuery({ page, limit, sort: sortBy })
+
+
+console.log(allStudents?.data?.meta?.totalPage)
+
+  if (isLoading) {
+    return <LoadingSpinner />
+  }
+
   return (
     <div className="bg-white shadow-lg">
       <div className="flex justify-between items-center p-6">
@@ -107,11 +45,11 @@ const AllStudentsTable = () => {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <div className="border border-gray-200 py-1 px-2">
-            <span className="text-sm text-gray-600">01/01/2025 - 31/01/2025</span>
+              <span className="text-sm text-gray-600">01/01/2025 - 31/01/2025</span>
 
             </div>
             <div className="relative">
-              <select 
+              <select
                 value={filterBy}
                 onChange={(e) => setFilterBy(e.target.value)}
                 className="appearance-none bg-white border rounded px-3 py-1 pr-8 text-sm text-gray-600 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -126,15 +64,13 @@ const AllStudentsTable = () => {
             </div>
           </div>
           <div className="relative">
-            <select 
+            <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
               className="appearance-none bg-white border rounded px-3 py-1 pr-8 text-sm text-gray-600 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="name-asc">Sort by A-Z</option>
-              <option value="name-desc">Sort by Z-A</option>
-              <option value="date-asc">Date Ascending</option>
-              <option value="date-desc">Date Descending</option>
+              <option value="-createdAt">Date Ascending</option>
+              <option value="createdAt">Date Descending</option>
             </select>
             <ChevronDown className="w-4 h-4 absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none text-gray-400" />
           </div>
@@ -147,9 +83,15 @@ const AllStudentsTable = () => {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-600">Row Per Page</span>
-            <select className="border rounded px-2 py-1 text-sm">
-              <option>10</option>
+            <select onChange={(e) => setLimit(Number(e.target.value))} className="border rounded px-2 py-1 text-sm">
+
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
             </select>
+
           </div>
           <span className="text-sm text-gray-600">Entries</span>
         </div>
@@ -180,57 +122,54 @@ const AllStudentsTable = () => {
             </tr>
           </thead>
           <tbody className="text-sm font-medium text-[#515B73]">
-            {students.map((student, index) => (
+            {allStudents?.data?.data?.map((student: any, index: number) => (
               <tr key={index} className="border-b">
                 <td className="p-4">
                   <input type="checkbox" className="rounded" />
                 </td>
                 <td className="p-4">
-                  <span className="text-blue-600">{student.admissionNo}</span>
+                  <span className="text-blue-600">{student.studentId}</span>
                 </td>
-                <td className="p-4">{student.rollNo}</td>
+                <td className="p-4">{student.studentId}</td>
                 <td className="p-4">
                   <div className="flex items-center gap-2">
-                    <img 
-                      src={student.profileImage} 
-                      alt={`${student.name}'s profile`}
+                    <img
+                      src={student.profileImage}
+                      alt={`${student.firstName}'s profile`}
                       className="w-8 h-8 rounded-full object-cover"
                     />
-                    <span>{student.name}</span>
+                    <span>{student.firstName} {student.lastName}</span>
                   </div>
                 </td>
                 <td className="p-4">{student.class}</td>
                 <td className="p-4">{student.section}</td>
                 <td className="p-4">{student.gender}</td>
                 <td className="p-4">
-                  <span className={`px-2 py-1 rounded text-xs ${
-                    student.status === 'Active' 
-                      ? 'bg-green-100 text-green-600' 
-                      : 'bg-red-100 text-red-600'
-                  }`}>
+                  <span className={`px-2 py-1 rounded text-xs ${student.status === 'Active'
+                    ? 'bg-green-100 text-green-600'
+                    : 'bg-red-100 text-red-600'
+                    }`}>
                     {student.status}
                   </span>
                 </td>
-                <td className="p-4">{student.dateOfJoin}</td>
+                <td className="p-4">{student.admissionDate}</td>
                 <td className="p-4">{student.dateOfBirth}</td>
                 <td className="p-4">
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">
-                      {[0, 1, 2].map((tickerIndex) => (
+                      {[1, 2, 3].map((tickerIndex) => (
                         <button
                           key={tickerIndex}
                           onClick={() => handleTickerClick(index, tickerIndex)}
-                          className={`w-8 h-8 rounded-full border-2 border-gray-200 cursor-pointer transition-colors ${
-                            tickers[`${index}-${tickerIndex}`] 
-                              ? 'bg-blue-500 border-blue-500' 
-                              : 'bg-white'
-                          }`}
+                          className={`w-8 h-8 rounded-full border-2 border-gray-200 cursor-pointer transition-colors ${tickers[`${index}-${tickerIndex}`]
+                            ? 'bg-blue-500 border-blue-500'
+                            : 'bg-white'
+                            }`}
                         />
                       ))}
                     </div>
-                    <button className={`px-4 py-1 rounded text-white ${
-                      student.paid ? 'bg-green-500' : 'bg-red-500'
-                    }`}>
+                    <button className={`px-4 py-1 rounded text-white ${student.paid ? 'bg-green-500' : 'bg-red-500'
+                      }`}>
                       {student.paid ? 'Paid' : 'Due'}
                     </button>
                   </div>
@@ -243,10 +182,11 @@ const AllStudentsTable = () => {
 
       <div className="flex justify-end p-6">
         <div className="flex items-center gap-2">
-          <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded">Prev</button>
+          {/* <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded">Prev</button>
           <button className="px-3 py-1 text-sm text-white bg-blue-600 rounded">1</button>
           <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded">2</button>
-          <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded">Next</button>
+          <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded">Next</button> */}
+          <PaginationPage totalPages={allStudents?.data?.meta?.totalPage} page={page} setPage={setPage} />
         </div>
       </div>
     </div>

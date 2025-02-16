@@ -1,4 +1,4 @@
-import AddAccountantForm from '@/components/Account_officer/Create Account Officer/AddAccountOfficer';
+import AddAccountantForm from '@/components/Account_officer/CreateAccountOfficer/AddAccountOfficer';
 import React from 'react';
 
 const page = () => {

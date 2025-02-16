@@ -1,4 +1,4 @@
-import UpdateAccountantForm from '@/components/Account_officer/Update Account Officer/UpdateAccountOfficer';
+import UpdateAccountantForm from '@/components/Account_officer/UpdateAccountOfficer/UpdateAccountOfficer';
 import React from 'react';
 
 // interface PageProps {

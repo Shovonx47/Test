@@ -1,4 +1,4 @@
-import UpdateStudentForm from '@/components/Students/Update Student/UpdateStudent';
+import UpdateStudentForm from '@/components/Students/UpdateStudent/UpdateStudent';
 import React from 'react';
 
 // interface PageProps {
