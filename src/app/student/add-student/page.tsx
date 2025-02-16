@@ -1,4 +1,4 @@
-import AddStudentForm from '@/components/Students/Create Student/AddStudent';
+import AddStudentForm from '@/components/Students/CreateStudent/AddStudent';
 import React from 'react';
 
 const page = () => {

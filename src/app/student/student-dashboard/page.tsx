@@ -1,19 +1,19 @@
 import React from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
-import ProfileCard from "@/components/Students/Students Dashboard/ProfileCard";
-import TodaysClasses from "@/components/Students/Students Dashboard/TodaysClasses";
-import StatusIndicators from "@/components/Students/Students Dashboard/StatusIndicators";
-import AttendanceSection from "@/components/Students/Students Dashboard/AttendanceSection";
-import LeaveStatusSection from "@/components/Students/Students Dashboard/LeaveStatusSection";
-import ExamResultsSection from "@/components/Students/Students Dashboard/ExamResultsSection";
-import ClassFacultiesSection from "@/components/Students/Students Dashboard/ClassFacultiesSection";
-import NoticeBoardSection from "@/components/Students/Students Dashboard/NoticeBoardSection";
-import PerformanceSection from "@/components/Students/Students Dashboard/PerformanceSection";
-import ScheduleSection from "@/components/Students/Students Dashboard/ScheduleSection";
-import HomeWorksSection from "@/components/Students/Students Dashboard/HomeWorksSection";
-import FeesReminderSection from "@/components/Students/Students Dashboard/FeesReminderSection";
-import SyllabusSection from "@/components/Students/Students Dashboard/SyllabusSection";
-import TodoList from "@/components/Students/Students Dashboard/TodoList";
+import ProfileCard from "@/components/Students/StudentsDashboard/ProfileCard";
+import TodaysClasses from "@/components/Students/StudentsDashboard/TodaysClasses";
+import StatusIndicators from "@/components/Students/StudentsDashboard/StatusIndicators";
+import AttendanceSection from "@/components/Students/StudentsDashboard/AttendanceSection";
+import LeaveStatusSection from "@/components/Students/StudentsDashboard/LeaveStatusSection";
+import ExamResultsSection from "@/components/Students/StudentsDashboard/ExamResultsSection";
+import ClassFacultiesSection from "@/components/Students/StudentsDashboard/ClassFacultiesSection";
+import NoticeBoardSection from "@/components/Students/StudentsDashboard/NoticeBoardSection";
+import PerformanceSection from "@/components/Students/StudentsDashboard/PerformanceSection";
+import ScheduleSection from "@/components/Students/StudentsDashboard/ScheduleSection";
+import HomeWorksSection from "@/components/Students/StudentsDashboard/HomeWorksSection";
+import FeesReminderSection from "@/components/Students/StudentsDashboard/FeesReminderSection";
+import SyllabusSection from "@/components/Students/StudentsDashboard/SyllabusSection";
+import TodoList from "@/components/Students/StudentsDashboard/TodoList";
 
 
 export default function StudentDashboard() {

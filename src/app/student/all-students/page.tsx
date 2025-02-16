@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import AllStudentsTable from "@/components/Students/All Students/Tables/AllStudentsTable";
+import AllStudentsTable from "@/components/Students/AllStudents/Tables/AllStudentsTable";
 
 export default function AllStudentsPage() {
   return (
