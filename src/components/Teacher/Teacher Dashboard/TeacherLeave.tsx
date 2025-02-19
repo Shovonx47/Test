@@ -6,25 +6,25 @@ const LeaveStatusSection = () => {
       type: "Emergency Leave",
       date: "03 Jan 2025",
       status: "Approved",
-      statusColor: "bg-green-100 text-green-600",
+      statusColor: "bg-[#1ABE17] text-white",
     },
     {
       type: "Medical Leave",
       date: "20 Jan 2025",
       status: "Pending",
-      statusColor: "bg-yellow-100 text-yellow-600",
+      statusColor: "bg-[#05C3FB] text-white",
     },
     {
       type: "Casual Leave",
       date: "25 Jan 2025",
       status: "Rejected",
-      statusColor: "bg-red-100 text-red-600",
+      statusColor: "bg-[#E82646] text-white",
     },
     {
       type: "Fever",
       date: "28 Jan 2025",
       status: "Approved",
-      statusColor: "bg-green-100 text-green-600",
+      statusColor: "bg-[#1ABE17] text-white",
     },
   ];
 
@@ -41,17 +41,17 @@ const LeaveStatusSection = () => {
         {leaveTypes.map((leave, index) => (
           <div
             key={index}
-            className="flex items-center justify-between p-3 bg-gray-50 rounded"
+            className="flex items-center justify-between p-3 bg-[#F8FAFC] rounded"
           >
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-sm bg-[#FDE9ED]"></div>
+              <div className="w-8 h-8 rounded-sm bg-[#1ABE171A]"></div>
               <div>
                 <h4 className="font-medium">{leave.type}</h4>
                 <p className="text-sm text-gray-500">Date: {leave.date}</p>
               </div>
             </div>
             <span
-              className={`px-2 py-1 text-sm ${leave.statusColor}`}
+              className={`px-2 py-0.5 rounded-md text-sm ${leave.statusColor}`}
             >
               {leave.status}
             </span>

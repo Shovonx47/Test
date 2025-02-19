@@ -70,6 +70,10 @@ const data = {
           title: "Teacher Dashboard",
           url: "/teacher/teacher-dashboard",
         },
+        {
+          title: "Teacher Details",
+          url: "/teacher/teacher-details",
+        },
       ],
     },
     {
