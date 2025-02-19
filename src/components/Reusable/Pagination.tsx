@@ -21,19 +21,16 @@ export function PaginationPage({
   page: currentPage,
 }: PaginationProps) {
 
-  // Handle page change
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  // Handle previous page
   const handlePrevious = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   };
 
-  // Handle next page
   const handleNext = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -42,58 +39,80 @@ export function PaginationPage({
 
   const renderPageNumbers = () => {
     const pageNumbers: JSX.Element[] = [];
-    const maxVisiblePages = 2; // The first two pages
-    const range = 1; // Surrounding pages around the current page
+    const range = 1; // Number of surrounding pages around current page
 
-    // Show first two pages
-    if (currentPage > maxVisiblePages) {
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(
+          <PaginationItem key={i}>
+            <PaginationLink
+              href="#"
+              onClick={() => handlePageChange(i)}
+              className={`px-3 py-1 rounded-md ${
+                i === currentPage ? "bg-blue-500 text-white" : "hover:bg-gray-200"
+              }`}
+            >
+              {i}
+            </PaginationLink>
+          </PaginationItem>
+        );
+      }
+    } else {
       pageNumbers.push(
         <PaginationItem key={1}>
-          <PaginationLink href="#" onClick={() => handlePageChange(1)}>
+          <PaginationLink
+            href="#"
+            onClick={() => handlePageChange(1)}
+            className={`px-3 py-1 rounded-md ${
+              currentPage === 1 ? "bg-blue-500 text-white" : "hover:bg-gray-200"
+            }`}
+          >
             1
           </PaginationLink>
         </PaginationItem>
       );
-    }
 
-    // Show ellipsis if there are skipped pages between first pages and current
-    if (currentPage > maxVisiblePages + range + 1) {
-      pageNumbers.push(
-        <PaginationItem key="ellipsis-1">
-          <PaginationEllipsis />
-        </PaginationItem>
-      );
-    }
+      if (currentPage > range + 2) {
+        pageNumbers.push(
+          <PaginationItem key="ellipsis-1">
+            <PaginationEllipsis />
+          </PaginationItem>
+        );
+      }
 
-    // Show surrounding pages (currentPage ± 1)
-    for (let i = Math.max(2, currentPage - range); i <= Math.min(totalPages - 1, currentPage + range); i++) {
-      pageNumbers.push(
-        <PaginationItem key={i}>
-          <PaginationLink
-            href="#"
-            onClick={() => handlePageChange(i)}
-            isActive={i === currentPage}
-          >
-            {i}
-          </PaginationLink>
-        </PaginationItem>
-      );
-    }
+      for (let i = Math.max(2, currentPage - range); i <= Math.min(totalPages - 1, currentPage + range); i++) {
+        pageNumbers.push(
+          <PaginationItem key={i}>
+            <PaginationLink
+              href="#"
+              onClick={() => handlePageChange(i)}
+              className={`px-3 py-1 rounded-md ${
+                i === currentPage ? "bg-blue-500 text-white" : "hover:bg-gray-200"
+              }`}
+            >
+              {i}
+            </PaginationLink>
+          </PaginationItem>
+        );
+      }
 
-    // Show ellipsis if there are skipped pages between current pages and last page
-    if (currentPage < totalPages - maxVisiblePages - range) {
-      pageNumbers.push(
-        <PaginationItem key="ellipsis-2">
-          <PaginationEllipsis />
-        </PaginationItem>
-      );
-    }
+      if (currentPage < totalPages - range - 1) {
+        pageNumbers.push(
+          <PaginationItem key="ellipsis-2">
+            <PaginationEllipsis />
+          </PaginationItem>
+        );
+      }
 
-    // Show last page
-    if (currentPage < totalPages - maxVisiblePages) {
       pageNumbers.push(
         <PaginationItem key={totalPages}>
-          <PaginationLink href="#" onClick={() => handlePageChange(totalPages)}>
+          <PaginationLink
+            href="#"
+            onClick={() => handlePageChange(totalPages)}
+            className={`px-3 py-1 rounded-md ${
+              currentPage === totalPages ? "bg-blue-500 text-white" : "hover:bg-gray-200"
+            }`}
+          >
             {totalPages}
           </PaginationLink>
         </PaginationItem>
@@ -110,7 +129,6 @@ export function PaginationPage({
           <PaginationPrevious href="#" onClick={handlePrevious} />
         </PaginationItem>
 
-        {/* Render page numbers dynamically */}
         {renderPageNumbers()}
 
         <PaginationItem>

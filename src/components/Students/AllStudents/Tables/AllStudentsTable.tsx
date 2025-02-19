@@ -12,8 +12,9 @@ type Tickers = {
 
 const AllStudentsTable = () => {
   const [tickers, setTickers] = useState<Tickers>({});
-  const [filterBy, setFilterBy] = useState('all');
+  const [filterBy, setFilterBy] = useState('Active');
   const [sortBy, setSortBy] = useState('-createdAt');
+  const [searchData, setSearchData] = useState('');
 
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState(5)
@@ -27,12 +28,8 @@ const AllStudentsTable = () => {
   };
 
 
+  const { data: allStudents, isLoading } = useGetAllStudentsQuery({ page, limit, sort: sortBy, searchTerm: searchData, status: filterBy })
 
-
-  const { data: allStudents, isLoading } = useGetAllStudentsQuery({ page, limit, sort: sortBy })
-
-
-console.log(allStudents?.data?.meta?.totalPage)
 
   if (isLoading) {
     return <LoadingSpinner />
@@ -55,8 +52,8 @@ console.log(allStudents?.data?.meta?.totalPage)
                 className="appearance-none bg-white border rounded px-3 py-1 pr-8 text-sm text-gray-600 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="all">Fiters</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
                 <option value="paid">Paid</option>
                 <option value="unpaid">Unpaid</option>
               </select>
@@ -85,6 +82,7 @@ console.log(allStudents?.data?.meta?.totalPage)
             <span className="text-sm text-gray-600">Row Per Page</span>
             <select onChange={(e) => setLimit(Number(e.target.value))} className="border rounded px-2 py-1 text-sm">
 
+              <option value="5">5</option>
               <option value="10">10</option>
               <option value="15">15</option>
               <option value="20">20</option>
@@ -96,6 +94,7 @@ console.log(allStudents?.data?.meta?.totalPage)
           <span className="text-sm text-gray-600">Entries</span>
         </div>
         <input
+          onChange={(e) => setSearchData(e.target.value)}
           type="search"
           placeholder="Search"
           className="border rounded px-3 py-1 text-sm"
@@ -121,71 +120,74 @@ console.log(allStudents?.data?.meta?.totalPage)
               <th className="p-4 text-left text-sm font-semibold text-gray-600">Action</th>
             </tr>
           </thead>
-          <tbody className="text-sm font-medium text-[#515B73]">
-            {allStudents?.data?.data?.map((student: any, index: number) => (
-              <tr key={index} className="border-b">
-                <td className="p-4">
-                  <input type="checkbox" className="rounded" />
-                </td>
-                <td className="p-4">
-                  <span className="text-blue-600">{student.studentId}</span>
-                </td>
-                <td className="p-4">{student.studentId}</td>
-                <td className="p-4">
-                  <div className="flex items-center gap-2">
-                    <img
-                      src={student.profileImage}
-                      alt={`${student.firstName}'s profile`}
-                      className="w-8 h-8 rounded-full object-cover"
-                    />
-                    <span>{student.firstName} {student.lastName}</span>
-                  </div>
-                </td>
-                <td className="p-4">{student.class}</td>
-                <td className="p-4">{student.section}</td>
-                <td className="p-4">{student.gender}</td>
-                <td className="p-4">
-                  <span className={`px-2 py-1 rounded text-xs ${student.status === 'Active'
-                    ? 'bg-green-100 text-green-600'
-                    : 'bg-red-100 text-red-600'
-                    }`}>
-                    {student.status}
-                  </span>
-                </td>
-                <td className="p-4">{student.admissionDate}</td>
-                <td className="p-4">{student.dateOfBirth}</td>
-                <td className="p-4">
-                  <div className="flex items-center gap-4">
+          {
+            allStudents?.data?.data.length > 0 &&
+            <tbody className="text-sm font-medium text-[#515B73]">
+              {allStudents?.data?.data?.map((student: any, index: number) => (
+                <tr key={index} className="border-b">
+                  <td className="p-4">
+                    <input type="checkbox" className="rounded" />
+                  </td>
+                  <td className="p-4">
+                    <span className="text-blue-600">{student.studentId}</span>
+                  </td>
+                  <td className="p-4">{student.studentId}</td>
+                  <td className="p-4">
                     <div className="flex items-center gap-2">
-                      {[1, 2, 3].map((tickerIndex) => (
-                        <button
-                          key={tickerIndex}
-                          onClick={() => handleTickerClick(index, tickerIndex)}
-                          className={`w-8 h-8 rounded-full border-2 border-gray-200 cursor-pointer transition-colors ${tickers[`${index}-${tickerIndex}`]
-                            ? 'bg-blue-500 border-blue-500'
-                            : 'bg-white'
-                            }`}
-                        />
-                      ))}
+                      <img
+                        src={student.profileImage}
+                        alt={`${student.firstName}'s profile`}
+                        className="w-8 h-8 rounded-full object-cover"
+                      />
+                      <span>{student.firstName} {student.lastName}</span>
                     </div>
-                    <button className={`px-4 py-1 rounded text-white ${student.paid ? 'bg-green-500' : 'bg-red-500'
+                  </td>
+                  <td className="p-4">{student.class}</td>
+                  <td className="p-4">{student.section}</td>
+                  <td className="p-4">{student.gender}</td>
+                  <td className="p-4">
+                    <span className={`px-2 py-1 rounded text-xs ${student.status === 'Active'
+                      ? 'bg-green-100 text-green-600'
+                      : 'bg-red-100 text-red-600'
                       }`}>
-                      {student.paid ? 'Paid' : 'Due'}
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+                      {student.status}
+                    </span>
+                  </td>
+                  <td className="p-4">{student.admissionDate}</td>
+                  <td className="p-4">{student.dateOfBirth}</td>
+                  <td className="p-4">
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-2">
+                        {[1, 2, 3].map((tickerIndex) => (
+                          <button
+                            key={tickerIndex}
+                            onClick={() => handleTickerClick(index, tickerIndex)}
+                            className={`w-8 h-8 rounded-full border-2 border-gray-200 cursor-pointer transition-colors ${tickers[`${index}-${tickerIndex}`]
+                              ? 'bg-blue-500 border-blue-500'
+                              : 'bg-white'
+                              }`}
+                          />
+                        ))}
+                      </div>
+                      <button className={`px-4 py-1 rounded text-white ${student.paid ? 'bg-green-500' : 'bg-red-500'
+                        }`}>
+                        {student.paid ? 'Paid' : 'Due'}
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          }
         </table>
+        {
+          allStudents?.data?.data.length === 0 &&
+          <div className='h-40 flex items-center justify-center w-full'> No data found. </div>
+        }
       </div>
 
       <div className="flex justify-end p-6">
         <div className="flex items-center gap-2">
-          {/* <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded">Prev</button>
-          <button className="px-3 py-1 text-sm text-white bg-blue-600 rounded">1</button>
-          <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded">2</button>
-          <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded">Next</button> */}
           <PaginationPage totalPages={allStudents?.data?.meta?.totalPage} page={page} setPage={setPage} />
         </div>
       </div>
