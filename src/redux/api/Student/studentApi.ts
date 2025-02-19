@@ -13,10 +13,10 @@ const studentApi = baseApi.injectEndpoints({
             invalidatesTags: ["student"],
         }),
         getAllStudents: builder.query({
-            query: ({ page, limit, sort }) => ({
+            query: ({ page, limit, sort, searchTerm, status }) => ({
                 url: "/students",
                 method: "GET",
-                params: { page, limit, sort }
+                params: { page, limit, sort, searchTerm, status }
             }),
             providesTags: ["student"],
         }),

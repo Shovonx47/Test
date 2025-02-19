@@ -8,6 +8,7 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import AllStudentsTable from "@/components/Students/AllStudents/Tables/AllStudentsTable";
+import Link from 'next/link';
 
 export default function AllStudentsPage() {
   return (
@@ -54,9 +55,11 @@ export default function AllStudentsPage() {
               <SelectItem value="csv">Export as CSV</SelectItem>
             </SelectContent>
           </Select>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-            Add Student
-          </button>
+          <Link href="/student/add-student">
+            <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+              Add Student
+            </button>
+          </Link>
         </div>
       </div>
 
